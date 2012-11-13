@@ -12,7 +12,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<compile.version>1.6</compile.version>
-		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
 	</properties>
 
 	<build>

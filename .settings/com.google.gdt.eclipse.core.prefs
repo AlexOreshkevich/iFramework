@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
 lastWarOutDir=/Users/neo/java/jworkspace/temp/iFramework/target/iFramework-0.1-SNAPSHOT
-warSrcDir=src/main/webapp
+warSrcDir=
 warSrcDirIsOutput=false
