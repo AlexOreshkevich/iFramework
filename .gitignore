@@ -1,0 +1,13 @@
+.settings/
+.project
+.classpath
+target/
+*~
+MANIFEST.MF
+/www-test
+/war
+.gwt
+.settings
+target
+gwt-unitCache
+builds/
