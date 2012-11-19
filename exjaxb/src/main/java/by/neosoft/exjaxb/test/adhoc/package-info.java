@@ -7,4 +7,3 @@
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.prognoz.ru/Adhoc")
 package by.neosoft.exjaxb.test.adhoc;
-

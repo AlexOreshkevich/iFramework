@@ -5,21 +5,22 @@
 // Generated on: 2011.06.21 at 10:39:14 AM EEST 
 //
 
-
-package by.prognoz.exjaxb.test.adhoc;
+package by.neosoft.exjaxb.test.adhoc;
 
 import java.math.BigInteger;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for obj complex type.
+ * <p>
+ * Java class for obj complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="obj">
@@ -86,512 +87,453 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "obj")
-@XmlSeeAlso({
-    Themes.Theme.class,
-    Themes.class,
+@XmlSeeAlso({ Themes.Theme.class, Themes.class,
     ContainerBasePropertiesBinding.PropertiesBinding.Binding.class,
-    ContainerBasePropertiesBinding.PropertiesBinding.class,
-    ContainerBasePropertiesBinding.class,
-    Obstyle.class,
-    MenuItem.class,
-    ControlItem.class,
-    by.prognoz.exjaxb.test.adhoc.Frame.FrameCaption.Caption.class,
-    View.class,
-    Grid.class,
-    ContainerBase.class,
-    Control.class,
-    Infoblock.class,
-    by.prognoz.exjaxb.test.adhoc.TagCaption.Caption.class
-})
+    ContainerBasePropertiesBinding.PropertiesBinding.class, ContainerBasePropertiesBinding.class,
+    Obstyle.class, MenuItem.class, ControlItem.class,
+    by.neosoft.exjaxb.test.adhoc.Frame.FrameCaption.Caption.class, View.class, Grid.class,
+    ContainerBase.class, Control.class, Infoblock.class,
+    by.neosoft.exjaxb.test.adhoc.TagCaption.Caption.class })
 public class Obj {
 
-    @XmlAttribute(name = "Id")
-    protected String id;
-    @XmlAttribute(name = "Width")
-    protected String width;
-    @XmlAttribute(name = "Height")
-    protected String height;
-    @XmlAttribute(name = "MinWidth")
-    protected String minWidth;
-    @XmlAttribute(name = "MinHeight")
-    protected String minHeight;
-    @XmlAttribute(name = "Margin")
-    protected String margin;
-    @XmlAttribute(name = "ShowHeader")
-    protected String showHeader;
-    @XmlAttribute(name = "Name")
-    protected String name;
-    @XmlAttribute(name = "Description")
-    protected String description;
-    @XmlAttribute(name = "Visible")
-    protected String visible;
-    @XmlAttribute(name = "Grid.Row")
-    protected BigInteger gridRow;
-    @XmlAttribute(name = "Grid.Column")
-    protected BigInteger gridColumn;
-    @XmlAttribute(name = "Grid.ColSpan")
-    protected BigInteger gridColSpan;
-    @XmlAttribute(name = "Grid.RowSpan")
-    protected BigInteger gridRowSpan;
-    @XmlAttribute(name = "DockPanel.Dock")
-    protected String dockPanelDock;
-    @XmlAttribute(name = "SplitPanel.Position")
-    protected String splitPanelPosition;
-    @XmlAttribute(name = "VerticalAlignment")
-    protected String verticalAlignment;
-    @XmlAttribute(name = "HorizontalAlignment")
-    protected String horizontalAlignment;
+  @XmlAttribute(name = "Id")
+  protected String     id;
+  @XmlAttribute(name = "Width")
+  protected String     width;
+  @XmlAttribute(name = "Height")
+  protected String     height;
+  @XmlAttribute(name = "MinWidth")
+  protected String     minWidth;
+  @XmlAttribute(name = "MinHeight")
+  protected String     minHeight;
+  @XmlAttribute(name = "Margin")
+  protected String     margin;
+  @XmlAttribute(name = "ShowHeader")
+  protected String     showHeader;
+  @XmlAttribute(name = "Name")
+  protected String     name;
+  @XmlAttribute(name = "Description")
+  protected String     description;
+  @XmlAttribute(name = "Visible")
+  protected String     visible;
+  @XmlAttribute(name = "Grid.Row")
+  protected BigInteger gridRow;
+  @XmlAttribute(name = "Grid.Column")
+  protected BigInteger gridColumn;
+  @XmlAttribute(name = "Grid.ColSpan")
+  protected BigInteger gridColSpan;
+  @XmlAttribute(name = "Grid.RowSpan")
+  protected BigInteger gridRowSpan;
+  @XmlAttribute(name = "DockPanel.Dock")
+  protected String     dockPanelDock;
+  @XmlAttribute(name = "SplitPanel.Position")
+  protected String     splitPanelPosition;
+  @XmlAttribute(name = "VerticalAlignment")
+  protected String     verticalAlignment;
+  @XmlAttribute(name = "HorizontalAlignment")
+  protected String     horizontalAlignment;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
+  /**
+   * Gets the value of the id property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getId() {
+    return id;
+  }
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
+  /**
+   * Sets the value of the id property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setId(String value) {
+    this.id = value;
+  }
 
-    /**
-     * Gets the value of the width property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getWidth() {
-        return width;
-    }
+  /**
+   * Gets the value of the width property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getWidth() {
+    return width;
+  }
 
-    /**
-     * Sets the value of the width property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setWidth(String value) {
-        this.width = value;
-    }
+  /**
+   * Sets the value of the width property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setWidth(String value) {
+    this.width = value;
+  }
 
-    /**
-     * Gets the value of the height property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getHeight() {
-        return height;
-    }
+  /**
+   * Gets the value of the height property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getHeight() {
+    return height;
+  }
 
-    /**
-     * Sets the value of the height property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setHeight(String value) {
-        this.height = value;
-    }
+  /**
+   * Sets the value of the height property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setHeight(String value) {
+    this.height = value;
+  }
 
-    /**
-     * Gets the value of the minWidth property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMinWidth() {
-        return minWidth;
-    }
+  /**
+   * Gets the value of the minWidth property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getMinWidth() {
+    return minWidth;
+  }
 
-    /**
-     * Sets the value of the minWidth property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMinWidth(String value) {
-        this.minWidth = value;
-    }
+  /**
+   * Sets the value of the minWidth property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setMinWidth(String value) {
+    this.minWidth = value;
+  }
 
-    /**
-     * Gets the value of the minHeight property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMinHeight() {
-        return minHeight;
-    }
+  /**
+   * Gets the value of the minHeight property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getMinHeight() {
+    return minHeight;
+  }
 
-    /**
-     * Sets the value of the minHeight property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMinHeight(String value) {
-        this.minHeight = value;
-    }
+  /**
+   * Sets the value of the minHeight property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setMinHeight(String value) {
+    this.minHeight = value;
+  }
 
-    /**
-     * Gets the value of the margin property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getMargin() {
-        if (margin == null) {
-            return "0,0,0,0";
-        } else {
-            return margin;
-        }
+  /**
+   * Gets the value of the margin property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getMargin() {
+    if (margin == null) {
+      return "0,0,0,0";
     }
+    else {
+      return margin;
+    }
+  }
 
-    /**
-     * Sets the value of the margin property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setMargin(String value) {
-        this.margin = value;
-    }
+  /**
+   * Sets the value of the margin property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setMargin(String value) {
+    this.margin = value;
+  }
 
-    /**
-     * Gets the value of the showHeader property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getShowHeader() {
-        if (showHeader == null) {
-            return "true";
-        } else {
-            return showHeader;
-        }
+  /**
+   * Gets the value of the showHeader property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getShowHeader() {
+    if (showHeader == null) {
+      return "true";
     }
+    else {
+      return showHeader;
+    }
+  }
 
-    /**
-     * Sets the value of the showHeader property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setShowHeader(String value) {
-        this.showHeader = value;
-    }
+  /**
+   * Sets the value of the showHeader property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setShowHeader(String value) {
+    this.showHeader = value;
+  }
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
+  /**
+   * Gets the value of the name property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
+  /**
+   * Sets the value of the name property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setName(String value) {
+    this.name = value;
+  }
 
-    /**
-     * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDescription() {
-        return description;
-    }
+  /**
+   * Gets the value of the description property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getDescription() {
+    return description;
+  }
 
-    /**
-     * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDescription(String value) {
-        this.description = value;
-    }
+  /**
+   * Sets the value of the description property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setDescription(String value) {
+    this.description = value;
+  }
 
-    /**
-     * Gets the value of the visible property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVisible() {
-        if (visible == null) {
-            return "true";
-        } else {
-            return visible;
-        }
+  /**
+   * Gets the value of the visible property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getVisible() {
+    if (visible == null) {
+      return "true";
     }
+    else {
+      return visible;
+    }
+  }
 
-    /**
-     * Sets the value of the visible property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVisible(String value) {
-        this.visible = value;
-    }
+  /**
+   * Sets the value of the visible property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setVisible(String value) {
+    this.visible = value;
+  }
 
-    /**
-     * Gets the value of the gridRow property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getGridRow() {
-        return gridRow;
-    }
+  /**
+   * Gets the value of the gridRow property.
+   * 
+   * @return possible object is {@link BigInteger }
+   * 
+   */
+  public BigInteger getGridRow() {
+    return gridRow;
+  }
 
-    /**
-     * Sets the value of the gridRow property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setGridRow(BigInteger value) {
-        this.gridRow = value;
-    }
+  /**
+   * Sets the value of the gridRow property.
+   * 
+   * @param value
+   *          allowed object is {@link BigInteger }
+   * 
+   */
+  public void setGridRow(BigInteger value) {
+    this.gridRow = value;
+  }
 
-    /**
-     * Gets the value of the gridColumn property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getGridColumn() {
-        return gridColumn;
-    }
+  /**
+   * Gets the value of the gridColumn property.
+   * 
+   * @return possible object is {@link BigInteger }
+   * 
+   */
+  public BigInteger getGridColumn() {
+    return gridColumn;
+  }
 
-    /**
-     * Sets the value of the gridColumn property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setGridColumn(BigInteger value) {
-        this.gridColumn = value;
-    }
+  /**
+   * Sets the value of the gridColumn property.
+   * 
+   * @param value
+   *          allowed object is {@link BigInteger }
+   * 
+   */
+  public void setGridColumn(BigInteger value) {
+    this.gridColumn = value;
+  }
 
-    /**
-     * Gets the value of the gridColSpan property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getGridColSpan() {
-        return gridColSpan;
-    }
+  /**
+   * Gets the value of the gridColSpan property.
+   * 
+   * @return possible object is {@link BigInteger }
+   * 
+   */
+  public BigInteger getGridColSpan() {
+    return gridColSpan;
+  }
 
-    /**
-     * Sets the value of the gridColSpan property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setGridColSpan(BigInteger value) {
-        this.gridColSpan = value;
-    }
+  /**
+   * Sets the value of the gridColSpan property.
+   * 
+   * @param value
+   *          allowed object is {@link BigInteger }
+   * 
+   */
+  public void setGridColSpan(BigInteger value) {
+    this.gridColSpan = value;
+  }
 
-    /**
-     * Gets the value of the gridRowSpan property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
-    public BigInteger getGridRowSpan() {
-        return gridRowSpan;
-    }
+  /**
+   * Gets the value of the gridRowSpan property.
+   * 
+   * @return possible object is {@link BigInteger }
+   * 
+   */
+  public BigInteger getGridRowSpan() {
+    return gridRowSpan;
+  }
 
-    /**
-     * Sets the value of the gridRowSpan property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setGridRowSpan(BigInteger value) {
-        this.gridRowSpan = value;
-    }
+  /**
+   * Sets the value of the gridRowSpan property.
+   * 
+   * @param value
+   *          allowed object is {@link BigInteger }
+   * 
+   */
+  public void setGridRowSpan(BigInteger value) {
+    this.gridRowSpan = value;
+  }
 
-    /**
-     * Gets the value of the dockPanelDock property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDockPanelDock() {
-        return dockPanelDock;
-    }
+  /**
+   * Gets the value of the dockPanelDock property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getDockPanelDock() {
+    return dockPanelDock;
+  }
 
-    /**
-     * Sets the value of the dockPanelDock property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDockPanelDock(String value) {
-        this.dockPanelDock = value;
-    }
+  /**
+   * Sets the value of the dockPanelDock property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setDockPanelDock(String value) {
+    this.dockPanelDock = value;
+  }
 
-    /**
-     * Gets the value of the splitPanelPosition property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSplitPanelPosition() {
-        return splitPanelPosition;
-    }
+  /**
+   * Gets the value of the splitPanelPosition property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getSplitPanelPosition() {
+    return splitPanelPosition;
+  }
 
-    /**
-     * Sets the value of the splitPanelPosition property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSplitPanelPosition(String value) {
-        this.splitPanelPosition = value;
-    }
+  /**
+   * Sets the value of the splitPanelPosition property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setSplitPanelPosition(String value) {
+    this.splitPanelPosition = value;
+  }
 
-    /**
-     * Gets the value of the verticalAlignment property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getVerticalAlignment() {
-        if (verticalAlignment == null) {
-            return "Stretch";
-        } else {
-            return verticalAlignment;
-        }
+  /**
+   * Gets the value of the verticalAlignment property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getVerticalAlignment() {
+    if (verticalAlignment == null) {
+      return "Stretch";
     }
+    else {
+      return verticalAlignment;
+    }
+  }
 
-    /**
-     * Sets the value of the verticalAlignment property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setVerticalAlignment(String value) {
-        this.verticalAlignment = value;
-    }
+  /**
+   * Sets the value of the verticalAlignment property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setVerticalAlignment(String value) {
+    this.verticalAlignment = value;
+  }
 
-    /**
-     * Gets the value of the horizontalAlignment property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getHorizontalAlignment() {
-        if (horizontalAlignment == null) {
-            return "Stretch";
-        } else {
-            return horizontalAlignment;
-        }
+  /**
+   * Gets the value of the horizontalAlignment property.
+   * 
+   * @return possible object is {@link String }
+   * 
+   */
+  public String getHorizontalAlignment() {
+    if (horizontalAlignment == null) {
+      return "Stretch";
     }
+    else {
+      return horizontalAlignment;
+    }
+  }
 
-    /**
-     * Sets the value of the horizontalAlignment property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setHorizontalAlignment(String value) {
-        this.horizontalAlignment = value;
-    }
+  /**
+   * Sets the value of the horizontalAlignment property.
+   * 
+   * @param value
+   *          allowed object is {@link String }
+   * 
+   */
+  public void setHorizontalAlignment(String value) {
+    this.horizontalAlignment = value;
+  }
 
 }

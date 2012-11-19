@@ -6,7 +6,7 @@
 //
 
 
-package by.prognoz.exjaxb.test.adhoc;
+package by.neosoft.exjaxb.test.adhoc;
 
 import java.util.ArrayList;
 import java.util.List;

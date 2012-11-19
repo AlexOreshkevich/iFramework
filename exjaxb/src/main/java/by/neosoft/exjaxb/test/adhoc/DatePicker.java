@@ -6,7 +6,7 @@
 //
 
 
-package by.prognoz.exjaxb.test.adhoc;
+package by.neosoft.exjaxb.test.adhoc;
 
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
