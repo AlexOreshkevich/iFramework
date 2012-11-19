@@ -31,4 +31,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<modules>
+		<module>exjaxb</module>
+	</modules>
 </project>

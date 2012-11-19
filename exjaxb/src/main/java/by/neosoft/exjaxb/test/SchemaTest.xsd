@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsi="http://www.prognoz.ru/Adhoc" 
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+	targetNamespace="http://www.prognoz.ru/Adhoc" 
+	elementFormDefault="unqualified" 
+	attributeFormDefault="unqualified" 
+	jxb:version="2.0">
+	
+	<xs:annotation>
+		<xs:appinfo> Adhoc Report Standardized Specification v0.83 </xs:appinfo>
+	</xs:annotation>	
+	<!-- Корневой элемент (root) обязательно имеет имя Adhoc -->
+	<xs:element name="Adhoc" type="xsi:adhocroot"/>
+	<!-- Здесь можно задать регулярное выражение для валидации Id -->
+	<!-- Зарезервировано -->
+	<xs:simpleType name="idType">
+		<xs:restriction base="xs:string">
+			<!--<xs:pattern value="([ASCII]){1,}"/>-->
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Для логических значений допустимыми являются 1, 0, true, True, false, False -->
+	<xs:simpleType name="bool">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="0|1|[tT]rue|[fF]alse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Определение секции CDATA -->
+	<!-- http://www.w3.org/TR/2000/CR-xmlschema-2-20001024/#schema -->
+	<xs:simpleType name="CDATA" id="CDATA">
+		<xs:annotation>
+			<xs:documentation source="http://www.w3.org/TR/xmlschema-2/#CDATA" xml:lang="en"/>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="replace"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Описание корневого элемента Adhoc -->
+	<xs:complexType name="adhocroot">
+		<xs:all>
+			<!-- Для тестирования все компоненты являются необязательными (можно валидировать XML по частям) -->
+			<xs:element name="Report" type="xsi:report" minOccurs="0"/>
+			<xs:element name="DataProviders" type="xsi:dataproviders" minOccurs="0"/>
+			<xs:element name="Themes" type="xsi:themes" minOccurs="0"/>
+			<xs:element name="Resources" type="xsi:resources" minOccurs="0"/>
+			<xs:element name="Components" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="version" type="xs:string" fixed="0.83"/>
+	</xs:complexType>
+	<!-- Описание абстрактного типа (позволяет не дублировать повторяющиеся атрибуты) -->
+	<xs:complexType name="obj">
+		<xs:attribute name="Id" type="xsi:idType"/>
+		<xs:attribute name="Width" type="xs:string"/>
+		<xs:attribute name="Height" type="xs:string"/>
+		<xs:attribute name="MinWidth" type="xs:string"/>
+		<xs:attribute name="MinHeight" type="xs:string"/>
+		<xs:attribute name="Margin" type="xs:string" default="0,0,0,0"/>
+		<xs:attribute name="ShowHeader" type="xsi:bool" default="true"/>
+		<xs:attribute name="Name" type="xs:string"/>
+		<xs:attribute name="Description" type="xs:string"/>
+		<xs:attribute name="Visible" type="xsi:bool" default="true"/>
+		<xs:attribute name="Grid.Row" type="xs:integer"/>
+		<xs:attribute name="Grid.Column" type="xs:integer"/>
+		<xs:attribute name="Grid.ColSpan" type="xs:integer"/>
+		<xs:attribute name="Grid.RowSpan" type="xs:integer"/>
+		<xs:attribute name="DockPanel.Dock">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Left"/>
+					<xs:enumeration value="Right"/>
+					<xs:enumeration value="Top"/>
+					<xs:enumeration value="Bottom"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="SplitPanel.Position">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="First"/>
+					<xs:enumeration value="Last"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="VerticalAlignment" default="Stretch">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Top"/>
+					<xs:enumeration value="Center"/>
+					<xs:enumeration value="Bottom"/>
+					<xs:enumeration value="Stretch"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="HorizontalAlignment" default="Stretch">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Left"/>
+					<xs:enumeration value="Center"/>
+					<xs:enumeration value="Right"/>
+					<xs:enumeration value="Stretch"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- 3.3.1.1 Описание заголовка как типа -->
+	<xs:complexType name="tag.caption">
+		<xs:sequence>
+			<xs:element name="Caption">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="xsi:obj">
+							<xs:attribute name="Text" type="xs:string" default="CaptionText"/>
+							<xs:attribute name="SubText" type="xs:string" default=""/>
+							<xs:attribute name="VisibleText" type="xsi:bool" default="True"/>
+							<xs:attribute name="VisibleSubText" type="xsi:bool"/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Описание Report -->
+	<xs:complexType name="report">
+		<xs:sequence>
+			<xs:element name="Report.Views">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Views" minOccurs="1" maxOccurs="1">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="View" type="xsi:view" maxOccurs="unbounded"/>
+								</xs:sequence>
+								<xs:attribute name="DefaultView" type="xsi:idType" default="0"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Id" type="xsi:idType" use="required"/>
+		<xs:attribute name="Name" type="xs:string"/>
+		<xs:attribute name="Description" type="xs:string"/>
+		<xs:attribute name="ThemeId" type="xs:string"/>
+		<xs:attribute name="DefaultThemeId" type="xs:string"/>
+	</xs:complexType>
+	<!-- Описание View -->
+	<xs:complexType name="view">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj">
+				<xs:choice minOccurs="1" maxOccurs="unbounded">
+					<xs:sequence>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<!-- Описание допустимых вложенных контейнеров -->
+							<xs:element name="StackPanel" type="xsi:stackPanel"/>
+							<xs:element name="Grid" type="xsi:grid"/>
+							<xs:element name="PageControl" type="xsi:pageControl"/>
+							<xs:element name="ScrollViewer" type="xsi:scrollViewer"/>
+							<xs:element name="Container" type="xsi:container"/>
+							<xs:element name="DockPanel" type="xsi:dockPanel"/>
+							<xs:element name="DialogContainer" type="xsi:dialogContainer"/>
+						</xs:choice>
+					</xs:sequence>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<!-- Описание допустимых вложенных инфоблоков -->
+						<xs:element name="Frame" type="xsi:frame"/>
+						<xs:element name="Legend" type="xsi:legend"/>
+						<xs:element name="Image" type="xsi:image"/>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<!-- Описание допустимых вложенных элементов управления -->
+						<xs:element name="ComboBox" type="xsi:comboBox"/>
+						<xs:element name="TabControl" type="xsi:tabControl"/>
+						<xs:element name="Toolbar" type="xsi:toolbar"/>
+						<xs:element name="DatePicker" type="xsi:datePicker"/>
+						<xs:element name="Button" type="xsi:button"/>
+						<xs:element name="CheckBox" type="xsi:checkBox"/>
+						<xs:element name="RadioButton" type="xsi:radioButton"/>
+						<xs:element name="Menu" type="xsi:menu"/>
+						<xs:element name="SplitPanel" type="xsi:splitPanel"/>
+					</xs:choice>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- attribute Orientation -->
+	<xs:attribute name="Orientation" default="Vertical">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Vertical"/>
+				<xs:enumeration value="Horizontal"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<!-- Описание контейнера -->
+	<xs:complexType name="containerBase">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj">
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="StackPanel" type="xsi:stackPanel"/>
+					<xs:element name="Grid" type="xsi:grid"/>
+					<xs:element name="PageControl" type="xsi:pageControl"/>
+					<xs:element name="ScrollViewer" type="xsi:scrollViewer"/>
+					<xs:element name="Container" type="xsi:container"/>
+					<xs:element name="DockPanel" type="xsi:dockPanel"/>
+					<xs:element name="DialogContainer" type="xsi:dialogContainer"/>
+					<!-- Описание допустимых вложенных инфоблоков -->
+					<xs:element name="Frame" type="xsi:frame"/>
+					<xs:element name="Legend" type="xsi:legend"/>
+					<xs:element name="Image" type="xsi:image"/>
+					<!-- Описание допустимых вложенных элементов управления -->
+					<xs:element name="ComboBox" type="xsi:comboBox"/>
+					<xs:element name="TabControl" type="xsi:tabControl"/>
+					<xs:element name="Toolbar" type="xsi:toolbar"/>
+					<xs:element name="DatePicker" type="xsi:datePicker"/>
+					<xs:element name="Button" type="xsi:button"/>
+					<xs:element name="CheckBox" type="xsi:checkBox"/>
+					<xs:element name="RadioButton" type="xsi:radioButton"/>
+					<xs:element name="Menu" type="xsi:menu"/>
+					<xs:element name="SplitPanel" type="xsi:splitPanel"/>
+				</xs:choice>
+				<xs:attribute name="BackgroundColor" type="xs:string"/>
+				<xs:attribute name="VerticalSpacing" type="xs:string" use="optional" default="0"/>
+				<xs:attribute name="HorizontalSpacing" type="xs:string" use="optional" default="0"/>
+				<xs:attribute name="ThemeId" type="xs:string"/>
+			</xs:extension>
+			<!-- Рекурсивное задание допустимого контента -->
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.6.1 Описание StackPanel -->
+	<xs:complexType name="stackPanel">
+		<xs:complexContent>
+			<xs:extension base="xsi:containerBase">
+				<xs:attribute ref="xsi:Orientation"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание конкретных контейнеров -->
+	<!-- 3.6.2 Описание Grid -->
+	<xs:complexType name="grid">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj">
+				<xs:sequence>
+					<xs:choice maxOccurs="unbounded">
+						<xs:element name="Grid.ColumnDefinitions">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ColumnDefinitions">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="ColumnDefinition" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:attribute name="Width" type="xs:string" use="required"/>
+														<xs:attribute name="MinWidth" type="xs:string" use="required"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Grid.RowDefinitions">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="RowDefinitions">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="RowDefinition" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:attribute name="Height" type="xs:string" use="required"/>
+														<xs:attribute name="MinHeight" type="xs:string" use="required"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="StackPanel" type="xsi:stackPanel"/>
+							<xs:element name="Grid" type="xsi:grid"/>
+							<xs:element name="PageControl" type="xsi:pageControl"/>
+							<xs:element name="ScrollViewer" type="xsi:scrollViewer"/>
+							<xs:element name="Container" type="xsi:container"/>
+							<xs:element name="DockPanel" type="xsi:dockPanel"/>
+							<xs:element name="DialogContainer" type="xsi:dialogContainer"/>
+							<!-- Описание допустимых вложенных инфоблоков -->
+							<xs:element name="Frame" type="xsi:frame"/>
+							<xs:element name="Legend" type="xsi:legend"/>
+							<xs:element name="Image" type="xsi:image"/>
+							<!-- Описание допустимых вложенных элементов управления -->
+							<xs:element name="ComboBox" type="xsi:comboBox"/>
+							<xs:element name="TabControl" type="xsi:tabControl"/>
+							<xs:element name="Toolbar" type="xsi:toolbar"/>
+							<xs:element name="DatePicker" type="xsi:datePicker"/>
+							<xs:element name="Button" type="xsi:button"/>
+							<xs:element name="CheckBox" type="xsi:checkBox"/>
+							<xs:element name="RadioButton" type="xsi:radioButton"/>
+							<xs:element name="Menu" type="xsi:menu"/>
+							<xs:element name="SplitPanel" type="xsi:splitPanel"/>
+						</xs:choice>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="BackgroundColor" type="xs:string"/>
+				<xs:attribute name="VerticalSpacing" type="xs:string" use="optional" default="0"/>
+				<xs:attribute name="HorizontalSpacing" type="xs:string" use="optional" default="0"/>
+				<xs:attribute name="ThemeId" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание PropertiesBinding -->
+	<xs:complexType name="containerBase.propertiesBinding">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj">
+				<xs:sequence>
+					<xs:element name="PropertiesBinding">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="xsi:obj">
+									<xs:sequence>
+										<xs:element name="Binding" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="xsi:obj">
+														<xs:sequence/>
+														<xs:attribute name="PropertyName" type="xs:string"/>
+														<xs:attribute name="SelectedIndex" type="xs:string"/>
+														<xs:attribute name="SourceBlockId" type="xs:string"/>
+														<xs:attribute name="SourceProperty" type="xs:string"/>
+													</xs:extension>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.6.3 Описание PageControl -->
+	<xs:complexType name="pageControl">
+		<xs:complexContent>
+			<xs:extension base="xsi:containerBase">
+				<xs:sequence>
+					<xs:element name="PageControl.Pages">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Pages">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Page" type="xsi:containerBase" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="PageControl.PropertiesBinding" type="xsi:containerBase.propertiesBinding" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="SelectedIndex" type="xs:nonNegativeInteger" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.6.4 Описание ScrollViewer -->
+	<xs:complexType name="scrollViewer">
+		<xs:complexContent>
+			<xs:extension base="xsi:containerBase"/>
+			<!-- TODO   Элемент ScrollViewer может размещать внутри себя только один дочерний элемент-контейнер объектов,                             элемент – информационный блок или элемент управления.-->
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.6.5 Описание Container -->
+	<xs:complexType name="container">
+		<xs:complexContent>
+			<xs:extension base="xsi:containerBase">
+				<xs:sequence>
+					<xs:element name="Container.Caption" type="xsi:tag.caption" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.6.6 Описание DockPanel -->
+	<xs:complexType name="dockPanel">
+		<xs:complexContent>
+			<xs:extension base="xsi:containerBase"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.6.7 Описание DialogContainer -->
+	<xs:complexType name="dialogContainer">
+		<xs:complexContent>
+			<xs:extension base="xsi:containerBase">
+				<xs:sequence>
+					<xs:element name="DialogContainer.Caption" type="xsi:tag.caption" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание обобщенного информационного блока -->
+	<xs:complexType name="infoblock">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.7.1 Описание информационного блока Frame -->
+	<xs:complexType name="frame">
+		<xs:complexContent>
+			<xs:extension base="xsi:infoblock">
+				<xs:sequence>
+					<xs:element name="Frame.Caption">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Caption">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="xsi:obj">
+												<xs:attribute name="Text" type="xs:string" default="CaptionText"/>
+												<xs:attribute name="SubText" type="xs:string" default=""/>
+												<xs:attribute name="VisibleText" type="xsi:bool" default="True"/>
+												<xs:attribute name="VisibleSubText" type="xsi:bool"/>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Frame.DataSourceBinding" type="xsi:frame.dataSourceBinding"/>
+					<xs:element name="Frame.Visualizers" type="xsi:infoblock.visualizers"/>
+				</xs:sequence>
+				<xs:attribute name="CurrentVisualizerId" type="xsi:idType" use="optional" default=""/>
+				<xs:attribute name="Expandable" type="xsi:bool" use="optional" default="false"/>
+				<xs:attribute name="RoundCorners" type="xsi:bool" use="optional" default="false"/>
+				<xs:attribute name="CaptionBackgroundColor" type="xs:string"/>
+				<xs:attribute name="ThemeId" type="xs:string"/>
+				<xs:attribute name="Caption" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание Frame -->
+	<!--	<xs:complexType name="frame">	<xs:sequence>		<xs:element name="Frame.Caption" type="xsi:tag.caption" />		<xs:element name="Frame.DataSourceBinding" type="xsi:frame.dataSourceBinding" />		<xs:element name="Frame.Visualizers" type="xsi:infoblock.visualizers" />	</xs:sequence>	<xs:attribute name="Id" type="xs:string" use="required" />	<xs:attribute name="Margin" type="xs:string" />	<xs:attribute name="CurrentVisualizerId" type="xs:string"		use="optional" default="" />	<xs:attribute name="ShowHeader" type="xsi:bool" use="optional"		default="false" />	<xs:attribute name="Expandable" type="xsi:bool" use="optional"		default="false" />	<xs:attribute name="RoundCorners" type="xsi:bool" use="optional"		default="false" />	<xs:attribute name="CaptionBackgroundColor" type="xs:string" />	<xs:attribute name="ThemeId" type="xs:string" />	<xs:attribute name="MinHeight" type="xs:string" />	<xs:attribute name="MinWidth" type="xs:string" />	<xs:attribute name="Grid.Row" type="xs:decimal" />	<xs:attribute name="Grid.Column" type="xs:decimal" />	<xs:attribute name="Grid.ColSpan" type="xs:decimal" />	<xs:attribute name="Grid.RowSpan" type="xs:decimal" />	<xs:anyAttribute />	</xs:complexType>-->
+	<!-- Описание Frame.DataSourceBinding -->
+	<xs:complexType name="frame.dataSourceBinding">
+		<xs:sequence minOccurs="0">
+			<xs:element name="DataSourceBinding">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Param" type="xsi:dsb.param" minOccurs="0"/>
+					</xs:sequence>
+					<xs:attribute name="DataSourceId" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Описание Param (у DataSourceBinding) -->
+	<xs:complexType name="dsb.param">
+		<xs:attribute name="ParamName" type="xs:string" use="required"/>
+		<xs:attribute name="Value" type="xs:string"/>
+		<xs:attribute name="SourceBlockId" type="xs:string"/>
+		<xs:attribute name="SourceProperty" type="xs:string"/>
+	</xs:complexType>
+	<!-- Описание обобщенного визуализатора -->
+	<xs:complexType name="generic.visualizer">
+		<xs:attribute name="Id" type="xs:string" use="required"/>
+		<xs:attribute name="XsltSource" type="xs:string"/>
+		<xs:attribute name="Name" type="xs:string"/>
+		<xs:attribute name="Description" type="xs:string"/>
+		<!-- TODO Отсутствует в спецификации, но есть в реальных примерах-->
+	</xs:complexType>
+	<!-- Описание Visualizers -->
+	<xs:complexType name="infoblock.visualizers">
+		<xs:sequence>
+			<xs:element name="Visualizers">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="HtmlTextVisualizer" type="xsi:generic.visualizer" minOccurs="0"/>
+						<xs:element name="FusionChartVisualizer" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="xsi:generic.visualizer">
+										<xs:attribute name="Type" use="required">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Bubble"/>
+													<xs:enumeration value="Column3D"/>
+													<xs:enumeration value="Doughnut2D"/>
+													<xs:enumeration value="Doughnut3D"/>
+													<xs:enumeration value="Line"/>
+													<xs:enumeration value="MSArea"/>
+													<xs:enumeration value="MSBar2D"/>
+													<xs:enumeration value="MSBar3D"/>
+													<xs:enumeration value="MSColumn2D"/>
+													<xs:enumeration value="MSColumn3D"/>
+													<xs:enumeration value="MSColumn3DLineDY"/>
+													<xs:enumeration value="MSColumnLine3D"/>
+													<xs:enumeration value="MSCombyDY2D"/>
+													<xs:enumeration value="MSLine"/>
+													<xs:enumeration value="MSStackedColumn2D"/>
+													<xs:enumeration value="MSStackedColumn2DLineDY"/>
+													<xs:enumeration value="Pie3D"/>
+													<xs:enumeration value="StackedBar2D"/>
+													<xs:enumeration value="StackedColumn2D"/>
+													<xs:enumeration value="StackedColumn3D"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:attribute>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="FlashMapVisualizer" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="xsi:generic.visualizer">
+										<xs:attribute name="TopoBase" type="xs:string" use="required"/>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="P5ExpressReportVisualizer" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="xsi:generic.visualizer">
+										<xs:attribute name="Type" use="required">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Table"/>
+													<xs:enumeration value="Chart"/>
+													<xs:enumeration value="Map"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:attribute>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="P5ProceduralReportVisualizer" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="xsi:generic.visualizer">
+										<xs:attribute name="Sheet" type="xs:string" use="required"/>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="TableVisualizer" type="xsi:generic.visualizer" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- 3.7.2 Описание информационного блока Legend -->
+	<xs:complexType name="legend">
+		<xs:complexContent>
+			<xs:extension base="xsi:infoblock">
+				<xs:sequence>
+					<xs:element name="Legend.Caption" type="xsi:tag.caption"/>
+				</xs:sequence>
+				<xs:attribute ref="xsi:Orientation"/>
+				<xs:attribute name="Source" type="xsi:idType" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.7.3 Описание информационного блока Image -->
+	<xs:complexType name="image">
+		<xs:complexContent>
+			<xs:extension base="xsi:infoblock">
+				<xs:attribute name="Source" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание обобщенного элемента управления -->
+	<xs:complexType name="control">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj">
+				<xs:choice>
+					<xs:sequence>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<!-- Описание допустимых вложенных контейнеров -->
+							<xs:element name="StackPanel" type="xsi:stackPanel"/>
+							<xs:element name="Grid" type="xsi:grid"/>
+							<xs:element name="PageControl" type="xsi:pageControl"/>
+							<xs:element name="ScrollViewer" type="xsi:scrollViewer"/>
+							<xs:element name="Container" type="xsi:container"/>
+							<xs:element name="DockPanel" type="xsi:dockPanel"/>
+							<xs:element name="DialogContainer" type="xsi:dialogContainer"/>
+						</xs:choice>
+					</xs:sequence>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<!-- Описание допустимых вложенных инфоблоков -->
+						<xs:element name="Frame" type="xsi:frame"/>
+						<xs:element name="Legend" type="xsi:legend"/>
+						<xs:element name="Image" type="xsi:image"/>
+					</xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<!-- Описание допустимых вложенных элементов управления -->
+						<xs:element name="ComboBox" type="xsi:comboBox"/>
+						<xs:element name="TabControl" type="xsi:tabControl"/>
+						<xs:element name="Toolbar" type="xsi:toolbar"/>
+						<xs:element name="DatePicker" type="xsi:datePicker"/>
+						<xs:element name="Button" type="xsi:button"/>
+						<xs:element name="CheckBox" type="xsi:checkBox"/>
+						<xs:element name="RadioButton" type="xsi:radioButton"/>
+						<xs:element name="Menu" type="xsi:menu"/>
+						<xs:element name="SplitPanel" type="xsi:splitPanel"/>
+					</xs:choice>
+				</xs:choice>
+			</xs:extension>
+			<!-- Рекурсивное задание допустимого контента -->
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.8.1 ComboBox -->
+	<xs:complexType name="comboBox">
+		<xs:complexContent>
+			<xs:extension base="xsi:control">
+				<xs:sequence>
+					<xs:element name="ComboBox.Items" maxOccurs="1">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Items" maxOccurs="1">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="ComboBoxItem" type="xsi:controlItem" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="SelectedIndex" type="xs:nonNegativeInteger" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание ComboBoxItem (controlItem) -->
+	<xs:complexType name="controlItem">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj">
+				<xs:attribute name="Text" type="xs:string" use="optional" default=""/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.8.2 TabControl -->
+	<xs:complexType name="tabControl">
+		<xs:complexContent>
+			<xs:extension base="xsi:control">
+				<xs:sequence minOccurs="0">
+					<xs:element name="TabControl.PropertiesBinding" type="xsi:containerBase.propertiesBinding"/>
+					<xs:element name="TabControl.Items" maxOccurs="1">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Items" maxOccurs="1">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="TabControlItem" type="xsi:controlItem" minOccurs="0" maxOccurs="unbounded"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="SelectedIndex" type="xs:nonNegativeInteger" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.8.3 Toolbar -->
+	<xs:complexType name="toolbar">
+		<xs:complexContent>
+			<xs:extension base="xsi:control">
+				<xs:attribute ref="xsi:Orientation"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.8.4 DatePicker -->
+	<xs:complexType name="datePicker">
+		<xs:complexContent>
+			<xs:extension base="xsi:control">
+				<xs:attribute name="SelectedDate" type="xs:string"/>
+				<xs:attribute name="NumberOfMonths" type="xs:nonNegativeInteger"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.8.5 Button -->
+	<xs:complexType name="button">
+		<xs:complexContent>
+			<xs:extension base="xsi:control">
+				<xs:sequence>
+					<xs:element name="Button.EventHandlers">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="EventHandlers">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="ButtonClickEventHandler" maxOccurs="unbounded">
+												<!-- TODO В спецификации отсутствует описание ... -->
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="Text" type="xs:string"/>
+				<xs:attribute name="ImageSource" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.8.6 CheckBox -->
+	<xs:complexType name="checkBox">
+		<xs:complexContent>
+			<xs:extension base="xsi:control">
+				<xs:sequence>
+					<xs:element name="CheckBox.EventHandlers">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="EventHandlers">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="CheckBoxClickEventHandler" maxOccurs="unbounded">
+												<!-- TODO В спецификации отсутствует описание ... -->
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="Text" type="xs:string"/>
+				<xs:attribute name="IsChecked" type="xsi:bool" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.8.7 RadioButton -->
+	<xs:complexType name="radioButton">
+		<xs:complexContent>
+			<xs:extension base="xsi:control">
+				<xs:sequence>
+					<xs:element name="RadioButton.EventHandlers">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="EventHandlers">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="RadioButtonClickEventHandler" maxOccurs="unbounded">
+												<!-- TODO В спецификации отсутствует описание ... -->
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="Text" type="xs:string"/>
+				<xs:attribute name="IsChecked" type="xsi:bool" use="required"/>
+				<xs:attribute name="GroupName" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.8.8 Menu -->
+	<xs:complexType name="menu">
+		<xs:complexContent>
+			<xs:extension base="xsi:control">
+				<xs:sequence>
+					<xs:element name="MenuItem" type="xsi:menuItem" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute ref="xsi:Orientation"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- MenuItem нужно для рекурсивного определения Menu -->
+	<xs:complexType name="menuItem">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj">
+				<xs:sequence>
+					<xs:element name="MenuItem" type="xsi:menuItem" maxOccurs="unbounded"/>
+					<xs:element name="MenuItem.EventHandlers" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="EventHandlers">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="MenuClickEventHandler" maxOccurs="unbounded">
+												<!-- TODO В спецификации отсутствует описание ... -->
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="Text" type="xs:string"/>
+				<xs:attribute name="ImageSource" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- 3.8.9 SplitPanel -->
+	<xs:complexType name="splitPanel">
+		<xs:complexContent>
+			<xs:extension base="xsi:control">
+				<xs:sequence>
+					<xs:element name="SplitPanel.PartDefinitions">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="PartDefinitions" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:all>
+											<xs:element name="FirstPartDefinition">
+												<xs:complexType>
+													<xs:attribute name="Size" type="xs:string" default="1*"/>
+													<xs:attribute name="MinSize" type="xs:string"/>
+													<xs:attribute name="Collapsed" type="xsi:bool" default="false"/>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="LastPartDefinition">
+												<xs:complexType>
+													<xs:attribute name="Size" type="xs:string" default="1*"/>
+													<xs:attribute name="MinSize" type="xs:string"/>
+													<xs:attribute name="Collapsed" type="xsi:bool" default="false"/>
+												</xs:complexType>
+											</xs:element>
+										</xs:all>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="Text" type="xs:string"/>
+				<xs:attribute name="ShowSplitter" type="xsi:bool" default="false"/>
+				<xs:attribute name="SplitterWidth" type="xs:string"/>
+				<xs:attribute ref="xsi:Orientation"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание DataProviders -->
+	<xs:complexType name="dataproviders">
+		<xs:all>
+			<xs:element name="DataSources">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="P5SqlDataSource" type="xsi:ds.p5sql"/>
+						<xs:element name="P5ExpressReportDataSource" type="xsi:ds.p5expressreport"/>
+						<xs:element name="P5ProceduralReportDataSource" type="xsi:ds.p5proceduralreport"/>
+						<xs:element name="OracleDataSource" type="xsi:ds.ora"/>
+						<xs:element name="MsSqlDataSource" type="xsi:ds.mssql"/>
+						<xs:element name="TextDataSource" type="xsi:ds.text"/>
+					</xs:choice>
+					<!-- Описание DataSources -->
+				</xs:complexType>
+			</xs:element>
+			<!-- Описание Connections -->
+			<xs:element name="Connections">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="P5MetabaseConnection" type="xsi:connect.p5mb"/>
+							<xs:element name="OraConnection" type="xsi:connect.ora"/>
+							<xs:element name="MSSQLConnection" type="xsi:connect.mssql"/>
+						</xs:choice>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<!-- Описание обобщенного datasource -->
+	<xs:complexType name="ds.generic">
+		<xs:attribute name="Id" type="xs:string"/>
+		<xs:attribute name="ConnectionId" type="xs:string"/>
+	</xs:complexType>
+	<!-- Описание TextDataSource -->
+	<xs:complexType name="ds.text">
+		<xs:complexContent>
+			<xs:extension base="xsi:ds.generic">
+				<xs:sequence>
+					<xs:element name="TextDataSource.Text" type="xs:string"/>
+				</xs:sequence>
+				<xs:attribute name="Name" type="xs:string"/>
+				<xs:attribute name="Description" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание P5SqlDataSource -->
+	<xs:complexType name="ds.p5sql">
+		<xs:complexContent>
+			<xs:extension base="xsi:ds.ora"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание OracleDataSource -->
+	<xs:complexType name="ds.ora">
+		<xs:complexContent>
+			<xs:extension base="xsi:ds.generic">
+				<xs:sequence>
+					<xs:element name="OracleDataSource.Sql" type="xsi:ds.ora.sql"/>
+					<xs:element name="OracleDataSource.DataSourceParams" type="xsi:ds.dsparams"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание OracleDataSource.Sql -->
+	<!-- Можно убрать, если кроме CDATA в OracleDataSource ничего не будет -->
+	<xs:complexType name="ds.ora.sql">
+		<xs:simpleContent>
+			<xs:extension base="xsi:CDATA"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- Описание P5ExpressReportDataSource -->
+	<xs:complexType name="ds.p5expressreport">
+		<xs:complexContent>
+			<xs:extension base="xsi:ds.generic">
+				<xs:sequence>
+					<xs:element name="P5ExpressReportDataSource.DataSourceParams" type="xsi:ds.dsparams"/>
+				</xs:sequence>
+				<xs:attribute name="MetabaseObjectId" type="xs:string"/>
+				<xs:attribute name="MetabaseObjectKey" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание P5ExpressReportDataSource.DataSourceParams -->
+	<!-- Такая же структура использована для OracleDataSource.DataSourceParams -->
+	<xs:complexType name="ds.dsparams">
+		<xs:sequence>
+			<xs:element name="DataSourceParams" type="xsi:ds.p5expressreport.paramlist" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Описание P5ProceduralReportDataSource -->
+	<xs:complexType name="ds.p5proceduralreport">
+		<xs:complexContent>
+			<xs:extension base="xsi:ds.generic">
+				<xs:sequence>
+					<xs:element name="P5ProceduralReportDataSource.DataSourceParams" type="xsi:ds.dsparams"/>
+				</xs:sequence>
+				<xs:attribute name="MetabaseObjectId" type="xs:string"/>
+				<xs:attribute name="MetabaseObjectKey" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ========================================================================================= -->
+	<!-- Описание DataSourceParams -->
+	<xs:complexType name="ds.p5expressreport.paramlist">
+		<xs:sequence>
+			<xs:element name="DataSourceParam" type="xsi:ds.param" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Описание DataSourceParam -->
+	<!-- У ораклового коннекта используются такие же, поэтому сделал общую версию -->
+	<xs:complexType name="ds.param">
+		<xs:attribute name="DataType" type="xs:string"/>
+		<xs:attribute name="Name" type="xs:string"/>
+		<xs:attribute name="Value" type="xs:string"/>
+	</xs:complexType>
+	<!-- Описание MsSqlDataSource -->
+	<xs:complexType name="ds.mssql">
+		<xs:complexContent>
+			<xs:extension base="xsi:ds.generic">
+				<xs:sequence>
+					<xs:element name="MsSqlDataSource.Sql" type="xsi:ds.ora.sql"/>
+					<xs:element name="MsSqlDataSource.DataSourceParams" type="xsi:ds.dsparams"/>
+				</xs:sequence>
+				<xs:attribute name="Name" type="xs:string"/>
+				<xs:attribute name="Description" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание обобщенного коннекта -->
+	<xs:complexType name="connect.generic">
+		<xs:sequence>
+			<xs:any minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="Id" type="xs:string" use="required"/>
+	</xs:complexType>
+	<!-- Описание P5MetabaseConnection -->
+	<xs:complexType name="connect.p5mb">
+		<xs:complexContent>
+			<xs:extension base="xsi:connect.generic">
+				<xs:sequence/>
+				<xs:attribute name="Driver" type="xs:string"/>
+				<xs:attribute name="Server" type="xs:string"/>
+				<xs:attribute name="Schema" type="xs:string"/>
+				<xs:attribute name="User" type="xs:string"/>
+				<xs:attribute name="Password" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание OraConnection -->
+	<xs:complexType name="connect.ora">
+		<xs:complexContent>
+			<xs:extension base="xsi:connect.generic">
+				<xs:sequence/>
+				<xs:attribute name="ConnectionString" type="xs:string"/>
+				<xs:attribute name="User" type="xs:string"/>
+				<xs:attribute name="Password" type="xs:string"/>
+				<xs:attribute name="Server" type="xs:string"/>
+				<xs:attribute name="Name" type="xs:string"/>
+				<xs:attribute name="Description" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание MSSQLConnection -->
+	<xs:complexType name="connect.mssql">
+		<xs:complexContent>
+			<xs:extension base="xsi:connect.generic">
+				<xs:sequence/>
+				<xs:attribute name="ConnectionString" type="xs:string"/>
+				<xs:attribute name="Login" type="xs:string"/>
+				<xs:attribute name="Password" type="xs:string"/>
+				<xs:attribute name="Server" type="xs:string"/>
+				<xs:attribute name="Name" type="xs:string"/>
+				<xs:attribute name="Description" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание Themes -->
+	<xs:complexType name="themes">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj">
+				<xs:sequence>
+					<xs:element name="Theme" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="xsi:obj">
+									<xs:sequence>
+										<xs:element name="ObjectStyle" type="xsi:obstyle" minOccurs="1" maxOccurs="unbounded"/>
+									</xs:sequence>
+									<xs:attribute name="DefaultStyleId" type="xsi:bool"/>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание ObjectStyle -->
+	<xs:complexType name="obstyle">
+		<xs:complexContent>
+			<xs:extension base="xsi:obj">
+				<xs:attribute name="AppliedTo" type="xs:string" use="required"/>
+				<xs:attribute name="BackgroundColor" type="xs:string"/>
+				<xs:attribute name="CaptionBackgroundColor" type="xs:string"/>
+				<xs:attribute name="BodyBackgroundColor" type="xs:string"/>
+				<xs:attribute name="Underline" type="xsi:bool"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Описание Resources -->
+	<xs:complexType name="resources">
+		<xs:sequence>
+			<xs:element name="Resource" type="xsi:resource" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Описание Resource -->
+	<xs:complexType name="resource">
+		<xs:simpleContent>
+			<xs:extension base="xsi:CDATA">
+				<xs:attribute name="Id" type="xs:string" use="required"/>
+				<xs:attribute name="Name" type="xs:string" use="required"/>
+				<xs:attribute name="Type" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- ========================================================================================= -->
+</xs:schema>
