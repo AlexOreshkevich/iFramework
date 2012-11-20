@@ -86,7 +86,7 @@ public class ExJAXB<T> {
    * @throws InvalidAdhocXmlException
    */
   @SuppressWarnings("unchecked")
-  public <T> T unmarshall(String srcXml, Schema srcXsd, Class<T> srcBean, boolean isValidationEnabled,
+  public T unmarshall(String srcXml, Schema srcXsd, Class<T> srcBean, boolean isValidationEnabled,
       boolean isSavingTempEnabled) throws DetailedJAXBException {
 
     JAXBContext jc = null;
@@ -95,7 +95,7 @@ public class ExJAXB<T> {
     // сохраняю файлик себе при отладке
     if (isSavingTempEnabled) {
       try {
-        FileSystemUtils.saveTempFile(srcXml, "Adhoc");
+        FileSystemUtils.saveTempFile(srcXml, "temp");
       }
       catch (Throwable e1) {
         throw new DetailedJAXBException(ErrorCodes.ERROR_SAVING_TEMP_FILE, e1.getMessage());

@@ -49,7 +49,7 @@ public class FileSystemUtils {
    */
   public static void saveTempFile(String xmlSource, String fileName) throws Throwable {
 
-    File rootDir = new File("C://Adhoc/Temp");
+    File rootDir = new File(System.getProperty("user.dir"));
     if (!rootDir.exists()) {
       rootDir.mkdir();
     }
@@ -64,6 +64,8 @@ public class FileSystemUtils {
     }
 
     adhoc.createNewFile();
+
+    System.out.println("Created file " + adhoc.getAbsolutePath());
 
     BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(adhoc));
     bos.write(xmlSource.getBytes());
