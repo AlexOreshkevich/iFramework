@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<xsi:config xmlns:xsi="http://www.prognoz.ru/Adhoc">
-	<xsi:entryPoint>this is entryPoint value</xsi:entryPoint>
-</xsi:config>

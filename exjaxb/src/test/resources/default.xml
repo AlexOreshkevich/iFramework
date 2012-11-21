@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:config xmlns:xsi="http://www.example.com/example">
+	<entryPoint>this is entryPoint value</entryPoint>
+</xsi:config>

@@ -18,7 +18,6 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXParseException;
 
 import by.neosoft.exjaxb.builder.MarshallerBuilder;
-import by.neosoft.exjaxb.builder.UnmarshallerBuilder;
 import by.neosoft.exjaxb.exception.DetailedJAXBException;
 import by.neosoft.exjaxb.exception.ErrorCodes;
 import by.neosoft.exjaxb.fs.FileSystemUtils;
@@ -39,12 +38,11 @@ import by.neosoft.exjaxb.parser.ExJAXBParser;
 public class ExJAXB<T> {
 
   // используется для параметризации пространств имен при маршализации
-  private NamespaceDecorator        nsDecorator;
+  private NamespaceDecorator      nsDecorator;
   // билдеры являются постоянными
-  private final MarshallerBuilder   marshallBuilder;
-  private final UnmarshallerBuilder unmarshallBuilder;
+  private final MarshallerBuilder marshallBuilder;
   // парсер, связанный с используемыми преобразованиями
-  private final ExJAXBParser<T>     exParser;
+  private final ExJAXBParser<T>   exParser;
 
   /**
    * Карта пространств имен дополняется сведениями о пользовательских простанствах имен
@@ -54,7 +52,6 @@ public class ExJAXB<T> {
   public ExJAXB(ExJAXBParser<T> exParser) {
     nsDecorator = new NamespaceDecorator();
     marshallBuilder = new MarshallerBuilder(this);
-    unmarshallBuilder = new UnmarshallerBuilder(this);
     this.exParser = exParser;
 
     HashMap<String, String> additionalMap = exParser.getNamespacePrefixMap();
@@ -113,12 +110,7 @@ public class ExJAXB<T> {
 
     // схема должна существовать
     if (null == srcXsd) {
-      try {
-        throw new DetailedJAXBException(ErrorCodes.WRONG_SCHEMA_LOCATION, "");
-      }
-      catch (DetailedJAXBException e) {
-        System.err.println(e.getDetailedMessage());
-      }
+      throw new DetailedJAXBException(ErrorCodes.WRONG_SCHEMA_LOCATION, "");
     }
 
     // передаем ему схему для валидации
@@ -200,7 +192,7 @@ public class ExJAXB<T> {
    * @throws JAXBException
    *           ошибки
    */
-  public <T> org.w3c.dom.Document marshall(T targetObj, Document doc) throws JAXBException {
+  public org.w3c.dom.Document marshall(T targetObj, Document doc) throws JAXBException {
     Marshaller m = marshallBuilder.createMarshaller(targetObj.getClass());
     return marshall(m, targetObj, doc);
   }
@@ -219,7 +211,7 @@ public class ExJAXB<T> {
    * @throws JAXBException
    *           ошибки
    */
-  public <T> org.w3c.dom.Document marshall(Marshaller m, T targetObj, Document doc) throws JAXBException {
+  public org.w3c.dom.Document marshall(Marshaller m, T targetObj, Document doc) throws JAXBException {
     return marshall(m, targetObj, targetObj.getClass().getName(), "xsi", doc);
   }
 
@@ -236,8 +228,8 @@ public class ExJAXB<T> {
    * @return
    * @throws JAXBException
    */
-  public <T> org.w3c.dom.Document marshall(Marshaller m, T targetObj, String rootName, String prefix,
-      Document doc) throws JAXBException {
+  public org.w3c.dom.Document marshall(Marshaller m, T targetObj, String rootName, String prefix, Document doc)
+      throws JAXBException {
 
     // преобразовать бин targetObj в документ doc
     JAXBElement<T> jbx = wrap(rootName, prefix, targetObj);
@@ -254,7 +246,7 @@ public class ExJAXB<T> {
    * @param targetObj
    * @throws JAXBException
    */
-  public <T> void marshall(Marshaller m, T targetObj) throws JAXBException {
+  public void marshall(Marshaller m, T targetObj) throws JAXBException {
     m.marshal(targetObj, System.out);
   }
 
@@ -270,7 +262,7 @@ public class ExJAXB<T> {
    * @return
    */
   @SuppressWarnings("unchecked")
-  <T> JAXBElement<T> wrap(String tagName, String prefix, T object) {
+  JAXBElement<T> wrap(String tagName, String prefix, T object) {
     QName qtag = new QName(exParser.getNamespace(), tagName, prefix);
     JAXBElement<T> jbe = new JAXBElement<T>(qtag, (Class<T>) object.getClass(), object);
     return jbe;
@@ -287,9 +279,5 @@ public class ExJAXB<T> {
 
   public MarshallerBuilder getMarshallBuilder() {
     return marshallBuilder;
-  }
-
-  public UnmarshallerBuilder getUnmarshallerBuilder() {
-    return unmarshallBuilder;
   }
 }

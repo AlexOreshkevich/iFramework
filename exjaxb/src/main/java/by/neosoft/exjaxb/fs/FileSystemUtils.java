@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package by.neosoft.exjaxb.fs;
 
 import java.io.BufferedOutputStream;
@@ -12,11 +8,11 @@ import java.io.FileOutputStream;
 /**
  * FileSystemUtils
  * 
- * Работа с файловой системой
- * 
  * @author oreshkevich
  */
 public class FileSystemUtils {
+
+  public static String PATH = System.getProperty("user.dir");
 
   /**
    * Чтение файла
@@ -35,9 +31,8 @@ public class FileSystemUtils {
       return adhocXml;
     }
     catch (Throwable e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     }
-    return adhocXml;
   }
 
   /**
@@ -49,23 +44,17 @@ public class FileSystemUtils {
    */
   public static void saveTempFile(String xmlSource, String fileName) throws Throwable {
 
-    File rootDir = new File(System.getProperty("user.dir"));
-    if (!rootDir.exists()) {
-      rootDir.mkdir();
-    }
-
     if (fileName.isEmpty()) {
       fileName = "MissingId";
     }
 
-    File adhoc = new File(rootDir.getPath() + "/" + fileName + ".xml");
+    File adhoc = new File(PATH + fileName + ".xml");
+
     if (adhoc.exists()) {
       adhoc.delete();
     }
 
     adhoc.createNewFile();
-
-    System.out.println("Created file " + adhoc.getAbsolutePath());
 
     BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(adhoc));
     bos.write(xmlSource.getBytes());

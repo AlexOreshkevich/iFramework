@@ -12,7 +12,17 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<compile.version>1.6</compile.version>
+		<junit.version>4.10</junit.version>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<pluginManagement>
@@ -31,6 +41,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
 	<modules>
 		<module>exjaxb</module>
 	</modules>

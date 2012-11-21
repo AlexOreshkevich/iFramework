@@ -2,8 +2,9 @@ package by.neosoft.exjaxb.test;
 
 import java.io.File;
 import java.io.StringWriter;
-import java.net.URL;
+import java.net.MalformedURLException;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.Marshaller;
@@ -19,75 +20,33 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import junit.framework.Assert;
+
+import org.junit.Before;
+import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 import by.neosoft.exjaxb.ExJAXB;
 import by.neosoft.exjaxb.fs.FileSystemUtils;
 import by.neosoft.exjaxb.parser.ExJAXBParser;
-import by.neosoft.exjaxb.test.config.Cmjconfig;
+import by.neosoft.exjaxb.test.config.Config;
 
-/**
- * SimpleTest
- * 
- * @author alex oreshkevich
- */
-public class SimpleTest {
+public class HelloJAXBTest {
 
-  private static TransformerFactory transformerFactory = TransformerFactory.newInstance();
+  static class SimpleParser implements ExJAXBParser<Config> {
 
-  private static Schema getSchema(String name) throws NullPointerException {
-
-    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-    try {
-      URL schemaUrl = new URL(SimpleTest.class.getResource(""), name);
-      Schema s = sf.newSchema(schemaUrl);
-      return s;
+    @Override
+    public String getNamespace() {
+      return "http://www.example.com/example";
     }
-    catch (Throwable e) {
-      System.err.println("No schema " + name);
-    }
-    return null;
-  }
-
-  private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-  private static DocumentBuilder        builder;
-
-  public static Document getDocument() throws ParserConfigurationException {
-
-    if (builder == null) {
-      builder = factory.newDocumentBuilder();
-    }
-
-    return builder.newDocument();
-  }
-
-  /**
-   * Преобразование Node в строку
-   */
-  public static String nodeToString(Node node) throws TransformerException {
-    StringWriter sw = new StringWriter();
-
-    // описание преобразователя
-    Transformer transformer = transformerFactory.newTransformer();
-    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-    transformer.transform(new DOMSource(node), new StreamResult(sw));
-
-    return sw.toString();
-  }
-
-  static class SimpleParser implements ExJAXBParser<Cmjconfig> {
 
     @Override
     public HashMap<String, String> getNamespacePrefixMap() {
       HashMap<String, String> map = new HashMap<String, String>();
-      map.put("http://www.prognoz.ru/Adhoc", "xsi");
+      map.put("http://www.example.com/example", "xsi");
       return map;
-    }
-
-    @Override
-    public String getNamespace() {
-      return "http://www.prognoz.ru/Adhoc";
     }
 
     @Override
@@ -101,25 +60,62 @@ public class SimpleTest {
     }
   }
 
-  public static void main(String[] args) throws Throwable {
+  private static DocumentBuilder        builder;
 
-    System.out.println("Running " + SimpleTest.class.getName());
+  private static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-    URL defaultUrl = new URL(SimpleTest.class.getResource(""), "default.xml");
+  public static Document getDocument() throws ParserConfigurationException {
+
+    if (builder == null) {
+      builder = factory.newDocumentBuilder();
+    }
+
+    return builder.newDocument();
+  }
+
+  Logger                     logger             = Logger.getLogger("HelloJAXBTest");
+
+  private TransformerFactory transformerFactory = TransformerFactory.newInstance();
+
+  private Schema getSchema(String name) throws NullPointerException, MalformedURLException, SAXException {
+    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    Schema s = sf.newSchema(new File(System.getProperty("CONFIG_LOCATION") + "HelloJAXBTestSchema.xsd"));
+    return s;
+  }
+
+  /**
+   * Преобразование Node в строку
+   */
+  public String nodeToString(Node node) throws TransformerException {
+    StringWriter sw = new StringWriter();
+
+    // описание преобразователя
+    Transformer transformer = transformerFactory.newTransformer();
+    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+    transformer.transform(new DOMSource(node), new StreamResult(sw));
+
+    return sw.toString();
+  }
+
+  @Before
+  public void setUp() {
+    System.setProperty("CONFIG_LOCATION", System.getProperty("user.dir") + "/src/test/resources/");
+  }
+
+  @Test
+  public void test() throws Throwable {
 
     // загрузка тестового xml-документа
-    File xmlFile = new File(defaultUrl.toURI());
+    File xmlFile = new File(System.getProperty("CONFIG_LOCATION") + "default.xml");
     String srcXml = FileSystemUtils.readFile(xmlFile);
 
-    if (srcXml == null) {
-      throw new NullPointerException("srcXml is null");
-    }
+    Assert.assertNotNull("srcXml is null", srcXml);
 
     // загрузка схемы XSD
     Schema srcXsd = getSchema("SimpleSchema.xsd");
 
     // объявление целевого класса
-    Class<Cmjconfig> target = Cmjconfig.class;
+    Class<Config> target = Config.class;
 
     // параметры вызова
     boolean isValidationEnabled = false;
@@ -127,11 +123,13 @@ public class SimpleTest {
 
     // service init
     SimpleParser parser = new SimpleParser();
-    ExJAXB<Cmjconfig> service = new ExJAXB<Cmjconfig>(parser);
+    ExJAXB<Config> service = new ExJAXB<Config>(parser);
 
     // тестирование демаршализации
-    Cmjconfig result = service.unmarshall(srcXml, srcXsd, target, isValidationEnabled, isSavingTempEnabled);
-    System.out.println("Cmjconfig!!!! " + result.getEntryPoint() + " " + result.getVersion());
+    Config result = service.unmarshall(srcXml, srcXsd, target, isValidationEnabled, isSavingTempEnabled);
+
+    Assert.assertEquals("this is entryPoint value", result.getEntryPoint());
+    Assert.assertEquals("0.1-SNAPSHOT", result.getVersion());
 
     // тестирование маршализации
     Marshaller marshaller = service.getMarshallBuilder().createMarshaller(result.getClass());
@@ -139,6 +137,6 @@ public class SimpleTest {
     Document doc = getDocument();
     service.marshall(marshaller, result, parser.getRootTagName(), parser.getSchemaInstancePrefix(), doc);
 
-    FileSystemUtils.saveTempFile(nodeToString(doc), parser.getRootTagName());
+    // FileSystemUtils.saveTempFile(nodeToString(doc), parser.getRootTagName());
   }
 }

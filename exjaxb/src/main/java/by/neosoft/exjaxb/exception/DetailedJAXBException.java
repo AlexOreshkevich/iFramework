@@ -9,8 +9,10 @@ package by.neosoft.exjaxb.exception;
  */
 public class DetailedJAXBException extends RuntimeException {
 
-  private ErrorCodes errorCode;
-  private String     detailedMessage = "";
+  private static final long serialVersionUID = 3379423349112269775L;
+
+  private ErrorCodes        errorCode;
+  private String            detailedMessage  = "";
 
   /**
    * Создает новое исключение с неизвестным кодом ошибки

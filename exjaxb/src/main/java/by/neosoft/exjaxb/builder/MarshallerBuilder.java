@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package by.neosoft.exjaxb.builder;
 
 import javax.xml.bind.JAXBContext;
@@ -23,7 +19,7 @@ public class MarshallerBuilder {
 
   public final static String              NAMESPACE_PREFIX_PROP = "com.sun.xml.bind.namespacePrefixMapper";
 
-  private final ExJAXB                    service;
+  private final ExJAXB<?>                 service;
   private final NamespacePrefixMapperImpl nsPrefixMapper;
 
   /**
@@ -31,7 +27,7 @@ public class MarshallerBuilder {
    * 
    * @param service
    */
-  public MarshallerBuilder(ExJAXB service) {
+  public MarshallerBuilder(ExJAXB<?> service) {
     this.service = service;
     this.nsPrefixMapper = new NamespacePrefixMapperImpl(service.getNsDecorator());
   }
@@ -118,10 +114,8 @@ public class MarshallerBuilder {
    */
   private static void setProperty(Marshaller m, String propertyName, Object propertyValue)
       throws PropertyException {
-    if (propertyValue instanceof String && !((String) propertyValue).isEmpty()) {
-      m.setProperty(propertyName, propertyValue);
-    }
-    else if (propertyValue instanceof Boolean) {
+    if (!(propertyValue instanceof String) || propertyValue instanceof String
+        && !((String) propertyValue).isEmpty()) {
       m.setProperty(propertyName, propertyValue);
     }
   }

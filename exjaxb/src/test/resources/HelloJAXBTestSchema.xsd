@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.example.com/example" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	targetNamespace="http://www.example.com/example" elementFormDefault="unqualified"
+	attributeFormDefault="unqualified" jxb:version="2.0">
+
+	<xs:annotation>
+		<xs:appinfo> Example specification </xs:appinfo>
+	</xs:annotation>
+
+	<!-- Root named as config -->
+	<xs:element name="config" type="xsi:config" />
+
+	<!-- Valid logic values are 1, 0, true, True, false, False -->
+	<xs:simpleType name="bool">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="0|1|[tT]rue|[fF]alse" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Root type named config -->
+	<xs:complexType name="config">
+		<xs:all>
+			<xs:element name="entryPoint" type="xs:string" minOccurs="1" />
+		</xs:all>
+		<xs:attribute name="version" type="xs:string" fixed="0.1-SNAPSHOT" />
+	</xs:complexType>
+
+</xs:schema>
