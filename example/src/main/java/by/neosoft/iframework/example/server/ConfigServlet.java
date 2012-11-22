@@ -17,7 +17,10 @@ import org.apache.log4j.Logger;
  */
 public class ConfigServlet extends HttpServlet {
 
+  private static final long   serialVersionUID = 8232303229476547470L;
+
   private static Logger       configLogger     = Logger.getLogger(ConfigServlet.class);
+
   /** Returns getServletContext().getContextPath() property */
   private static String       contextPath;
 
@@ -26,8 +29,6 @@ public class ConfigServlet extends HttpServlet {
 
   /** Full path to war directory */
   private static String       realContextPath;
-
-  private static final long   serialVersionUID = 8232303229476547470L;
 
   /** Full path to temp directory */
   private final static String tempDirPath      = System.getProperty("java.io.tmpdir") + fileSeparator;
@@ -64,13 +65,5 @@ public class ConfigServlet extends HttpServlet {
 
   public static String getContextPath() {
     return contextPath;
-  }
-
-  public static void setContextPath(String contextPath) {
-    ConfigServlet.contextPath = contextPath;
-  }
-
-  public static void setRealContextPath(String realContextPath) {
-    ConfigServlet.realContextPath = realContextPath;
   }
 }
