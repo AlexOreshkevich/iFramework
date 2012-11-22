@@ -7,48 +7,71 @@ import javax.servlet.http.HttpServlet;
 import org.apache.log4j.Logger;
 
 /**
- * Servlet implementation class ConfigServlet
+ * <h1>ConfigServlet</h1>
+ * 
+ * <p>
+ * Do not call directly app/config. We use 'loadOnStartup' property in web.xml. <br/>
+ * Use
+ * </p>
+ * 
+ * @author vadim rylski, alex oreshkevich
  */
 public class ConfigServlet extends HttpServlet {
 
-  private static final long serialVersionUID = 8232303229476547470L;
-  private static Logger     LOG              = Logger.getLogger(ConfigServlet.class);
-  private static String     contextPath;
-  private static String     realContextPath;
-  private static String     fileSeparator;
-  private static String     tempDir;
+  private static Logger       configLogger     = Logger.getLogger(ConfigServlet.class);
+  /** Returns getServletContext().getContextPath() property */
+  private static String       contextPath;
 
-  /**
-   * Сервлет для определения параметров серверной стороны.
-   * 
-   * @see HttpServlet#HttpServlet()
-   */
-  public ConfigServlet() {
-    super();
-  }
+  /** Returns \ on Windows and / on Unix OS */
+  private final static String fileSeparator    = System.getProperty("file.separator");
+
+  /** Full path to war directory */
+  private static String       realContextPath;
+
+  private static final long   serialVersionUID = 8232303229476547470L;
+
+  /** Full path to temp directory */
+  private final static String tempDirPath      = System.getProperty("java.io.tmpdir") + fileSeparator;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
 
-    LOG.debug("catalina.home=" + System.getProperty("catalina.home"));
-    LOG.debug("catalina.base=" + System.getProperty("catalina.base"));
-    // osLinux = System.getProperty("os.name").equalsIgnoreCase("linux");
-    fileSeparator = System.getProperty("file.separator");
-    LOG.debug("fileSeparator=" + fileSeparator);
-    tempDir = System.getProperty("java.io.tmpdir") + fileSeparator;
+    // save servlet contextPath
     contextPath = config.getServletContext().getContextPath();
-    LOG.debug("contextPath=" + contextPath);
+
+    // calculate real contextPath to war directory
     String web_inf = config.getServletContext().getRealPath("/WEB-INF/");
-    LOG.debug("path /WEB-INF/ = " + web_inf);
-    realContextPath = web_inf.substring(0, web_inf.length() - 8) + fileSeparator;
-    LOG.debug("realContextPath = " + realContextPath);
+    realContextPath = web_inf.substring(0, web_inf.length() - 8);
+    if (!realContextPath.endsWith(fileSeparator)) {
+      realContextPath += fileSeparator;
+    }
 
-    LOG.debug("getServletContextName = " + config.getServletContext().getServletContextName());
-    LOG.debug("getMajorVersion = " + config.getServletContext().getMajorVersion());
-    LOG.debug("getMinorVersion = " + config.getServletContext().getMinorVersion());
-    LOG.debug("getServerInfo = " + config.getServletContext().getServerInfo());
+    // debug info
+    configLogger.debug("getServerInfo = " + config.getServletContext().getServerInfo());
+    configLogger.info("Application was successfully deployed by path " + realContextPath);
+  }
 
-    new ConfigServer(contextPath, realContextPath, tempDir);
-    LOG.info("Приложение испешно развернуто на сервере. Путь: " + realContextPath);
+  public static String getFileseparator() {
+    return fileSeparator;
+  }
+
+  public static String getRealContextPath() {
+    return realContextPath;
+  }
+
+  public static String getTempDirPath() {
+    return tempDirPath;
+  }
+
+  public static String getContextPath() {
+    return contextPath;
+  }
+
+  public static void setContextPath(String contextPath) {
+    ConfigServlet.contextPath = contextPath;
+  }
+
+  public static void setRealContextPath(String realContextPath) {
+    ConfigServlet.realContextPath = realContextPath;
   }
 }
