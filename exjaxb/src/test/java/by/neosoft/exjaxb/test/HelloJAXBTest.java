@@ -27,7 +27,7 @@ public class HelloJAXBTest {
   public void test() throws Throwable {
 
     // parser init
-    SimpleParser parser = new SimpleParser(Config.class);
+    ExampleParser parser = new ExampleParser(Config.class);
 
     // loading test xml source
     String srcXml = FileSystemUtils.readFile(new File(System.getProperty("CONFIG_LOCATION") + "default.xml"));

@@ -1,5 +1,7 @@
 package by.neosoft.iframework.example.client;
 
+import by.neosoft.iframework.example.shared.config.Config;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -9,4 +11,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("greet")
 public interface GreetingService extends RemoteService {
   String greetServer(String name) throws IllegalArgumentException;
+
+  Config loadConfig() throws RuntimeException;
 }

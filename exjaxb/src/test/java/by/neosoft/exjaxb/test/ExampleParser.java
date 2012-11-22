@@ -8,9 +8,9 @@ import java.util.HashMap;
 import by.neosoft.exjaxb.test.config.Config;
 import by.neosoft.iframework.exjaxb.AbstractJAXBParser;
 
-public class SimpleParser extends AbstractJAXBParser<Config> {
+public class ExampleParser extends AbstractJAXBParser<Config> {
 
-  public SimpleParser(Class<Config> classType) {
+  public ExampleParser(Class<Config> classType) {
     super(classType);
   }
 

@@ -3,18 +3,18 @@
  */
 package by.neosoft.iframework.example.client;
 
+import by.neosoft.iframework.example.shared.config.Config;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * @author neo
- *
+ * @author alex oreshkevich
+ * 
  */
 public interface GreetingServiceAsync {
 
-  /**
-   * 
-   * @see by.neosoft.iframework.example.client.GreetingService#greetServer(java.lang.String)
-   */
   void greetServer(String name, AsyncCallback<String> callback);
+
+  void loadConfig(AsyncCallback<Config> callback) throws RuntimeException;
 
 }

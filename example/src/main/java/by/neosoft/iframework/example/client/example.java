@@ -1,6 +1,8 @@
 package by.neosoft.iframework.example.client;
 
 import by.neosoft.iframework.example.shared.FieldVerifier;
+import by.neosoft.iframework.example.shared.config.Config;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -22,27 +24,27 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class example implements EntryPoint {
   /**
-   * The message displayed to the user when the server cannot be reached or
-   * returns an error.
+   * The message displayed to the user when the server cannot be reached or returns an error.
    */
-  private static final String SERVER_ERROR = "An error occurred while "
-      + "attempting to contact the server. Please check your network "
-      + "connection and try again.";
+  private static final String        SERVER_ERROR    = "An error occurred while "
+                                                         + "attempting to contact the server. Please check your network "
+                                                         + "connection and try again.";
 
   /**
    * Create a remote service proxy to talk to the server-side Greeting service.
    */
   private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-  private final Messages messages = GWT.create(Messages.class);
+  private final Messages             messages        = GWT.create(Messages.class);
 
   /**
    * This is the entry point method.
    */
+  @Override
   public void onModuleLoad() {
-    final Button sendButton = new Button( messages.sendButton() );
+    final Button sendButton = new Button(messages.sendButton());
     final TextBox nameField = new TextBox();
-    nameField.setText( messages.nameField() );
+    nameField.setText(messages.nameField());
     final Label errorLabel = new Label();
 
     // We can add style names to widgets
@@ -79,6 +81,7 @@ public class example implements EntryPoint {
 
     // Add a handler to close the DialogBox
     closeButton.addClickHandler(new ClickHandler() {
+      @Override
       public void onClick(ClickEvent event) {
         dialogBox.hide();
         sendButton.setEnabled(true);
@@ -91,6 +94,7 @@ public class example implements EntryPoint {
       /**
        * Fired when the user clicks on the sendButton.
        */
+      @Override
       public void onClick(ClickEvent event) {
         sendNameToServer();
       }
@@ -98,6 +102,7 @@ public class example implements EntryPoint {
       /**
        * Fired when the user types in the nameField.
        */
+      @Override
       public void onKeyUp(KeyUpEvent event) {
         if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
           sendNameToServer();
@@ -120,20 +125,24 @@ public class example implements EntryPoint {
         sendButton.setEnabled(false);
         textToServerLabel.setText(textToServer);
         serverResponseLabel.setText("");
-        greetingService.greetServer(textToServer, new AsyncCallback<String>() {
+
+        greetingService.loadConfig(new AsyncCallback<Config>() {
+
+          @Override
+          public void onSuccess(Config result) {
+            dialogBox.setText("Load configuration file");
+            serverResponseLabel.removeStyleName("serverResponseLabelError");
+            serverResponseLabel.setHTML(result.toString());
+            dialogBox.center();
+            closeButton.setFocus(true);
+          }
+
+          @Override
           public void onFailure(Throwable caught) {
             // Show the RPC error message to the user
             dialogBox.setText("Remote Procedure Call - Failure");
             serverResponseLabel.addStyleName("serverResponseLabelError");
             serverResponseLabel.setHTML(SERVER_ERROR);
-            dialogBox.center();
-            closeButton.setFocus(true);
-          }
-
-          public void onSuccess(String result) {
-            dialogBox.setText("Remote Procedure Call");
-            serverResponseLabel.removeStyleName("serverResponseLabelError");
-            serverResponseLabel.setHTML(result);
             dialogBox.center();
             closeButton.setFocus(true);
           }

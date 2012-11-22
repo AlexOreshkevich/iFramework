@@ -8,9 +8,10 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 import org.xml.sax.SAXException;
 
-import by.neosoft.exjaxb.test.SimpleParser;
-import by.neosoft.exjaxb.test.config.Config;
 import by.neosoft.iframework.example.client.GreetingService;
+import by.neosoft.iframework.example.shared.ConfigParser;
+import by.neosoft.iframework.example.shared.config.Config;
+import by.neosoft.iframework.exjaxb.AbstractJAXBParser;
 import by.neosoft.iframework.exjaxb.FileSystemUtils;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -27,8 +28,35 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
   @Override
   public String greetServer(String input) throws IllegalArgumentException {
 
+    // load config file
+    File configFile = new File(ConfigServlet.getRealContextPath() + "config.xml");
+
+    // loading test xml source
+    String srcXml = FileSystemUtils.readFile(configFile);
+
+    return escapeHtml(srcXml);
+  }
+
+  /**
+   * Escape an html string. Escaping data received from the client helps to prevent cross-site script
+   * vulnerabilities.
+   * 
+   * @param html
+   *          the html string to escape
+   * @return the escaped string
+   */
+  private String escapeHtml(String html) {
+    if (html == null) {
+      return null;
+    }
+    return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+  }
+
+  @Override
+  public Config loadConfig() throws RuntimeException {
+
     // parser init
-    SimpleParser parser = new SimpleParser(Config.class);
+    AbstractJAXBParser<Config> parser = new ConfigParser(Config.class);
 
     // load config file
     File configFile = new File(ConfigServlet.getRealContextPath() + "config.xml");
@@ -48,21 +76,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
     // start unmarshalling
     Config result = parser.unmarshall(srcXml, srcXsd, false);
 
-    return escapeHtml(result.getEntryPoint() + "\n" + result.getVersion());
-  }
-
-  /**
-   * Escape an html string. Escaping data received from the client helps to prevent cross-site script
-   * vulnerabilities.
-   * 
-   * @param html
-   *          the html string to escape
-   * @return the escaped string
-   */
-  private String escapeHtml(String html) {
-    if (html == null) {
-      return null;
-    }
-    return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+    return result;
   }
 }
