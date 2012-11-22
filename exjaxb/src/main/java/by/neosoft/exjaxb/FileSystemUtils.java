@@ -1,4 +1,4 @@
-package by.neosoft.exjaxb.fs;
+package by.neosoft.exjaxb;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

@@ -1,12 +1,10 @@
-package by.neosoft.exjaxb.builder;
+package by.neosoft.exjaxb;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 
-import by.neosoft.exjaxb.namespace.NamespaceDecorator;
-import by.neosoft.exjaxb.namespace.NamespacePrefixMapperImpl;
 
 /**
  * MarshallerBuilder

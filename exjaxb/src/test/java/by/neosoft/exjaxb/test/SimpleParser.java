@@ -10,6 +10,10 @@ import by.neosoft.exjaxb.test.config.Config;
 
 class SimpleParser extends AbstractJAXBParser<Config> {
 
+  public SimpleParser(Class<Config> classType) {
+    super(classType);
+  }
+
   @Override
   public String getNamespace() {
     return "http://www.example.com/example";

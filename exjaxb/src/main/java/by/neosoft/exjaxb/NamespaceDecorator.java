@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package by.neosoft.exjaxb.namespace;
+package by.neosoft.exjaxb;
 
 import java.util.HashMap;
 

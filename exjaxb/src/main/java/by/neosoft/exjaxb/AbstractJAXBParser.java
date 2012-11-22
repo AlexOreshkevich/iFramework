@@ -6,6 +6,7 @@ package by.neosoft.exjaxb;
 import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.HashMap;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -34,13 +35,6 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-import by.neosoft.exjaxb.builder.MarshallerBuilder;
-import by.neosoft.exjaxb.exception.DetailedJAXBException;
-import by.neosoft.exjaxb.exception.ErrorCodes;
-import by.neosoft.exjaxb.fs.FileSystemUtils;
-import by.neosoft.exjaxb.namespace.NamespaceDecorator;
-import by.neosoft.exjaxb.parser.ExJAXBParser;
-
 /**
  * AbstractJAXBParser
  * 
@@ -48,21 +42,22 @@ import by.neosoft.exjaxb.parser.ExJAXBParser;
  * 
  * @param <T>
  */
-public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBParser<T> {
-
-  // используется для параметризации пространств имен при маршализации
-  private NamespaceDecorator           nsDecorator;
-
-  // билдеры являются постоянными
-  private final MarshallerBuilder      marshallBuilder;
-
-  private TransformerFactory           transformerFactory = TransformerFactory.newInstance();
+public abstract class AbstractJAXBParser<T extends Object> {
 
   private DocumentBuilder              builder;
 
+  protected final Class<T>             classType;
+
   private final DocumentBuilderFactory factory            = DocumentBuilderFactory.newInstance();
 
-  public AbstractJAXBParser() {
+  private final MarshallerBuilder      marshallBuilder;
+
+  private NamespaceDecorator           nsDecorator;
+
+  private TransformerFactory           transformerFactory = TransformerFactory.newInstance();
+
+  public AbstractJAXBParser(Class<T> classType) {
+    this.classType = classType;
     nsDecorator = new NamespaceDecorator();
     marshallBuilder = new MarshallerBuilder(nsDecorator);
 
@@ -74,6 +69,80 @@ public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBPars
       builder = factory.newDocumentBuilder();
     }
     return builder.newDocument();
+  }
+
+  public MarshallerBuilder getMarshallBuilder() {
+    return marshallBuilder;
+  }
+
+  /**
+   * Для корректного определения префикса необходимо определить пространство имен
+   * 
+   * @return
+   */
+  public abstract String getNamespace();
+
+  /**
+   * ExJAXBParser должен предоставить сведения о пользовательских простанствах имен Если возвращается null, то
+   * используется карта по умолчанию
+   * 
+   * @return сведения о пользовательских простанствах имен (HashMap)
+   */
+  public abstract HashMap<String, String> getNamespacePrefixMap();
+
+  /**
+   * Ассоциированный с данным сервисом декоратор
+   * 
+   * @return
+   */
+  public NamespaceDecorator getNsDecorator() {
+    return nsDecorator;
+  }
+
+  /**
+   * getRootTagName
+   * 
+   * @return
+   */
+  public abstract String getRootTagName();
+
+  public Schema getSchema(File file) throws SAXException {
+    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    Schema s = sf.newSchema(file);
+    return s;
+  }
+
+  /**
+   * getSchemaInstancePrefix
+   * 
+   * @return
+   */
+  public abstract String getSchemaInstancePrefix();
+
+  /**
+   * Выполняет автоматическую сериализацию объекта, задаваемого через targetObj Имя рутового тега rootName
+   * 
+   * @param <T>
+   * @param m
+   * @param targetObj
+   * @param rootName
+   * @param doc
+   *          создание документа без создания фабрики для вывода результатов маршаллера
+   * 
+   * @return
+   * @throws JAXBException
+   * @throws ParserConfigurationException
+   */
+  public org.w3c.dom.Document marshall(T targetObj) throws JAXBException, ParserConfigurationException {
+
+    Marshaller m = marshallBuilder.createMarshaller(classType);
+    Document doc = getDocument();
+
+    // преобразовать бин targetObj в документ doc
+    JAXBElement<T> jbx = wrap(getRootTagName(), getSchemaInstancePrefix(), targetObj);
+    m.marshal(jbx, doc);
+
+    return doc;
   }
 
   /**
@@ -88,12 +157,6 @@ public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBPars
     transformer.transform(new DOMSource(node), new StreamResult(sw));
 
     return sw.toString();
-  }
-
-  public Schema getSchema(File file) throws SAXException {
-    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-    Schema s = sf.newSchema(file);
-    return s;
   }
 
   /**
@@ -118,8 +181,7 @@ public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBPars
    * @throws InvalidAdhocXmlException
    */
   @SuppressWarnings("unchecked")
-  public T unmarshall(String srcXml, Schema srcXsd, Class<T> srcBean, boolean isValidationEnabled,
-      boolean isSavingTempEnabled) throws DetailedJAXBException {
+  public T unmarshall(String srcXml, Schema srcXsd, boolean isSavingTempEnabled) throws DetailedJAXBException {
 
     JAXBContext jc = null;
     Unmarshaller unmarshaller = null;
@@ -136,7 +198,7 @@ public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBPars
 
     // создаем Unmarshaller
     try {
-      jc = JAXBContext.newInstance(srcBean);
+      jc = JAXBContext.newInstance(classType);
       unmarshaller = jc.createUnmarshaller();
     }
     catch (JAXBException e) {
@@ -150,7 +212,7 @@ public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBPars
 
     // передаем ему схему для валидации
     ValidationEventCollector vec = null;
-    if (isValidationEnabled && srcXsd != null) {
+    if (srcXsd != null) {
       unmarshaller.setSchema(srcXsd);
 
       // трассировка ошибок валидации
@@ -192,7 +254,7 @@ public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBPars
     // см. http://jaxb.java.net/tutorial/section_3_3-Validation.html#Validation
     finally {
 
-      if (isValidationEnabled && vec != null && vec.hasEvents()) {
+      if (vec != null && vec.hasEvents()) {
         for (ValidationEvent ve : vec.getEvents()) {
 
           ValidationEventLocator vel = ve.getLocator();
@@ -216,76 +278,6 @@ public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBPars
   }
 
   /**
-   * Выполняет автоматическую сериализацию объекта, задаваемого через targetObj Все параметры по умолчанию
-   * 
-   * @param <T>
-   *          тип целевого класса
-   * @param targetObj
-   *          бин (сущность целевого класса)
-   * 
-   * @return org.w3c.dom.Document
-   * @throws JAXBException
-   *           ошибки
-   */
-  public org.w3c.dom.Document marshall(T targetObj, Document doc) throws JAXBException {
-    Marshaller m = marshallBuilder.createMarshaller(targetObj.getClass());
-    return marshall(m, targetObj, doc);
-  }
-
-  /**
-   * Выполняет автоматическую сериализацию объекта, задаваемого через targetObj
-   * 
-   * @param <T>
-   *          тип целевого класса
-   * @param m
-   *          Marshaller
-   * @param targetObj
-   *          бин (сущность целевого класса)
-   * 
-   * @return org.w3c.dom.Document
-   * @throws JAXBException
-   *           ошибки
-   */
-  public org.w3c.dom.Document marshall(Marshaller m, T targetObj, Document doc) throws JAXBException {
-    return marshall(m, targetObj, targetObj.getClass().getName(), "xsi", doc);
-  }
-
-  /**
-   * Выполняет автоматическую сериализацию объекта, задаваемого через targetObj Имя рутового тега rootName
-   * 
-   * @param <T>
-   * @param m
-   * @param targetObj
-   * @param rootName
-   * @param doc
-   *          создание документа без создания фабрики для вывода результатов маршаллера
-   * 
-   * @return
-   * @throws JAXBException
-   */
-  public org.w3c.dom.Document marshall(Marshaller m, T targetObj, String rootName, String prefix, Document doc)
-      throws JAXBException {
-
-    // преобразовать бин targetObj в документ doc
-    JAXBElement<T> jbx = wrap(rootName, prefix, targetObj);
-    m.marshal(jbx, doc);
-
-    return doc;
-  }
-
-  /**
-   * Выполняет автоматическую сериализацию объекта, задаваемого через targetObj Вывод в консоль
-   * 
-   * @param <T>
-   * @param m
-   * @param targetObj
-   * @throws JAXBException
-   */
-  public void marshall(Marshaller m, T targetObj) throws JAXBException {
-    m.marshal(targetObj, System.out);
-  }
-
-  /**
    * Универсальный метод для обертки бинов (разрешает не дописывать @XmlRootElement)
    * 
    * http://jaxb.java.net/tutorial/section_4_5-Calling-marshal.html#Calling%20marshal
@@ -301,18 +293,5 @@ public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBPars
     QName qtag = new QName(getNamespace(), tagName, prefix);
     JAXBElement<T> jbe = new JAXBElement<T>(qtag, (Class<T>) object.getClass(), object);
     return jbe;
-  }
-
-  /**
-   * Ассоциированный с данным сервисом декоратор
-   * 
-   * @return
-   */
-  public NamespaceDecorator getNsDecorator() {
-    return nsDecorator;
-  }
-
-  public MarshallerBuilder getMarshallBuilder() {
-    return marshallBuilder;
   }
 }

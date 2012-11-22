@@ -1,4 +1,4 @@
-package by.neosoft.exjaxb.namespace;
+package by.neosoft.exjaxb;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 

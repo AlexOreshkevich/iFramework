@@ -1,4 +1,4 @@
-package by.neosoft.exjaxb.exception;
+package by.neosoft.exjaxb;
 
 /**
  * ErrorCodes
