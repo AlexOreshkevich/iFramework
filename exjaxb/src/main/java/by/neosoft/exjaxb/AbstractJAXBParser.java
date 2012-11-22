@@ -1,8 +1,13 @@
+/**
+ * 
+ */
 package by.neosoft.exjaxb;
 
+import java.io.File;
 import java.io.StringReader;
-import java.util.HashMap;
+import java.io.StringWriter;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -12,9 +17,21 @@ import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventLocator;
 import javax.xml.bind.util.ValidationEventCollector;
 import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import by.neosoft.exjaxb.builder.MarshallerBuilder;
@@ -25,42 +42,58 @@ import by.neosoft.exjaxb.namespace.NamespaceDecorator;
 import by.neosoft.exjaxb.parser.ExJAXBParser;
 
 /**
- * ExJAXB
+ * AbstractJAXBParser
  * 
- * Предоставляет серию обобщенных методов для работы с JAXB-компонентами
+ * @author alex oreshkevich
  * 
- * @param T
- *          тип целевого класса
- * @since jaxb 2.2.4u2
- * 
- * @author oreshkevich
+ * @param <T>
  */
-public class ExJAXB<T> {
+public abstract class AbstractJAXBParser<T extends Object> implements ExJAXBParser<T> {
 
   // используется для параметризации пространств имен при маршализации
-  private NamespaceDecorator      nsDecorator;
+  private NamespaceDecorator           nsDecorator;
 
   // билдеры являются постоянными
-  private final MarshallerBuilder marshallBuilder;
+  private final MarshallerBuilder      marshallBuilder;
 
-  // парсер, связанный с используемыми преобразованиями
-  private final ExJAXBParser<T>   exParser;
+  private TransformerFactory           transformerFactory = TransformerFactory.newInstance();
+
+  private DocumentBuilder              builder;
+
+  private final DocumentBuilderFactory factory            = DocumentBuilderFactory.newInstance();
+
+  public AbstractJAXBParser() {
+    nsDecorator = new NamespaceDecorator();
+    marshallBuilder = new MarshallerBuilder(nsDecorator);
+
+    nsDecorator.getNamespacePrefixMap().putAll(getNamespacePrefixMap());
+  }
+
+  public Document getDocument() throws ParserConfigurationException {
+    if (builder == null) {
+      builder = factory.newDocumentBuilder();
+    }
+    return builder.newDocument();
+  }
 
   /**
-   * Карта пространств имен дополняется сведениями о пользовательских простанствах имен
-   * 
-   * @param decorator
+   * Преобразование Node в строку
    */
-  public ExJAXB(ExJAXBParser<T> exParser) {
-    nsDecorator = new NamespaceDecorator();
-    marshallBuilder = new MarshallerBuilder(this.nsDecorator);
-    this.exParser = exParser;
+  public String nodeToString(Node node) throws TransformerException {
+    StringWriter sw = new StringWriter();
 
-    HashMap<String, String> additionalMap = exParser.getNamespacePrefixMap();
+    // описание преобразователя
+    Transformer transformer = transformerFactory.newTransformer();
+    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+    transformer.transform(new DOMSource(node), new StreamResult(sw));
 
-    if (additionalMap != null) {
-      nsDecorator.getNamespacePrefixMap().putAll(additionalMap);
-    }
+    return sw.toString();
+  }
+
+  public Schema getSchema(File file) throws SAXException {
+    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    Schema s = sf.newSchema(file);
+    return s;
   }
 
   /**
@@ -265,7 +298,7 @@ public class ExJAXB<T> {
    */
   @SuppressWarnings("unchecked")
   JAXBElement<T> wrap(String tagName, String prefix, T object) {
-    QName qtag = new QName(exParser.getNamespace(), tagName, prefix);
+    QName qtag = new QName(getNamespace(), tagName, prefix);
     JAXBElement<T> jbe = new JAXBElement<T>(qtag, (Class<T>) object.getClass(), object);
     return jbe;
   }

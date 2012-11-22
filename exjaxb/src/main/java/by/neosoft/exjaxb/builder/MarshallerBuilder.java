@@ -5,7 +5,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 
-import by.neosoft.exjaxb.ExJAXB;
+import by.neosoft.exjaxb.namespace.NamespaceDecorator;
 import by.neosoft.exjaxb.namespace.NamespacePrefixMapperImpl;
 
 /**
@@ -19,7 +19,6 @@ public class MarshallerBuilder {
 
   public final static String              NAMESPACE_PREFIX_PROP = "com.sun.xml.bind.namespacePrefixMapper";
 
-  private final ExJAXB<?>                 service;
   private final NamespacePrefixMapperImpl nsPrefixMapper;
 
   /**
@@ -27,9 +26,8 @@ public class MarshallerBuilder {
    * 
    * @param service
    */
-  public MarshallerBuilder(ExJAXB<?> service) {
-    this.service = service;
-    this.nsPrefixMapper = new NamespacePrefixMapperImpl(service.getNsDecorator());
+  public MarshallerBuilder(NamespaceDecorator nsd) {
+    this.nsPrefixMapper = new NamespacePrefixMapperImpl(nsd);
   }
 
   /**
