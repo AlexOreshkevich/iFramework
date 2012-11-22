@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
-import by.neosoft.exjaxb.FileSystemUtils;
 import by.neosoft.exjaxb.test.config.Config;
+import by.neosoft.iframework.exjaxb.FileSystemUtils;
 
 public class HelloJAXBTest {
 

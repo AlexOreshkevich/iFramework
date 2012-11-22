@@ -1,7 +1,7 @@
 /**
  * 
  */
-package by.neosoft.exjaxb;
+package by.neosoft.iframework.exjaxb;
 
 import java.io.File;
 import java.io.StringReader;

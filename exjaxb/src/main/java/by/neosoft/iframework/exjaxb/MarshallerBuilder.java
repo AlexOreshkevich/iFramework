@@ -1,4 +1,4 @@
-package by.neosoft.exjaxb;
+package by.neosoft.iframework.exjaxb;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

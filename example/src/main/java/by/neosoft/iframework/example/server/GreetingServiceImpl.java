@@ -2,10 +2,16 @@ package by.neosoft.iframework.example.server;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
+import javax.xml.validation.Schema;
 
-import by.neosoft.exjaxb.FileSystemUtils;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
+import org.xml.sax.SAXException;
+
+import by.neosoft.exjaxb.test.SimpleParser;
+import by.neosoft.exjaxb.test.config.Config;
 import by.neosoft.iframework.example.client.GreetingService;
+import by.neosoft.iframework.exjaxb.FileSystemUtils;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -17,16 +23,32 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements Greetin
 
   private static Logger logger = Logger.getLogger(GreetingServiceImpl.class);
 
+  @SuppressWarnings("deprecation")
   @Override
   public String greetServer(String input) throws IllegalArgumentException {
 
-    File file = new File(ConfigServlet.getRealContextPath() + "config.xml");
-    logger.info("file.getAbsolutePath() = " + file.getAbsolutePath());
+    // parser init
+    SimpleParser parser = new SimpleParser(Config.class);
 
-    String result = FileSystemUtils.readFile(file);
-    logger.info("result = " + result);
+    // load config file
+    File configFile = new File(ConfigServlet.getRealContextPath() + "config.xml");
 
-    return escapeHtml(result);
+    // loading test xml source
+    String srcXml = FileSystemUtils.readFile(configFile);
+
+    // loading test xsd schema
+    Schema srcXsd = null;
+    try {
+      srcXsd = parser.getSchema(new File(ConfigServlet.getRealContextPath() + "config.xsd"));
+    }
+    catch (SAXException e) {
+      logger.log(Priority.ERROR, "", e);
+    }
+
+    // start unmarshalling
+    Config result = parser.unmarshall(srcXml, srcXsd, false);
+
+    return escapeHtml(result.getEntryPoint() + "\n" + result.getVersion());
   }
 
   /**

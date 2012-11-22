@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
  * 
  * <p>
  * Do not call directly app/config. We use 'loadOnStartup' property in web.xml. <br/>
- * Use
  * </p>
  * 
  * @author vadim rylski, alex oreshkevich

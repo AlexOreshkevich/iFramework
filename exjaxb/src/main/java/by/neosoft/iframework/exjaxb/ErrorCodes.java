@@ -1,4 +1,4 @@
-package by.neosoft.exjaxb;
+package by.neosoft.iframework.exjaxb;
 
 /**
  * ErrorCodes

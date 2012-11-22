@@ -5,10 +5,10 @@ package by.neosoft.exjaxb.test;
 
 import java.util.HashMap;
 
-import by.neosoft.exjaxb.AbstractJAXBParser;
 import by.neosoft.exjaxb.test.config.Config;
+import by.neosoft.iframework.exjaxb.AbstractJAXBParser;
 
-class SimpleParser extends AbstractJAXBParser<Config> {
+public class SimpleParser extends AbstractJAXBParser<Config> {
 
   public SimpleParser(Class<Config> classType) {
     super(classType);
