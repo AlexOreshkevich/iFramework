@@ -4,6 +4,14 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
+	<servlet-mapping>
+		<servlet-name>jUnitHostImpl</servlet-name>
+		<url-pattern>/by.neosoft.iframework.example.exampleJUnit/junithost/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>greetServlet</servlet-name>
+		<url-pattern>/by.neosoft.iframework.example.exampleJUnit/example/greet</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>jUnitHostImpl</servlet-name>
 		<servlet-class>com.google.gwt.junit.server.JUnitHostImpl</servlet-class>
@@ -18,10 +26,19 @@
 		<servlet-name>greetServlet</servlet-name>
 		<servlet-class>by.neosoft.iframework.example.server.GreetingServiceImpl</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>greetServlet</servlet-name>
 		<url-pattern>/example/greet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>configServlet</servlet-name>
+		<servlet-class>by.neosoft.iframework.example.server.ConfigServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>configServlet</servlet-name>
+		<url-pattern>/example/config</url-pattern>
 	</servlet-mapping>
 
 	<!-- Default page to serve -->

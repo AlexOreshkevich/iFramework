@@ -1,48 +1,50 @@
 package by.neosoft.iframework.example.server;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+import by.neosoft.exjaxb.FileSystemUtils;
 import by.neosoft.iframework.example.client.GreetingService;
-import by.neosoft.iframework.example.shared.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
  * The server side implementation of the RPC service.
  */
 @SuppressWarnings("serial")
-public class GreetingServiceImpl extends RemoteServiceServlet implements
-    GreetingService {
+public class GreetingServiceImpl extends RemoteServiceServlet implements GreetingService {
 
+  @Override
   public String greetServer(String input) throws IllegalArgumentException {
-    // Verify that the input is valid.
-    if (!FieldVerifier.isValidName(input)) {
-      // If the input is not valid, throw an IllegalArgumentException back to
-      // the client.
-      throw new IllegalArgumentException(
-          "Name must be at least 4 characters long");
+
+    try {
+      URL url = getServletContext().getResource("config.xml");
+      return FileSystemUtils.readFile(new File(url.toURI()));
+    }
+    catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+    catch (URISyntaxException e) {
+      e.printStackTrace();
     }
 
-    String serverInfo = getServletContext().getServerInfo();
-    String userAgent = getThreadLocalRequest().getHeader("User-Agent");
-
-    // Escape data from the client to avoid cross-site script vulnerabilities.
-    input = escapeHtml(input);
-    userAgent = escapeHtml(userAgent);
-
-    return "Hello, " + input + "!<br><br>I am running " + serverInfo
-        + ".<br><br>It looks like you are using:<br>" + userAgent;
+    return null;
   }
 
   /**
-   * Escape an html string. Escaping data received from the client helps to
-   * prevent cross-site script vulnerabilities.
-   *
-   * @param html the html string to escape
+   * Escape an html string. Escaping data received from the client helps to prevent cross-site script
+   * vulnerabilities.
+   * 
+   * @param html
+   *          the html string to escape
    * @return the escaped string
    */
   private String escapeHtml(String html) {
     if (html == null) {
       return null;
     }
-    return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(
-        ">", "&gt;");
+    return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
   }
 }

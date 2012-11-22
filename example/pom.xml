@@ -59,6 +59,16 @@
 			<classifier>sources</classifier>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>by.neosoft.iframework</groupId>
+			<artifactId>exjaxb</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -124,9 +134,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<excludes>
-					<exclude>by/neosoft/iframework/example/client/GwtTest*.java</exclude>
-					<exclude>by/neosoft/iframework/example/client/**/*Test.java</exclude>
-					<exclude>by/neosoft/iframework/example/client/test/**/*Test.java</exclude>
+						<exclude>by/neosoft/iframework/example/client/GwtTest*.java</exclude>
+						<exclude>by/neosoft/iframework/example/client/**/*Test.java</exclude>
+						<exclude>by/neosoft/iframework/example/client/test/**/*Test.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
