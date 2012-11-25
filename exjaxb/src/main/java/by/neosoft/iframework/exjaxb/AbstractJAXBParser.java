@@ -178,7 +178,7 @@ public abstract class AbstractJAXBParser<T extends Object> {
    * 
    * @return T instance заполненный бин из xml
    * 
-   * @throws InvalidAdhocXmlException
+   * @throws DetailedJAXBException
    */
   @SuppressWarnings("unchecked")
   public T unmarshall(String srcXml, Schema srcXsd, boolean isSavingTempEnabled) throws DetailedJAXBException {
@@ -198,7 +198,7 @@ public abstract class AbstractJAXBParser<T extends Object> {
 
     // создаем Unmarshaller
     try {
-      jc = JAXBContext.newInstance(classType);
+      jc = JAXBContext.newInstance(classType.getPackage().getName());
       unmarshaller = jc.createUnmarshaller();
     }
     catch (JAXBException e) {
@@ -237,6 +237,8 @@ public abstract class AbstractJAXBParser<T extends Object> {
       }
     }
     catch (JAXBException e) {
+
+      e.printStackTrace();
 
       // ошибка формирования xml документа
       if (e.getLinkedException() instanceof SAXParseException) {
