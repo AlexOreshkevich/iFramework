@@ -47,7 +47,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
           <preparationGoals>clean</preparationGoals>
-          <goals>deploy</goals>
+          <goals>install</goals>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <!-- <useReleaseProfile>false</useReleaseProfile> -->
           <!-- <releaseProfiles>release</releaseProfiles> -->
