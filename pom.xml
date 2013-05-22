@@ -5,7 +5,7 @@
   <groupId>by.neosoft.iframework</groupId>
   <artifactId>iFramework</artifactId>
   <packaging>pom</packaging>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <name>iFramework</name>
 
   <properties>
@@ -46,7 +46,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <preparationGoals>clean generate-sources</preparationGoals>
+          <preparationGoals>clean generate-sources package</preparationGoals>
           <goals>install</goals>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <!-- <useReleaseProfile>false</useReleaseProfile> -->
