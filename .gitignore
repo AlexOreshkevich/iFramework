@@ -11,3 +11,4 @@ MANIFEST.MF
 target
 gwt-unitCache
 builds/
+example/src/main/webapp/META-INF/maven/by.neosoft.iframework/example/pom.properties
