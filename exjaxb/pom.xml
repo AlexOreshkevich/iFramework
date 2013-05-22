@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>by.neosoft.iframework</groupId>
 		<artifactId>iFramework</artifactId>
-		<version>0.1</version>
+		<version>0.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>exjaxb</artifactId>
 	<name>exjaxb</name>
