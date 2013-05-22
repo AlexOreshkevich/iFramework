@@ -62,7 +62,7 @@
   </modules>
   
   <scm> <!-- <connection>scm:git:git://github.com/ArcBees/GWTP.git/</connection> -->
-    <connection>scm:git:git://github.com/AlexOreshkevich/iFramework.git</connection>
+    <connection>scm:git:https://github.com/AlexOreshkevich/iFramework.git</connection>
     <url>https://github.com/AlexOreshkevich/iFramework</url>
   </scm>
 
