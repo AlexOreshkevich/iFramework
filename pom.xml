@@ -62,8 +62,8 @@
   </modules>
 
   <scm>
-    <connection>scm:git:git://github.com/AlexOreshkevich/iFramework.git</connection>
-    <developerConnection>scm:git:git@github.com/AlexOreshkevich/iFramework.git</developerConnection>
+    <connection>scm:ssh:git@github.com:AlexOreshkevich/iFramework.git</connection>
+    <developerConnection>scm:ssh:git@github.com:AlexOreshkevich/iFramework.git</developerConnection>
     <url>https://github.com/AlexOreshkevich/iFramework</url>
   </scm>
 
