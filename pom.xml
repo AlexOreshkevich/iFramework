@@ -41,29 +41,30 @@
     </pluginManagement>
 
     <plugins>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.4.1</version>
         <configuration>
-          <tagBase>git:ssh://git@github.com:AlexOreshkevich/iFramework.git/tags</tagBase>
-          <branchBase>git:ssh://git@github.com:AlexOreshkevich/iFramework.git/branches</branchBase>
           <preparationGoals>clean</preparationGoals>
           <goals>deploy</goals>
           <autoVersionSubmodules>true</autoVersionSubmodules>
+          <!-- <useReleaseProfile>false</useReleaseProfile> -->
+          <!-- <releaseProfiles>release</releaseProfiles> -->
         </configuration>
       </plugin>
     </plugins>
-
   </build>
 
   <modules>
     <module>exjaxb</module>
     <module>example</module>
   </modules>
+
   <scm>
-    <connection>scm:git:ssh://git@github.com:AlexOreshkevich/iFramework.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:AlexOreshkevich/iFramework.git</developerConnection>
-	  <tag>iFramework-0.1</tag>
+    <connection>scm:git:git://github.com/AlexOreshkevich/iFramework.git</connection>
+    <developerConnection>scm:git:git@github.com/AlexOreshkevich/iFramework.git</developerConnection>
+    <url>https://github.com/AlexOreshkevich/iFramework</url>
   </scm>
+
 </project>
