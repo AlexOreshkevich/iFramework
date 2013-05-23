@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>by.neosoft.iframework</groupId>
+  <groupId>by.redsoft.iframework</groupId>
   <artifactId>iFramework</artifactId>
   <packaging>pom</packaging>
   <version>0.2-SNAPSHOT</version>
@@ -12,6 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <compile.version>1.6</compile.version>
     <junit.version>4.10</junit.version>
+    <nexus.repository>http://sup.inttrust.ru:8081/nexus/content/repositories</nexus.repository>
   </properties>
 
   <dependencies>
@@ -30,6 +31,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.0</version>
           <configuration>
             <source>${compile.version}</source>
             <target>${compile.version}</target>
@@ -45,25 +47,37 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
+        <version>2.4.1</version>
         <configuration>
-          <preparationGoals>test</preparationGoals>
-          <goals>compile</goals>
+          <preparationGoals>clean verify</preparationGoals>
+          <goals>install</goals>
           <autoVersionSubmodules>true</autoVersionSubmodules>
-          <!-- <useReleaseProfile>false</useReleaseProfile> -->
-          <!-- <releaseProfiles>release</releaseProfiles> -->
+          <useEditMode>true</useEditMode>
         </configuration>
       </plugin>
     </plugins>
   </build>
 
   <modules>
-    <module>exjaxb</module>
-    <module>example</module>
+    <module>jaxbx</module>
   </modules>
-  
-  <scm> <!-- <connection>scm:git:git://github.com/ArcBees/GWTP.git/</connection> -->
+
+  <scm>
     <connection>scm:git:https://github.com/AlexOreshkevich/iFramework.git</connection>
     <url>https://github.com/AlexOreshkevich/iFramework</url>
   </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>intertrust.releases</id>
+      <url>${nexus.repository}/releases</url>
+      <uniqueVersion>false</uniqueVersion>
+    </repository>
+    <snapshotRepository>
+      <id>intertrust.snapshots</id>
+      <url>${nexus.repository}/snapshots</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
 
 </project>

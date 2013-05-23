@@ -1,1 +1,0 @@
-package by.neosoft.iframework.exjaxb;
