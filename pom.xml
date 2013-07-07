@@ -5,14 +5,38 @@
   <groupId>by.redsoft.iframework</groupId>
   <artifactId>iFramework</artifactId>
   <packaging>pom</packaging>
-  <version>0.2-SNAPSHOT</version>
+  <version>0.2</version>
   <name>iFramework</name>
 
   <properties>
+
+    <!-- common -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <compile.version>1.6</compile.version>
-    <junit.version>4.10</junit.version>
-    <nexus.repository>http://sup.inttrust.ru:8081/nexus/content/repositories</nexus.repository>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <compile.version>1.7</compile.version>
+    <target.jdk>${compile.version}</target.jdk>
+
+    <!-- client -->
+    <gwt.version>2.5.1</gwt.version>
+    <gwtp.version>1.0</gwtp.version>
+    <gin.version>2.0.0</gin.version>
+
+    <!-- server -->
+    <guice.version>3.0</guice.version>
+
+    <!-- testing -->
+    <junit.version>4.11</junit.version>
+    <jukito.version>1.1</jukito.version>
+
+    <!-- maven -->
+    <gwt-maven-plugin.version>2.5.0</gwt-maven-plugin.version>
+    <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
+    <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+    <maven-resources-plugin.version>2.5</maven-resources-plugin.version>
+    <maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
+    <maven-build-helper-plugin.version>1.7</maven-build-helper-plugin.version>
+
+    <nexus.repository>https://89.175.40.133/nexus/content/repositories</nexus.repository>
   </properties>
 
   <dependencies>
@@ -60,6 +84,7 @@
 
   <modules>
     <module>jaxbx</module>
+    <module>gwtp-container</module>
   </modules>
 
   <scm>
