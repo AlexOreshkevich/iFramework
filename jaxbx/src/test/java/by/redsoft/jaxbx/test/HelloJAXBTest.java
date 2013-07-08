@@ -11,7 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
-import by.redsoft.iframework.jaxbx.FileSystemUtils;
+import pro.redsoft.iframework.jaxbx.FileSystemUtils;
+
 import by.redsoft.jaxbx.test.config.Config;
 
 public class HelloJAXBTest {

@@ -1,4 +1,0 @@
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
-    <g:TabLayoutPanel barHeight="22." ui:field="tabPanel" />
-</ui:UiBinder>

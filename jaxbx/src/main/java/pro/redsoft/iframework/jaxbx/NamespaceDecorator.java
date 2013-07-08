@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package by.redsoft.iframework.jaxbx;
+package pro.redsoft.iframework.jaxbx;
 
 import java.util.HashMap;
 

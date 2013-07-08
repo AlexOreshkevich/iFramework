@@ -1,1 +1,0 @@
-package by.redsoft.iframework.jaxbx;

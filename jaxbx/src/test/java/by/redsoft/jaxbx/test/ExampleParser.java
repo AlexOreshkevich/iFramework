@@ -5,7 +5,8 @@ package by.redsoft.jaxbx.test;
 
 import java.util.HashMap;
 
-import by.redsoft.iframework.jaxbx.AbstractJAXBParser;
+import pro.redsoft.iframework.jaxbx.AbstractJAXBParser;
+
 import by.redsoft.jaxbx.test.config.Config;
 
 public class ExampleParser extends AbstractJAXBParser<Config> {

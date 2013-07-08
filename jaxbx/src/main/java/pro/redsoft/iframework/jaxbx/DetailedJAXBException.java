@@ -1,4 +1,4 @@
-package by.redsoft.iframework.jaxbx;
+package pro.redsoft.iframework.jaxbx;
 
 /**
  * DetailedJAXBException <br/>

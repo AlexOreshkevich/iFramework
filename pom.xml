@@ -2,71 +2,215 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>by.redsoft.iframework</groupId>
+  <groupId>pro.redsoft.iframework</groupId>
   <artifactId>iFramework</artifactId>
   <packaging>pom</packaging>
   <version>0.2</version>
   <name>iFramework</name>
+  <inceptionYear>2012</inceptionYear>
+  <description>Extended model-view-presenter framework based on GWTP to simplify your next GWT project.</description>
+  <url>http://redsoft.pro</url>
+
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>RedSoft</name>
+    <url>http://redsoft.pro</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>neo.bsuir</id>
+      <name>alex oreshkevich</name>
+      <email>alex.oreshkevich@redsoft.pro</email>
+      <organization>REDSOFT.PRO</organization>
+      <organizationUrl>http://www.redsoft.pro</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>lead developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+    <developer>
+      <id>laputski</id>
+      <name>alex laputski</name>
+      <email>laputski@gmail.com</email>
+      <organization>OCSICO</organization>
+      <organizationUrl>http://www.ocsico.com</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>lead developer</role>
+      </roles>
+      <timezone>+3</timezone>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/AlexOreshkevich/iFramework.git</connection>
+    <url>https://github.com/AlexOreshkevich/iFramework</url>
+  </scm>
+
+  <modules>
+    <module>iframework-build-tools</module>
+    <module>iframework-core</module>
+    <module>jaxbx</module>
+  </modules>
 
   <properties>
-
-    <!-- common -->
+    <target.jdk>1.7</target.jdk>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <compile.version>1.7</compile.version>
-    <target.jdk>${compile.version}</target.jdk>
+    <gwt.style>OBF</gwt.style>
 
-    <!-- client -->
+    <!-- Maven -->
+    <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
+    <gwt-maven-plugin.version>2.5.1</gwt-maven-plugin.version>
+    <lifecycle-mapping-plugin.version>1.0.0</lifecycle-mapping-plugin.version>
+    <maven-checkstyle-plugin.version>2.7</maven-checkstyle-plugin.version>
+    <maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
+    <maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
+    <maven-eclipse-plugin.version>2.8</maven-eclipse-plugin.version>
+    <maven-gae-plugin.version>0.9.6</maven-gae-plugin.version>
+    <maven-javadoc-plugin.version>2.9</maven-javadoc-plugin.version>
+    <maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
+    <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+    <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
+    <maven-war-plugin.version>2.2</maven-war-plugin.version>
+    <maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
+
+    <!-- Client -->
     <gwt.version>2.5.1</gwt.version>
     <gwtp.version>1.0</gwtp.version>
     <gin.version>2.0.0</gin.version>
+    <gwtquery.version>1.3.2</gwtquery.version>
+    <piriti.version>0.10</piriti.version>
 
-    <!-- server -->
+    <!-- Server -->
     <guice.version>3.0</guice.version>
+    <guava.version>14.0.1</guava.version>
 
     <!-- testing -->
     <junit.version>4.11</junit.version>
     <jukito.version>1.1</jukito.version>
 
-    <!-- maven -->
-    <gwt-maven-plugin.version>2.5.0</gwt-maven-plugin.version>
-    <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
-    <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
-    <maven-resources-plugin.version>2.5</maven-resources-plugin.version>
-    <maven-processor-plugin.version>2.0.5</maven-processor-plugin.version>
-    <maven-build-helper-plugin.version>1.7</maven-build-helper-plugin.version>
-
+    <!-- Nexus -->
     <nexus.repository>https://89.175.40.133/nexus/content/repositories</nexus.repository>
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
+  <repositories />
 
   <build>
     <pluginManagement>
       <plugins>
+
         <!-- Compilation -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.0</version>
+          <version>${maven-compiler-plugin.version}</version>
           <configuration>
-            <source>${compile.version}</source>
-            <target>${compile.version}</target>
-            <encoding>UTF-8</encoding>
-            <sourceEncoding>UTF-8</sourceEncoding>
+            <source>${target.jdk}</source>
+            <target>${target.jdk}</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
         </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.bsc.maven</groupId>
+          <artifactId>maven-processor-plugin</artifactId>
+          <version>${maven-processor-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven-checkstyle-plugin.version}</version>
+          <configuration>
+            <configLocation>/checkstyle.xml</configLocation>
+            <suppressionsLocation>/suppressions.xml</suppressionsLocation>
+            <propertiesLocation>/checkstyle.properties</propertiesLocation>
+            <propertyExpansion>basedir=${basedir}</propertyExpansion>
+            <consoleOutput>true</consoleOutput>
+            <failsOnError>true</failsOnError>
+            <linkXRef>false</linkXRef>
+            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>pro.redsoft.iframework</groupId>
+              <artifactId>iframework-build-tools</artifactId>
+              <version>${project.version}</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <id>validate</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>checkstyle</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven-source-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
       </plugins>
     </pluginManagement>
 
+    <!-- Plugins to be inherited by sub-projects. Note that definitions and configurations of the following plugins in a sub module, will override the top level parent pom's definition -->
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${target.jdk}</source>
+          <target>${target.jdk}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+
+      <!-- Skip GWTTests during JUnit tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*TestCase.java</include>
+          </includes>
+          <excludes>
+            <exclude>**/*GwtTest.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -82,15 +226,27 @@
     </plugins>
   </build>
 
-  <modules>
-    <module>jaxbx</module>
-    <module>gwtp-container</module>
-  </modules>
 
-  <scm>
-    <connection>scm:git:https://github.com/AlexOreshkevich/iFramework.git</connection>
-    <url>https://github.com/AlexOreshkevich/iFramework</url>
-  </scm>
+  <dependencyManagement>
+    <dependencies>
+      <!-- This dependency is required by maven-checkstyle-plugin. -->
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>iframework-build-tools</artifactId>
+        <version>${project.version}</version>
+        <scope>provided</scope>
+        <optional>true</optional>
+      </dependency>
+
+      <!-- Testing -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <distributionManagement>
     <repository>

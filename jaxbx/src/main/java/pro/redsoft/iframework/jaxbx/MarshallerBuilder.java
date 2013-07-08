@@ -1,4 +1,4 @@
-package by.redsoft.iframework.jaxbx;
+package pro.redsoft.iframework.jaxbx;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

@@ -1,0 +1,1 @@
+package pro.redsoft.iframework.jaxbx;
