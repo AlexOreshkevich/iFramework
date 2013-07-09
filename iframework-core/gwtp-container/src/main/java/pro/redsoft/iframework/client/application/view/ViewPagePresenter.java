@@ -64,6 +64,5 @@ public class ViewPagePresenter extends
       initMap.put(ind, type);
       tabNamesMap.put(ind, type.toString());
     }
-
   }
 }

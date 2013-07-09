@@ -42,11 +42,11 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
  */
 public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> extends Presenter<V, P> {
 
-  @Inject
-  private AbstractTabFactoryLoader       tabFactoryLoader;
-
   protected final Map<Integer, ITabType> initMap     = new HashMap<Integer, ITabType>();
   protected final Map<Integer, String>   tabNamesMap = new HashMap<Integer, String>();
+
+  @Inject
+  private AbstractTabFactoryLoader       tabFactoryLoader;
 
   public TabbedPresenter(EventBus eventBus, V view, P proxy, Type<RevealContentHandler<?>> slot) {
     super(eventBus, view, proxy, slot);
