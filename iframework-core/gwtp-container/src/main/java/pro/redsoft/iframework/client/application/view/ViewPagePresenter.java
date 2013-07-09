@@ -16,8 +16,10 @@
 package pro.redsoft.iframework.client.application.view;
 
 import pro.redsoft.iframework.client.application.ApplicationPresenter;
-import pro.redsoft.iframework.client.application.render.TabbedView;
+import pro.redsoft.iframework.client.application.TabTypes;
 import pro.redsoft.iframework.client.place.NameTokens;
+import pro.redsoft.iframework.client.presenter.TabbedPresenter;
+import pro.redsoft.iframework.client.presenter.TabbedView;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -51,5 +53,17 @@ public class ViewPagePresenter extends
   @Inject
   public ViewPagePresenter(EventBus eventBus, MyView view, MyProxy proxy) {
     super(eventBus, view, proxy, ApplicationPresenter.SLOT_SetMainContent);
+  }
+
+  @Override
+  protected void initializeProxy() {
+
+    // this binding can be set in configuration file
+    for (int ind = 0; ind < TabTypes.values().length; ind++) {
+      TabTypes type = TabTypes.values()[ind];
+      initMap.put(ind, type);
+      tabNamesMap.put(ind, type.toString());
+    }
+
   }
 }

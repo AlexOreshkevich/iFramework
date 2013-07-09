@@ -13,38 +13,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.application.render;
+package pro.redsoft.iframework.client.provider;
 
 import java.util.HashMap;
 
-import pro.redsoft.iframework.client.application.TabTypes;
-import pro.redsoft.iframework.client.application.impl.ImageTabPresenter.ImageTabFactoryImpl;
-import pro.redsoft.iframework.client.application.impl.TextTabPresenter.TextTabFactoryImpl;
+import pro.redsoft.iframework.client.factory.AbstractTabFactory;
+import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
+import pro.redsoft.iframework.client.view.AbstractTabView;
 
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.inject.Inject;
 
 /**
  * AbstractTabFactoryLoader.
  * 
  * @author Alex N. Oreshkevich
  */
-public class AbstractTabFactoryLoader {
+public abstract class AbstractTabFactoryLoader {
 
-  private final HashMap<TabTypes, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>> map;
+  protected final HashMap<ITabType, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>> map;
 
-  @Inject
-  public AbstractTabFactoryLoader(AsyncProvider<ImageTabFactoryImpl> imageTabFactory,
-      AsyncProvider<TextTabFactoryImpl> textTabFactory) {
-    map = new HashMap<TabTypes, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>>();
-    map.put(TabTypes.IMAGE, imageTabFactory);
-    map.put(TabTypes.TEXT, textTabFactory);
+  public AbstractTabFactoryLoader() {
+    map = new HashMap<ITabType, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>>();
   }
 
   public
       void
-      get(TabTypes tabType,
+      get(ITabType tabType,
           final AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> callback) {
 
     @SuppressWarnings("unchecked")

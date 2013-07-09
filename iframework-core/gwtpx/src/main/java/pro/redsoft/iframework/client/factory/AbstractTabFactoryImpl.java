@@ -13,7 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.application.render;
+package pro.redsoft.iframework.client.factory;
+
+import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
+import pro.redsoft.iframework.client.view.AbstractTabView;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;

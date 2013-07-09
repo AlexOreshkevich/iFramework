@@ -15,7 +15,7 @@
  */
 package pro.redsoft.iframework.client.application.impl;
 
-import pro.redsoft.iframework.client.application.render.AbstractTabView;
+import pro.redsoft.iframework.client.view.AbstractTabView;
 
 /**
  * TextTabView.

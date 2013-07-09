@@ -13,12 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.application.view;
+package pro.redsoft.iframework.client.view;
 
 import java.util.Iterator;
 import java.util.Map;
 
-import pro.redsoft.iframework.client.application.render.TabbedView;
+import pro.redsoft.iframework.client.presenter.TabbedView;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.BeforeSelectionHandler;

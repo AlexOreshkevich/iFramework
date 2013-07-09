@@ -15,6 +15,8 @@
  */
 package pro.redsoft.iframework.client.application.view;
 
+import pro.redsoft.iframework.client.view.TabbedViewImpl;
+
 /**
  * ViewPageView.
  * 

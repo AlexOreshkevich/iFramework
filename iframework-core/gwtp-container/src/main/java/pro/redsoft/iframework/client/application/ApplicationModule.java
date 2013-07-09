@@ -19,7 +19,6 @@ import pro.redsoft.iframework.client.application.impl.ImageTabPresenter.ImageTab
 import pro.redsoft.iframework.client.application.impl.ImageTabViewFactory;
 import pro.redsoft.iframework.client.application.impl.TextTabPresenter.TextTabFactoryImpl;
 import pro.redsoft.iframework.client.application.impl.TextTabViewFactory;
-import pro.redsoft.iframework.client.application.render.AbstractTabFactoryLoader;
 import pro.redsoft.iframework.client.application.view.ViewModule;
 
 import com.google.inject.Singleton;
@@ -40,7 +39,7 @@ public class ApplicationModule extends AbstractPresenterModule {
     bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class, ApplicationView.class,
         ApplicationPresenter.MyProxy.class);
 
-    bind(AbstractTabFactoryLoader.class);
+    bind(FactoryLoader.class).in(Singleton.class);
 
     bind(ImageTabFactoryImpl.class).in(Singleton.class);
     bind(ImageTabViewFactory.class).in(Singleton.class);

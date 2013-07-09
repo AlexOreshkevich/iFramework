@@ -15,7 +15,7 @@
  */
 package pro.redsoft.iframework.client.application.impl;
 
-import pro.redsoft.iframework.client.application.render.AbstractTabViewImpl;
+import pro.redsoft.iframework.client.view.AbstractTabViewImpl;
 
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;

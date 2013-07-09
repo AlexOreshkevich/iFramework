@@ -13,17 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.application.view;
+package pro.redsoft.iframework.client.presenter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import pro.redsoft.iframework.client.application.TabTypes;
-import pro.redsoft.iframework.client.application.render.AbstractTabFactory;
-import pro.redsoft.iframework.client.application.render.AbstractTabFactoryLoader;
-import pro.redsoft.iframework.client.application.render.AbstractTabPresenter;
-import pro.redsoft.iframework.client.application.render.AbstractTabView;
-import pro.redsoft.iframework.client.application.render.TabbedView;
+import pro.redsoft.iframework.client.factory.AbstractTabFactory;
+import pro.redsoft.iframework.client.provider.AbstractTabFactoryLoader;
+import pro.redsoft.iframework.client.provider.ITabType;
+import pro.redsoft.iframework.client.view.AbstractTabView;
 
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
@@ -45,25 +43,22 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> extends Presenter<V, P> {
 
   @Inject
-  private AbstractTabFactoryLoader     tabFactoryLoader;
+  private AbstractTabFactoryLoader       tabFactoryLoader;
 
-  private final Map<Integer, TabTypes> initMap     = new HashMap<Integer, TabTypes>();
-  private final Map<Integer, String>   tabNamesMap = new HashMap<Integer, String>();
+  protected final Map<Integer, ITabType> initMap     = new HashMap<Integer, ITabType>();
+  protected final Map<Integer, String>   tabNamesMap = new HashMap<Integer, String>();
 
   public TabbedPresenter(EventBus eventBus, V view, P proxy, Type<RevealContentHandler<?>> slot) {
     super(eventBus, view, proxy, slot);
   }
 
+  protected abstract void initializeProxy();
+
   @Override
   protected void onBind() {
     super.onBind();
 
-    // this binding can be set in configuration file
-    for (int ind = 0; ind < TabTypes.values().length; ind++) {
-      TabTypes type = TabTypes.values()[ind];
-      initMap.put(ind, type);
-      tabNamesMap.put(ind, type.toString());
-    }
+    initializeProxy();
 
     // register tab selection handler
     registerHandler(getView().addSelectionHandler(new SelectionHandler<Integer>() {
@@ -81,8 +76,10 @@ public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> 
               }
 
               @Override
-              public void onSuccess(
-                  AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>> result) {
+              public
+                  void
+                  onSuccess(
+                      AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>> result) {
 
                 if (getView().isProxy(ind)) {
                   getView().replaceProxy(ind, result.create().getView().asWidget());

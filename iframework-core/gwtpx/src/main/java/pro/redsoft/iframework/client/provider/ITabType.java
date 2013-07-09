@@ -13,31 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.application.render;
-
-import com.google.gwt.user.client.ui.IsWidget;
-import com.gwtplatform.mvp.client.HandlerContainerImpl;
+package pro.redsoft.iframework.client.provider;
 
 /**
- * AbstractTabViewImpl.
+ * ITabType.
  * 
  * @author Alex N. Oreshkevich
  */
-public abstract class AbstractTabViewImpl extends HandlerContainerImpl implements AbstractTabView {
-
-  protected AbstractTabViewImpl() {
-    super(false); // No autobinding, the presenter will bind us.
-  }
+public interface ITabType {
 
   @Override
-  public void addToSlot(Object slot, IsWidget content) {
-  }
+  boolean equals(Object obj);
 
   @Override
-  public void removeFromSlot(Object slot, IsWidget content) {
-  }
-
-  @Override
-  public void setInSlot(Object slot, IsWidget content) {
-  }
+  int hashCode();
 }

@@ -15,8 +15,8 @@
  */
 package pro.redsoft.iframework.client.application.impl;
 
-import pro.redsoft.iframework.client.application.render.AbstractTabFactoryImpl;
-import pro.redsoft.iframework.client.application.render.AbstractTabPresenter;
+import pro.redsoft.iframework.client.factory.AbstractTabFactoryImpl;
+import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;

@@ -13,18 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.application.render;
+package pro.redsoft.iframework.client.factory;
+
+import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
+import pro.redsoft.iframework.client.view.AbstractTabView;
 
 /**
- * ITabType.
+ * Use this factory to create {@link AbstractTabPresenter} objects.
  * 
  * @author Alex N. Oreshkevich
+ * @param <V>
+ * @param <P>
  */
-public interface ITabType {
+public interface AbstractTabFactory<V extends AbstractTabView, P extends AbstractTabPresenter<V>> {
 
-  @Override
-  boolean equals(Object obj);
-
-  @Override
-  int hashCode();
+  /**
+   * Create a new {@link AbstractTabPresenter}.
+   * 
+   * @return The newly created {@link AbstractTabPresenter}.
+   */
+  P create();
 }

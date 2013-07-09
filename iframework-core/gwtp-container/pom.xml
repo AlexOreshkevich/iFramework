@@ -7,14 +7,20 @@
   </parent>
   <artifactId>gwtp-container</artifactId>
   <packaging>war</packaging>
-    <name>gwtp war container</name>
-    
+  <name>gwtp war container</name>
+
   <properties>
     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
   </properties>
 
   <build>
     <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
 
     <plugins>
       <plugin>
@@ -24,6 +30,23 @@
           <source>${target.jdk}</source>
           <target>${target.jdk}</target>
           <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>${maven-war-plugin.version}</version>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
         </configuration>
       </plugin>
 
@@ -54,7 +77,7 @@
         <version>${gwt.version}</version>
         <configuration>
           <!-- With multiple tests use GwtTestSuite.java for speed -->
-<!--           <includes>**/*GwtTest.java</includes> -->
+          <!-- <includes>**/*GwtTest.java</includes> -->
           <extraJvmArgs>-Xss1024K -Xmx1024M -XX:MaxPermSize=256M</extraJvmArgs>
           <copyWebapp>true</copyWebapp>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
@@ -76,69 +99,9 @@
   </build>
 
   <dependencies>
-    <!-- Google Web Toolkit -->
     <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-user</artifactId>
-      <version>${gwt.version}</version>
-    </dependency>
-
-    <!-- GWT-Platform -->
-    <dependency>
-      <groupId>com.gwtplatform</groupId>
-      <artifactId>gwtp-mvp-client</artifactId>
-      <version>${gwtp.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.gwtplatform</groupId>
-      <artifactId>gwtp-dispatch-client</artifactId>
-      <version>${gwtp.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.gwtplatform</groupId>
-      <artifactId>gwtp-dispatch-server-guice</artifactId>
-      <version>${gwtp.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.gwtplatform</groupId>
-      <artifactId>gwtp-dispatch-shared</artifactId>
-      <version>${gwtp.version}</version>
-    </dependency>
-
-    <!-- DI -->
-    <dependency>
-      <groupId>com.google.inject</groupId>
-      <artifactId>guice</artifactId>
-      <version>${guice.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.inject.extensions</groupId>
-      <artifactId>guice-servlet</artifactId>
-      <version>${guice.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.inject.extensions</groupId>
-      <artifactId>guice-assistedinject</artifactId>
-      <version>${guice.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gwt.inject</groupId>
-      <artifactId>gin</artifactId>
-      <version>${gin.version}</version>
-    </dependency>
-
-    <!-- Test -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jukito</groupId>
-      <artifactId>jukito</artifactId>
-      <version>${jukito.version}</version>
-      <scope>test</scope>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>gwtpx</artifactId>
     </dependency>
   </dependencies>
 

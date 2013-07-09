@@ -15,7 +15,7 @@
  */
 package pro.redsoft.iframework.client.application;
 
-import pro.redsoft.iframework.client.application.render.ITabType;
+import pro.redsoft.iframework.client.provider.ITabType;
 
 /**
  * TabTypes.
