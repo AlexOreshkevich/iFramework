@@ -60,7 +60,7 @@
   <modules>
     <module>iframework-build-tools</module>
     <module>iframework-core</module>
-    <module>jaxbx</module>
+    <module>iframework-jaxbx</module>
   </modules>
 
   <properties>

@@ -13,10 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.application.view;
+package pro.redsoft.iframework.client.application;
 
-import pro.redsoft.iframework.client.application.ApplicationPresenter;
-import pro.redsoft.iframework.client.application.TabTypes;
 import pro.redsoft.iframework.client.place.NameTokens;
 import pro.redsoft.iframework.client.presenter.TabbedPresenter;
 import pro.redsoft.iframework.client.presenter.TabbedView;

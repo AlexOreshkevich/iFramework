@@ -2,12 +2,12 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
-    <artifactId>iframework-core</artifactId>
+    <artifactId>iframework-samples</artifactId>
     <version>0.2</version>
   </parent>
-  <artifactId>gwtp-container</artifactId>
+  <artifactId>tabbed-presenter</artifactId>
   <packaging>war</packaging>
-  <name>gwtp war container</name>
+  <name>TabbedPresenter</name>
 
   <properties>
     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
@@ -82,9 +82,9 @@
           <copyWebapp>true</copyWebapp>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
 
-          <runTarget>Project.html</runTarget>
+          <runTarget>TabbedPresenter.html</runTarget>
           <modules>
-            <module>pro.redsoft.iframework.Project</module>
+            <module>pro.redsoft.iframework.TabbedPresenter</module>
           </modules>
         </configuration>
         <executions>
@@ -97,12 +97,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>gwtpx</artifactId>
-    </dependency>
-  </dependencies>
 
 </project>

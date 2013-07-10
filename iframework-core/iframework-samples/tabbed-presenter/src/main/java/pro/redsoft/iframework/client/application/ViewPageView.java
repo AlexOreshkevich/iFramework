@@ -13,5 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.application.render;
+package pro.redsoft.iframework.client.application;
 
+import pro.redsoft.iframework.client.view.TabbedViewImpl;
+
+/**
+ * ViewPageView.
+ * 
+ * @author Alex N. Oreshkevich
+ */
+public class ViewPageView extends TabbedViewImpl implements ViewPagePresenter.MyView {
+}

@@ -5,8 +5,8 @@
     <artifactId>iFramework</artifactId>
     <version>0.2</version>
   </parent>
-  <artifactId>jaxbx</artifactId>
-  <name>jaxbx</name>
+  <artifactId>iframework-jaxbx</artifactId>
+  <name>iframework-jaxbx</name>
 
   <dependencies>
     <dependency>

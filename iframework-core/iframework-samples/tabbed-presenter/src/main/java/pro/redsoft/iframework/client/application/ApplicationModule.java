@@ -19,7 +19,6 @@ import pro.redsoft.iframework.client.application.impl.ImageTabPresenter.ImageTab
 import pro.redsoft.iframework.client.application.impl.ImageTabViewFactory;
 import pro.redsoft.iframework.client.application.impl.TextTabPresenter.TextTabFactoryImpl;
 import pro.redsoft.iframework.client.application.impl.TextTabViewFactory;
-import pro.redsoft.iframework.client.application.view.ViewModule;
 import pro.redsoft.iframework.client.provider.FactoryLoader;
 
 import com.google.inject.Singleton;

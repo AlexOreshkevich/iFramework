@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.application.view;
+package pro.redsoft.iframework.client.application;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 

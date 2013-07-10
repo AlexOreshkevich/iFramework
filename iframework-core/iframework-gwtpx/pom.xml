@@ -5,7 +5,7 @@
     <artifactId>iframework-core</artifactId>
     <version>0.2</version>
   </parent>
-  <artifactId>gwtpx</artifactId>
+  <artifactId>iframework-gwtpx</artifactId>
   <name>Extended GWTP</name>
 
   <build>

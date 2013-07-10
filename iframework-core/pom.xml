@@ -10,8 +10,8 @@
   <name>iframework-core</name>
 
   <modules>
-    <module>gwtpx</module>
-    <module>gwtp-container</module>
+    <module>iframework-gwtpx</module>
+    <module>iframework-samples</module>
   </modules>
 
   <build>
