@@ -29,7 +29,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * 
  * @author Alex N. Oreshkevich
  */
-public abstract class AbstractTabFactoryLoader {
+public abstract class AbstractTabFactoryLoader implements FactoryLoader {
 
   protected final HashMap<ITabType, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>> map;
 

@@ -24,15 +24,15 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * FactoryLoader.
+ * FactoryLoaderImpl.
  * 
  * @author Alex N. Oreshkevich
  */
 @Singleton
-public class FactoryLoader extends AbstractTabFactoryLoader {
+public class FactoryLoaderImpl extends AbstractTabFactoryLoader {
 
   @Inject
-  public FactoryLoader(AsyncProvider<ImageTabFactoryImpl> imageTabFactory,
+  public FactoryLoaderImpl(AsyncProvider<ImageTabFactoryImpl> imageTabFactory,
       AsyncProvider<TextTabFactoryImpl> textTabFactory) {
     map.put(TabTypes.IMAGE, imageTabFactory);
     map.put(TabTypes.TEXT, textTabFactory);
