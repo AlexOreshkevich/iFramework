@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<module rename-to='project'>
+
+  <!-- Inherit the core Web Toolkit stuff. -->
+  <inherits name='com.google.gwt.user.User' />
+  <inherits name='com.google.gwt.inject.Inject' />
+
+  <!-- Other module inherits -->
+  <inherits name='com.gwtplatform.dispatch.Dispatch' />
+
+  <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
+
+  <source path='client' />
+  <source path='shared' />
+</module>
