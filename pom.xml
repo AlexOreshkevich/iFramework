@@ -5,7 +5,7 @@
   <groupId>pro.redsoft.iframework</groupId>
   <artifactId>iFramework</artifactId>
   <packaging>pom</packaging>
-  <version>0.2</version>
+  <version>0.2.0-SNAPSHOT</version>
   <name>iFramework</name>
   <inceptionYear>2012</inceptionYear>
   <description>Extended model-view-presenter framework based on GWTP to simplify your next GWT project.</description>
@@ -248,8 +248,11 @@
 
   <repositories>
     <repository>
-       <id>intertrust.releases</id>
+      <id>intertrust.releases</id>
       <url>${nexus.repository}/releases</url>
+      <releases>
+        <updatePolicy>always</updatePolicy>
+      </releases>
     </repository>
     <repository>
       <id>intertrust.snapshots</id>
