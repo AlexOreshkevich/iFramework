@@ -28,11 +28,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface FactoryLoader {
 
-  /**
-   * @param iTabType
-   * @param asyncCallback
-   */
       void
-      get(ITabType iTabType,
+      get(Object iTabType,
           AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> asyncCallback);
 }

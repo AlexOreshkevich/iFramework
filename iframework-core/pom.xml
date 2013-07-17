@@ -3,7 +3,7 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iFramework</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.1</version>
   </parent>
   <artifactId>iframework-core</artifactId>
   <packaging>pom</packaging>
@@ -11,8 +11,7 @@
 
   <modules>
     <module>iframework-gwtpx</module>
-    <module>iframework-samples</module>
-  </modules>
+      </modules>
 
   <build>
     <plugins>

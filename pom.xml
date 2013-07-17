@@ -5,7 +5,7 @@
   <groupId>pro.redsoft.iframework</groupId>
   <artifactId>iFramework</artifactId>
   <packaging>pom</packaging>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.1</version>
   <name>iFramework</name>
   <inceptionYear>2012</inceptionYear>
   <description>Extended model-view-presenter framework based on GWTP to simplify your next GWT project.</description>
@@ -61,6 +61,7 @@
     <module>iframework-build-tools</module>
     <module>iframework-core</module>
     <module>iframework-jaxbx</module>
+    <module>iframework-samples</module>
   </modules>
 
   <properties>
@@ -246,19 +247,28 @@
     </dependencies>
   </dependencyManagement>
 
-  <repositories>
-    <repository>
-      <id>intertrust.releases</id>
-      <url>${nexus.repository}/releases</url>
-      <releases>
-        <updatePolicy>always</updatePolicy>
-      </releases>
-    </repository>
-    <repository>
-      <id>intertrust.snapshots</id>
-      <url>${nexus.repository}/snapshots</url>
-    </repository>
-  </repositories>
+<!--   <repositories> -->
+<!--     <repository> -->
+<!--       <id>intertrust.releases</id> -->
+<!--       <url>${nexus.repository}/releases</url> -->
+<!--       <releases> -->
+<!--         <updatePolicy>always</updatePolicy> -->
+<!--       </releases> -->
+<!-- 	<snapshots> -->
+<!--         <updatePolicy>always</updatePolicy> -->
+<!--       </snapshots> -->
+<!--     </repository> -->
+<!--     <repository> -->
+<!--       <id>intertrust.snapshots</id> -->
+<!--       <url>${nexus.repository}/snapshots</url> -->
+<!-- 	<releases> -->
+<!--         <updatePolicy>always</updatePolicy> -->
+<!--       </releases> -->
+<!-- 	<snapshots> -->
+<!--         <updatePolicy>always</updatePolicy> -->
+<!--       </snapshots> -->
+<!--     </repository> -->
+<!--   </repositories> -->
 
   <distributionManagement>
     <repository>
