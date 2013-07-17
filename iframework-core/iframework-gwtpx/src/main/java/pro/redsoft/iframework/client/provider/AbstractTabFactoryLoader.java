@@ -31,15 +31,15 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public abstract class AbstractTabFactoryLoader implements FactoryLoader {
 
-  protected final HashMap<ITabType, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>> map;
+  protected final HashMap<Object, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>> map;
 
   public AbstractTabFactoryLoader() {
-    map = new HashMap<ITabType, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>>();
+    map = new HashMap<Object, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>>();
   }
 
   public
       void
-      get(ITabType tabType,
+      get(Object tabType,
           final AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> callback) {
 
     @SuppressWarnings("unchecked")
