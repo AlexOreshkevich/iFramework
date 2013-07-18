@@ -11,5 +11,6 @@ MANIFEST.MF
 target
 gwt-unitCache
 builds/
-gwtp-container/src/main/webapp/META-INF/maven/by.neosoft.iframework/project/pom.properties
-gwtp-container/src/main/webapp/META-INF/maven/by.neosoft.iframework/project/pom.xml
+pom.properties
+lib/
+/tabbed-presenter/src/main/webapp/META-INF
