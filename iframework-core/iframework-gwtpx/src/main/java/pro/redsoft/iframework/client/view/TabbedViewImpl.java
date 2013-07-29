@@ -175,7 +175,7 @@ public abstract class TabbedViewImpl extends HandlerContainerImpl implements Tab
   }
 
   @Override
-  public void replaceProxy(int tabInd, IsWidget w) throws IndexOutOfBoundsException {
+  public final void replaceProxy(int tabInd, IsWidget w) throws IndexOutOfBoundsException {
     ((ComplexPanel) getTabPanel().getWidget(tabInd)).add(w);
   }
 

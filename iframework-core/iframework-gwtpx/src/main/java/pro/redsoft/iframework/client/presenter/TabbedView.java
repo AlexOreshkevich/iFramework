@@ -41,6 +41,16 @@ public interface TabbedView extends View, HandlerContainer, HasWidgets, Provides
 
   void init(int defaultSelectedInd, Map<Integer, String> tabNamesMap);
 
+  /**
+   * Inserts a widget into the panel. If the Widget is already attached, it will be moved to the requested index.
+   * 
+   * @param child
+   *          the widget to be added
+   * @param text
+   *          the text to be shown on its tab
+   * @param beforeIndex
+   *          the index before which it will be inserted
+   */
   void insert(Widget child, String text, int beforeIndex);
 
   void selectTab(int ind);
