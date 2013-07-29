@@ -35,17 +35,13 @@ import com.gwtplatform.mvp.client.View;
  */
 public interface TabbedView extends View, HandlerContainer, HasWidgets, ProvidesResize,
     IndexedPanel.ForIsWidget, AnimatedLayout, HasBeforeSelectionHandlers<Integer>,
-    HasSelectionHandlers<Integer> {
+    HasSelectionHandlers<Integer>, ProxyTabbedView {
 
   void add(Widget widget, String string);
 
   void init(int defaultSelectedInd, Map<Integer, String> tabNamesMap);
 
   void insert(Widget child, String text, int beforeIndex);
-
-  boolean isProxy(int tabInd);
-
-  void replaceProxy(int tabInd, Widget w);
 
   void selectTab(int ind);
 

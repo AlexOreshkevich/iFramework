@@ -144,7 +144,7 @@ public abstract class TabbedViewImpl extends HandlerContainerImpl implements Tab
   }
 
   @Override
-  public boolean isProxy(int tabInd) {
+  public boolean isProxy(int tabInd) throws IndexOutOfBoundsException {
     return ((ComplexPanel) tabPanel.getWidget(tabInd)).getWidgetCount() == 0;
   }
 
@@ -168,16 +168,8 @@ public abstract class TabbedViewImpl extends HandlerContainerImpl implements Tab
   }
 
   @Override
-  public void replaceProxy(int tabInd, Widget w) {
-    Widget proxyContainer = tabPanel.getWidget(tabInd);
-    assert proxyContainer != null;
-    try {
-      ComplexPanel proxyPanel = (ComplexPanel) proxyContainer;
-      proxyPanel.add(w);
-    }
-    catch (ClassCastException e) {
-      throw new RuntimeException("replaceProxy() cast error", e);
-    }
+  public void replaceProxy(int tabInd, IsWidget w) throws IndexOutOfBoundsException {
+    ((ComplexPanel) tabPanel.getWidget(tabInd)).add(w);
   }
 
   @Override
