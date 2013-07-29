@@ -3,7 +3,7 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iFramework</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.5</version>
   </parent>
   <artifactId>iframework-core</artifactId>
   <packaging>pom</packaging>

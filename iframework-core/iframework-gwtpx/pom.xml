@@ -3,7 +3,7 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iframework-core</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.5</version>
   </parent>
   <artifactId>iframework-gwtpx</artifactId>
   <name>Extended GWTP</name>

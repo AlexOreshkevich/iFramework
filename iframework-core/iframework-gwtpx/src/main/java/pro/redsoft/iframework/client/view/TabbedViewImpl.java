@@ -29,7 +29,6 @@ import com.google.gwt.layout.client.Layout.AnimationCallback;
 import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.HandlerContainerImpl;
 
@@ -40,18 +39,15 @@ import com.gwtplatform.mvp.client.HandlerContainerImpl;
  */
 public abstract class TabbedViewImpl extends HandlerContainerImpl implements TabbedView {
 
-  protected TabLayoutPanel tabPanel;
+  private TabPanelEx tabPanel;
 
   public TabbedViewImpl() {
-    tabPanel = new TabLayoutPanel(25, Unit.PX);
-    tabPanel.setAnimationVertical(true);
-    tabPanel.setWidth("400px");
-    tabPanel.setHeight("600px");
+    buildTabPanel();
   }
 
   @Override
   public void add(Widget w) {
-    tabPanel.add(w);
+    getTabPanel().add(w);
   }
 
   @Override
@@ -61,12 +57,12 @@ public abstract class TabbedViewImpl extends HandlerContainerImpl implements Tab
 
   @Override
   public HandlerRegistration addBeforeSelectionHandler(BeforeSelectionHandler<Integer> handler) {
-    return tabPanel.addBeforeSelectionHandler(handler);
+    return getTabPanel().addBeforeSelectionHandler(handler);
   }
 
   @Override
   public HandlerRegistration addSelectionHandler(SelectionHandler<Integer> handler) {
-    return tabPanel.addSelectionHandler(handler);
+    return getTabPanel().addSelectionHandler(handler);
   }
 
   @Override
@@ -75,17 +71,17 @@ public abstract class TabbedViewImpl extends HandlerContainerImpl implements Tab
 
   @Override
   public void animate(int duration) {
-    tabPanel.animate(duration);
+    getTabPanel().animate(duration);
   }
 
   @Override
   public void animate(int duration, AnimationCallback callback) {
-    tabPanel.animate(duration, callback);
+    getTabPanel().animate(duration, callback);
   }
 
   @Override
   public Widget asWidget() {
-    return tabPanel;
+    return getTabPanel().asWidget();
   }
 
   private Widget buildProxyContainer() {
@@ -93,39 +89,50 @@ public abstract class TabbedViewImpl extends HandlerContainerImpl implements Tab
     return fp;
   }
 
+  protected void buildTabPanel() {
+    tabPanel = new TabPanelEx(25, Unit.PX);
+    tabPanel.setAnimationVertical(true);
+    tabPanel.setWidth("400px");
+    tabPanel.setHeight("600px");
+  }
+
   @Override
   public void clear() {
-    tabPanel.clear();
+    getTabPanel().clear();
   }
 
   @Override
   public void fireEvent(GwtEvent<?> event) {
-    tabPanel.fireEvent(event);
+    getTabPanel().fireEvent(event);
   }
 
   @Override
   public void forceLayout() {
-    tabPanel.forceLayout();
+    getTabPanel().forceLayout();
+  }
+
+  protected TabPanel getTabPanel() {
+    return tabPanel;
   }
 
   @Override
   public Widget getWidget(int index) {
-    return tabPanel.getWidget(index);
+    return getTabPanel().getWidget(index);
   }
 
   @Override
   public int getWidgetCount() {
-    return tabPanel.getWidgetCount();
+    return getTabPanel().getWidgetCount();
   }
 
   @Override
   public int getWidgetIndex(IsWidget child) {
-    return tabPanel.getWidgetIndex(child);
+    return getTabPanel().getWidgetIndex(child);
   }
 
   @Override
   public int getWidgetIndex(Widget child) {
-    return tabPanel.getWidgetIndex(child);
+    return getTabPanel().getWidgetIndex(child);
   }
 
   @Override
@@ -144,23 +151,23 @@ public abstract class TabbedViewImpl extends HandlerContainerImpl implements Tab
   }
 
   @Override
-  public boolean isProxy(int tabInd) throws IndexOutOfBoundsException {
-    return ((ComplexPanel) tabPanel.getWidget(tabInd)).getWidgetCount() == 0;
+  public final boolean isProxy(int tabInd) throws IndexOutOfBoundsException {
+    return ((ComplexPanel) getTabPanel().getWidget(tabInd)).getWidgetCount() == 0;
   }
 
   @Override
   public Iterator<Widget> iterator() {
-    return tabPanel.iterator();
+    return getTabPanel().iterator();
   }
 
   @Override
   public boolean remove(int index) {
-    return tabPanel.remove(index);
+    return getTabPanel().remove(index);
   }
 
   @Override
   public boolean remove(Widget w) {
-    return tabPanel.remove(w);
+    return getTabPanel().remove(w);
   }
 
   @Override
@@ -169,7 +176,7 @@ public abstract class TabbedViewImpl extends HandlerContainerImpl implements Tab
 
   @Override
   public void replaceProxy(int tabInd, IsWidget w) throws IndexOutOfBoundsException {
-    ((ComplexPanel) tabPanel.getWidget(tabInd)).add(w);
+    ((ComplexPanel) getTabPanel().getWidget(tabInd)).add(w);
   }
 
   @Override

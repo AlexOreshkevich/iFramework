@@ -5,7 +5,7 @@
   <groupId>pro.redsoft.iframework</groupId>
   <artifactId>iFramework</artifactId>
   <packaging>pom</packaging>
-  <version>0.2.3</version>
+  <version>0.2.5</version>
   <name>iFramework</name>
   <inceptionYear>2012</inceptionYear>
   <description>Extended model-view-presenter framework based on GWTP to simplify your next GWT project.</description>
