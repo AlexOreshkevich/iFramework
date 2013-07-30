@@ -37,10 +37,15 @@ public abstract class AbstractTabFactoryLoader implements FactoryLoader {
     map = new HashMap<Object, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>>();
   }
 
+  @Override
   public
       void
       get(Object tabType,
           final AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> callback) {
+
+    if (callback == null) {
+      throw new IllegalArgumentException("Callback cann't be null.");
+    }
 
     @SuppressWarnings("unchecked")
     AsyncProvider<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> provider = (AsyncProvider<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>) map
@@ -61,6 +66,10 @@ public abstract class AbstractTabFactoryLoader implements FactoryLoader {
               callback.onSuccess(result);
             }
           });
+    }
+    else {
+      callback.onFailure(new UnsupportedOperationException("Tab type " + tabType
+          + " doesn't supported by factory loader."));
     }
   }
 }

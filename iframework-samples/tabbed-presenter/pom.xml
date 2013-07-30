@@ -3,7 +3,7 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iframework-samples</artifactId>
-    <version>0.2.5</version>
+    <version>0.2.6</version>
   </parent>
   <artifactId>tabbed-presenter</artifactId>
   <packaging>war</packaging>

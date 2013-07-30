@@ -28,7 +28,18 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface FactoryLoader {
 
+  /**
+   * Load factory by tabType
+   * 
+   * @param tabType
+   * @param asyncCallback
+   * @throws IllegalArgumentException
+   *           if asyncCallback is null
+   * @throws UnsupportedOperationException
+   *           if missing configuration mapping for tabType
+   */
       void
-      get(Object iTabType,
-          AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> asyncCallback);
+      get(Object tabType,
+          AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> asyncCallback)
+          throws IllegalArgumentException, UnsupportedOperationException;
 }

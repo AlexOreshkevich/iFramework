@@ -24,7 +24,7 @@ import pro.redsoft.iframework.client.provider.ITabType;
  */
 public enum TabTypes implements ITabType {
 
-    VIDEO,
     TEXT,
-    IMAGE;
+    IMAGE,
+    VIDEO;
 }
