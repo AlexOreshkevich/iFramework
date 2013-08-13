@@ -15,12 +15,12 @@
  */
 package pro.redsoft.iframework.client.application.impl;
 
-import pro.redsoft.iframework.client.view.AbstractTabView;
+import pro.redsoft.iframework.client.view.ComponentView;
 
 /**
  * TextTabView.
  * 
  * @author Alex N. Oreshkevich
  */
-public interface TextTabView extends AbstractTabView {
+public interface TextTabView extends ComponentView {
 }

@@ -15,7 +15,7 @@
  */
 package pro.redsoft.iframework.client.application.impl;
 
-import pro.redsoft.iframework.client.view.AbstractTabViewImpl;
+import pro.redsoft.iframework.client.view.AbstractComponentView;
 
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Alex N. Oreshkevich
  */
-public class ImageTabViewImpl extends AbstractTabViewImpl implements ImageTabView {
+public class ImageTabViewImpl extends AbstractComponentView implements ImageTabView {
 
   private Image image;
 

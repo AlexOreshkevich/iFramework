@@ -15,14 +15,14 @@
  */
 package pro.redsoft.iframework.client.application.impl;
 
-import pro.redsoft.iframework.client.factory.AbstractTabViewFactory;
+import pro.redsoft.iframework.client.factory.ComponentViewFactory;
 
 /**
  * TextTabViewFactory.
  * 
  * @author Alex N. Oreshkevich
  */
-public class TextTabViewFactory implements AbstractTabViewFactory<TextTabView> {
+public class TextTabViewFactory implements ComponentViewFactory<TextTabView> {
 
   @Override
   public TextTabView create() {

@@ -15,28 +15,29 @@
  */
 package pro.redsoft.iframework.client.factory;
 
-import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
-import pro.redsoft.iframework.client.view.AbstractTabView;
+import pro.redsoft.iframework.client.presenter.ComponentPresenterWidget;
+import pro.redsoft.iframework.client.view.ComponentView;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
- * AbstractTabFactoryImpl.
+ * Base class for all factories of {@link PresenterWidget}.
  * 
  * @author Alex N. Oreshkevich
  * @param <V>
  * @param <P>
  * @param <F>
  */
-public abstract class AbstractTabFactoryImpl<V extends AbstractTabView, P extends AbstractTabPresenter<V>, F extends AbstractTabViewFactory<V>>
-    implements AbstractTabFactory<V, P> {
+public abstract class AbstractComponentPresenterFactory<V extends ComponentView, P extends ComponentPresenterWidget<V>, F extends ComponentViewFactory<V>>
+    implements ComponentPresenterFactory<V, P> {
 
   protected final EventBus eventBus;
   protected final F        viewFactory;
 
   @Inject
-  protected AbstractTabFactoryImpl(EventBus eventBus, F viewFactory) {
+  protected AbstractComponentPresenterFactory(EventBus eventBus, F viewFactory) {
     this.eventBus = eventBus;
     this.viewFactory = viewFactory;
   }

@@ -15,22 +15,21 @@
  */
 package pro.redsoft.iframework.client.factory;
 
-import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
-import pro.redsoft.iframework.client.view.AbstractTabView;
+import pro.redsoft.iframework.client.presenter.ComponentPresenterWidget;
+import pro.redsoft.iframework.client.view.ComponentView;
 
 /**
- * AbstractTabViewFactory. <br/>
- * This factory is used to create new views for the {@link AbstractTabPresenter}.
+ * This factory is used to create new views for the {@link ComponentPresenterWidget}.
  * 
  * @author Alex N. Oreshkevich
  * @param <V>
  */
-public interface AbstractTabViewFactory<V extends AbstractTabView> {
+public interface ComponentViewFactory<V extends ComponentView> {
 
   /**
-   * Create a new view for a {@link AbstractTabPresenter}.
+   * Create a new view for a {@link ComponentPresenterWidget}.
    * 
-   * @return The newly created view for this {@link AbstractTabPresenter}.
+   * @return The newly created view for this {@link ComponentPresenterWidget}.
    */
   V create();
 }

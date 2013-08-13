@@ -19,13 +19,13 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.gwtplatform.mvp.client.HandlerContainerImpl;
 
 /**
- * AbstractTabViewImpl.
+ * AbstractComponentView.
  * 
  * @author Alex N. Oreshkevich
  */
-public abstract class AbstractTabViewImpl extends HandlerContainerImpl implements AbstractTabView {
+public abstract class AbstractComponentView extends HandlerContainerImpl implements ComponentView {
 
-  protected AbstractTabViewImpl() {
+  protected AbstractComponentView() {
     super(false); // No autobinding, the presenter will bind us.
   }
 

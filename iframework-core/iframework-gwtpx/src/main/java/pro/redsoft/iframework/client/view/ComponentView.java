@@ -13,24 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.factory;
+package pro.redsoft.iframework.client.view;
 
-import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
-import pro.redsoft.iframework.client.view.AbstractTabView;
+import com.gwtplatform.mvp.client.HandlerContainer;
+import com.gwtplatform.mvp.client.View;
 
 /**
- * Use this factory to create {@link AbstractTabPresenter} objects.
+ * ComponentView.
  * 
  * @author Alex N. Oreshkevich
- * @param <V>
- * @param <P>
  */
-public interface AbstractTabFactory<V extends AbstractTabView, P extends AbstractTabPresenter<V>> {
-
-  /**
-   * Create a new {@link AbstractTabPresenter}.
-   * 
-   * @return The newly created {@link AbstractTabPresenter}.
-   */
-  P create();
+public interface ComponentView extends View, HandlerContainer {
 }

@@ -19,9 +19,8 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
- * Blocks application for unauthorized users.
+ * Blocks application for unauthorized users via revealing unauthorized place.
  * 
- * @since 4.1
  * @author alex oreshkevich
  */
 public class AuthGatekeeper implements Gatekeeper {

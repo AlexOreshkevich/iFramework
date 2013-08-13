@@ -17,7 +17,7 @@ package pro.redsoft.iframework.client.application;
 
 import pro.redsoft.iframework.client.application.impl.ImageTabPresenter.ImageTabFactoryImpl;
 import pro.redsoft.iframework.client.application.impl.TextTabPresenter.TextTabFactoryImpl;
-import pro.redsoft.iframework.client.provider.AbstractTabFactoryLoader;
+import pro.redsoft.iframework.client.provider.AbstractFactoryLoader;
 
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.inject.Inject;
@@ -29,7 +29,7 @@ import com.google.inject.Singleton;
  * @author Alex N. Oreshkevich
  */
 @Singleton
-public class FactoryLoaderImpl extends AbstractTabFactoryLoader {
+public class FactoryLoaderImpl extends AbstractFactoryLoader {
 
   @Inject
   public FactoryLoaderImpl(AsyncProvider<ImageTabFactoryImpl> imageTabFactory,

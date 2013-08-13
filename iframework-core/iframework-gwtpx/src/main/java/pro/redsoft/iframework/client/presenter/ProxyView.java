@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.IsWidget;
  * 
  * @author Alex N. Oreshkevich
  */
-public interface ProxyTabbedView {
+public interface ProxyView {
 
   /**
    * Checks whenever tab by specified index is proxy or not.

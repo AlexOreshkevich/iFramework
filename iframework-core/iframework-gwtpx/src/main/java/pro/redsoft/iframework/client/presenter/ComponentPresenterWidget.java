@@ -15,20 +15,20 @@
  */
 package pro.redsoft.iframework.client.presenter;
 
-import pro.redsoft.iframework.client.view.AbstractTabView;
+import pro.redsoft.iframework.client.view.ComponentView;
 
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
- * AbstractTabPresenter.
+ * ComponentPresenterWidget.
  * 
  * @author Alex N. Oreshkevich
  * @param <V>
  */
-public abstract class AbstractTabPresenter<V extends AbstractTabView> extends PresenterWidget<V> {
+public abstract class ComponentPresenterWidget<V extends ComponentView> extends PresenterWidget<V> {
 
-  protected AbstractTabPresenter(final EventBus eventBus, final V view) {
+  protected ComponentPresenterWidget(final EventBus eventBus, final V view) {
     super(false, eventBus, view);
   }
 

@@ -15,8 +15,8 @@
  */
 package pro.redsoft.iframework.client.application.impl;
 
-import pro.redsoft.iframework.client.factory.AbstractTabFactoryImpl;
-import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
+import pro.redsoft.iframework.client.factory.AbstractComponentPresenterFactory;
+import pro.redsoft.iframework.client.presenter.ComponentPresenterWidget;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -26,13 +26,13 @@ import com.google.web.bindery.event.shared.EventBus;
  * 
  * @author Alex N. Oreshkevich
  */
-public class TextTabPresenter extends AbstractTabPresenter<TextTabView> {
+public class TextTabPresenter extends ComponentPresenterWidget<TextTabView> {
 
   /**
    * TextTabFactoryImpl.
    */
   public static class TextTabFactoryImpl extends
-      AbstractTabFactoryImpl<TextTabView, TextTabPresenter, TextTabViewFactory> {
+      AbstractComponentPresenterFactory<TextTabView, TextTabPresenter, TextTabViewFactory> {
 
     @Inject
     protected TextTabFactoryImpl(EventBus eventBus, TextTabViewFactory viewFactory) {

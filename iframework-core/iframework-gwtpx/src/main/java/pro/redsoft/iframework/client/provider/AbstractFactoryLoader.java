@@ -16,44 +16,45 @@
 package pro.redsoft.iframework.client.provider;
 
 import java.util.HashMap;
+import java.util.Map;
 
-import pro.redsoft.iframework.client.factory.AbstractTabFactory;
-import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
-import pro.redsoft.iframework.client.view.AbstractTabView;
+import pro.redsoft.iframework.client.factory.ComponentPresenterFactory;
+import pro.redsoft.iframework.client.presenter.ComponentPresenterWidget;
+import pro.redsoft.iframework.client.view.ComponentView;
 
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * AbstractTabFactoryLoader.
+ * AbstractFactoryLoader.
  * 
  * @author Alex N. Oreshkevich
  */
-public abstract class AbstractTabFactoryLoader implements FactoryLoader {
+public abstract class AbstractFactoryLoader implements FactoryLoader {
 
-  protected final HashMap<Object, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>> map;
+  protected final Map<Object, AsyncProvider<? extends ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>>> map;
 
-  public AbstractTabFactoryLoader() {
-    map = new HashMap<Object, AsyncProvider<? extends AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>>();
+  public AbstractFactoryLoader() {
+    map = new HashMap<Object, AsyncProvider<? extends ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>>>();
   }
 
   @Override
   public
       void
       get(Object tabType,
-          final AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> callback) {
+          final AsyncCallback<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>> callback) {
 
     if (callback == null) {
       throw new IllegalArgumentException("Callback cann't be null.");
     }
 
     @SuppressWarnings("unchecked")
-    AsyncProvider<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> provider = (AsyncProvider<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>) map
+    AsyncProvider<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>> provider = (AsyncProvider<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>>) map
         .get(tabType);
 
     if (provider != null) {
       provider
-          .get(new AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>() {
+          .get(new AsyncCallback<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>>() {
 
             @Override
             public void onFailure(Throwable caught) {
@@ -61,8 +62,10 @@ public abstract class AbstractTabFactoryLoader implements FactoryLoader {
             }
 
             @Override
-            public void onSuccess(
-                AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>> result) {
+            public
+                void
+                onSuccess(
+                    ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>> result) {
               callback.onSuccess(result);
             }
           });

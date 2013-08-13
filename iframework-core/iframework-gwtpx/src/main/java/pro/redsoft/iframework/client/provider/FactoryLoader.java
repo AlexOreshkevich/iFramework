@@ -15,9 +15,9 @@
  */
 package pro.redsoft.iframework.client.provider;
 
-import pro.redsoft.iframework.client.factory.AbstractTabFactory;
-import pro.redsoft.iframework.client.presenter.AbstractTabPresenter;
-import pro.redsoft.iframework.client.view.AbstractTabView;
+import pro.redsoft.iframework.client.factory.ComponentPresenterFactory;
+import pro.redsoft.iframework.client.presenter.ComponentPresenterWidget;
+import pro.redsoft.iframework.client.view.ComponentView;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -40,6 +40,6 @@ public interface FactoryLoader {
    */
       void
       get(Object tabType,
-          AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>> asyncCallback)
+          AsyncCallback<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>> asyncCallback)
           throws IllegalArgumentException, UnsupportedOperationException;
 }

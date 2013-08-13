@@ -18,10 +18,10 @@ package pro.redsoft.iframework.client.presenter;
 import java.util.HashMap;
 import java.util.Map;
 
-import pro.redsoft.iframework.client.factory.AbstractTabFactory;
+import pro.redsoft.iframework.client.factory.ComponentPresenterFactory;
 import pro.redsoft.iframework.client.provider.FactoryLoader;
 import pro.redsoft.iframework.client.provider.ITabType;
-import pro.redsoft.iframework.client.view.AbstractTabView;
+import pro.redsoft.iframework.client.view.ComponentView;
 
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
@@ -68,7 +68,7 @@ public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> 
         final int ind = event.getSelectedItem();
         tabFactoryLoader.get(
             initMap.get(ind),
-            new AsyncCallback<AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>>>() {
+            new AsyncCallback<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>>() {
 
               @Override
               public void onFailure(Throwable caught) {
@@ -79,7 +79,7 @@ public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> 
               public
                   void
                   onSuccess(
-                      AbstractTabFactory<? extends AbstractTabView, ? extends AbstractTabPresenter<?>> result) {
+                      ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>> result) {
 
                 if (getView().isProxy(ind)) {
                   getView().replaceProxy(ind, result.create().getView().asWidget());

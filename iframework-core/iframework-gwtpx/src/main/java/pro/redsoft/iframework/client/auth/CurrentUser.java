@@ -27,9 +27,8 @@ import com.google.web.bindery.event.shared.EventBus;
  */
 public class CurrentUser implements HasHandlers {
 
-  private boolean        isAuthorized;
-
   private final EventBus eventBus;
+  private boolean        isAuthorized;
 
   @Inject
   public CurrentUser(EventBus eventBus) {
