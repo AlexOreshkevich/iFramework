@@ -15,6 +15,8 @@
  */
 package pro.redsoft.iframework.client.presenter;
 
+import pro.redsoft.iframework.client.component.Component;
+import pro.redsoft.iframework.client.component.Container;
 import pro.redsoft.iframework.client.view.ComponentView;
 
 import com.google.web.bindery.event.shared.EventBus;
@@ -26,7 +28,10 @@ import com.gwtplatform.mvp.client.PresenterWidget;
  * @author Alex N. Oreshkevich
  * @param <V>
  */
-public abstract class ComponentPresenterWidget<V extends ComponentView> extends PresenterWidget<V> {
+public abstract class ComponentPresenterWidget<V extends ComponentView> extends PresenterWidget<V>
+    implements Component {
+
+  protected transient Container parentContainer;
 
   protected ComponentPresenterWidget(final EventBus eventBus, final V view) {
     super(false, eventBus, view);
@@ -43,4 +48,14 @@ public abstract class ComponentPresenterWidget<V extends ComponentView> extends 
     super.onUnbind();
     getView().unbind();
   }
+
+  @Override
+  public Container getParentContainer() {
+    return parentContainer;
+  }
+
+  public void setParentContainer(Container parentContainer) {
+    this.parentContainer = parentContainer;
+  }
+
 }
