@@ -20,7 +20,6 @@ import java.util.Map;
 
 import pro.redsoft.iframework.client.factory.ComponentPresenterFactory;
 import pro.redsoft.iframework.client.provider.ComponentLoader;
-import pro.redsoft.iframework.client.provider.ITabType;
 import pro.redsoft.iframework.client.view.ComponentView;
 
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -42,11 +41,11 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
  */
 public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> extends Presenter<V, P> {
 
-  protected final Map<Integer, ITabType> initMap     = new HashMap<Integer, ITabType>();
-  protected final Map<Integer, String>   tabNamesMap = new HashMap<Integer, String>();
+  protected final Map<Integer, Object> initMap     = new HashMap<Integer, Object>();
+  protected final Map<Integer, String> tabNamesMap = new HashMap<Integer, String>();
 
   @Inject
-  private ComponentLoader                  tabFactoryLoader;
+  private ComponentLoader              tabFactoryLoader;
 
   public TabbedPresenter(EventBus eventBus, V view, P proxy, Type<RevealContentHandler<?>> slot) {
     super(eventBus, view, proxy, slot);

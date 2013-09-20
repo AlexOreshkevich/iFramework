@@ -26,6 +26,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * ComponentLoader.
  * 
  * @author Alex N. Oreshkevich
+ * @param <V>
+ *          view
+ * @param <P>
+ *          presenter
+ * @param <F>
+ *          factory
  */
 public interface ComponentLoader<V extends ComponentView, P extends ComponentPresenterWidget<V>, F extends ComponentPresenterFactory<V, P>> {
 

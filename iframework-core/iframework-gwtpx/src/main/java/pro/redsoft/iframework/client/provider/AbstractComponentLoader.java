@@ -29,6 +29,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * AbstractComponentLoader.
  * 
  * @author Alex N. Oreshkevich
+ * @param <V>
+ *          view
+ * @param <P>
+ *          presenter
+ * @param <F>
+ *          factory
  */
 public abstract class AbstractComponentLoader<V extends ComponentView, P extends ComponentPresenterWidget<V>, F extends ComponentPresenterFactory<V, P>>
     implements ComponentLoader<V, P, F> {
@@ -36,7 +42,7 @@ public abstract class AbstractComponentLoader<V extends ComponentView, P extends
   protected final Map<Object, AsyncProvider<F>> map;
 
   public AbstractComponentLoader() {
-    map = new HashMap<>();
+    map = new HashMap<Object, AsyncProvider<F>>();
   }
 
   @Override

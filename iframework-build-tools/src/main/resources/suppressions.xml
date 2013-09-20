@@ -11,7 +11,8 @@
 
   <suppress checks="LineLength" files="AbstractComponentPresenterFactory.java" />
   <suppress checks="LineLength" files="AbstractComponentFactoryLoader.java"  />
-  <suppress checks="LineLength" files="FactoryLoader.java" lines="0-100" />
+  <suppress checks="LineLength" files="AbstractComponentLoader.java"  />
+  <suppress checks="LineLength" files="ComponentLoader.java" lines="0-100" />
   <suppress checks="LineLength" files="TabbedPresenter.java" />
 </suppressions>
  

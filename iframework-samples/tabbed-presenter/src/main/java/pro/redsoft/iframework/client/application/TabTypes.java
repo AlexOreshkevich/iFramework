@@ -15,14 +15,13 @@
  */
 package pro.redsoft.iframework.client.application;
 
-import pro.redsoft.iframework.client.provider.ITabType;
 
 /**
  * TabTypes.
  * 
  * @author Alex N. Oreshkevich
  */
-public enum TabTypes implements ITabType {
+public enum TabTypes {
 
     TEXT,
     IMAGE,
