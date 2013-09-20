@@ -19,27 +19,37 @@ import pro.redsoft.iframework.client.factory.ComponentPresenterFactory;
 import pro.redsoft.iframework.client.presenter.ComponentPresenterWidget;
 import pro.redsoft.iframework.client.view.ComponentView;
 
+import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * FactoryLoader.
+ * ComponentLoader.
  * 
  * @author Alex N. Oreshkevich
  */
-public interface FactoryLoader {
+public interface ComponentLoader<V extends ComponentView, P extends ComponentPresenterWidget<V>, F extends ComponentPresenterFactory<V, P>> {
 
   /**
-   * Load factory by tabType
+   * Loads component by type.
    * 
-   * @param tabType
+   * @param type
    * @param asyncCallback
    * @throws IllegalArgumentException
    *           if asyncCallback is null
    * @throws UnsupportedOperationException
    *           if missing configuration mapping for tabType
    */
-      void
-      get(Object tabType,
-          AsyncCallback<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>> asyncCallback)
-          throws IllegalArgumentException, UnsupportedOperationException;
+  void get(Object type, AsyncCallback<F> asyncCallback) throws IllegalArgumentException,
+      UnsupportedOperationException;
+
+  /**
+   * Register component by type.
+   * 
+   * @param type
+   * @param provider
+   * @return the previous value associated with <tt>key</tt>, or <tt>null</tt> if there was no mapping for <tt>key</tt>.
+   *         (A <tt>null</tt> return can also indicate that the map previously associated <tt>null</tt> with
+   *         <tt>key</tt>, if the implementation supports <tt>null</tt> values.)
+   */
+  AsyncProvider<F> register(Object type, AsyncProvider<F> provider);
 }

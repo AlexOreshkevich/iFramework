@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import pro.redsoft.iframework.client.factory.ComponentPresenterFactory;
-import pro.redsoft.iframework.client.provider.FactoryLoader;
+import pro.redsoft.iframework.client.provider.ComponentLoader;
 import pro.redsoft.iframework.client.provider.ITabType;
 import pro.redsoft.iframework.client.view.ComponentView;
 
@@ -46,7 +46,7 @@ public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> 
   protected final Map<Integer, String>   tabNamesMap = new HashMap<Integer, String>();
 
   @Inject
-  private FactoryLoader                  tabFactoryLoader;
+  private ComponentLoader                  tabFactoryLoader;
 
   public TabbedPresenter(EventBus eventBus, V view, P proxy, Type<RevealContentHandler<?>> slot) {
     super(eventBus, view, proxy, slot);

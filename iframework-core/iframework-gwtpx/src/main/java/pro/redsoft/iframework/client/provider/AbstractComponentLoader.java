@@ -26,33 +26,37 @@ import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * AbstractFactoryLoader.
+ * AbstractComponentLoader.
  * 
  * @author Alex N. Oreshkevich
  */
-public abstract class AbstractFactoryLoader implements FactoryLoader {
+public abstract class AbstractComponentLoader<V extends ComponentView, P extends ComponentPresenterWidget<V>, F extends ComponentPresenterFactory<V, P>>
+    implements ComponentLoader<V, P, F> {
 
-  protected final Map<Object, AsyncProvider<? extends ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>>> map;
+  protected final Map<Object, AsyncProvider<F>> map;
 
-  public AbstractFactoryLoader() {
-    map = new HashMap<Object, AsyncProvider<? extends ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>>>();
+  public AbstractComponentLoader() {
+    map = new HashMap<>();
   }
 
   @Override
-  public
-      void
-      get(Object tabType,
-          final AsyncCallback<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>> callback) {
+  public AsyncProvider<F> register(Object type, AsyncProvider<F> provider) {
+    return map.put(type, provider);
+  }
+
+  @Override
+  public void get(Object type, final AsyncCallback<F> callback) {
 
     if (callback == null) {
       throw new IllegalArgumentException("Callback cann't be null.");
     }
 
-    @SuppressWarnings("unchecked")
-    AsyncProvider<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>> provider = (AsyncProvider<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>>) map
-        .get(tabType);
-
-    if (provider != null) {
+    AsyncProvider<F> provider = map.get(type);
+    if (null == provider) {
+      callback.onFailure(new UnsupportedOperationException("Type " + type
+          + " doesn't supported by ComponentLoader."));
+    }
+    else {
       provider
           .get(new AsyncCallback<ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>>>() {
 
@@ -61,18 +65,15 @@ public abstract class AbstractFactoryLoader implements FactoryLoader {
               callback.onFailure(caught);
             }
 
+            @SuppressWarnings("unchecked")
             @Override
             public
                 void
                 onSuccess(
                     ComponentPresenterFactory<? extends ComponentView, ? extends ComponentPresenterWidget<?>> result) {
-              callback.onSuccess(result);
+              callback.onSuccess((F) result);
             }
           });
-    }
-    else {
-      callback.onFailure(new UnsupportedOperationException("Tab type " + tabType
-          + " doesn't supported by factory loader."));
     }
   }
 }
