@@ -93,7 +93,7 @@ public abstract class TabbedViewImpl extends HandlerContainerImpl implements Tab
     tabPanel = new TabPanelEx(25, Unit.PX);
     tabPanel.setAnimationVertical(true);
     tabPanel.setWidth("400px");
-    tabPanel.setHeight("600px");
+    tabPanel.setHeight("200px");
   }
 
   @Override

@@ -15,7 +15,15 @@
  */
 package pro.redsoft.iframework.client.application;
 
+import pro.redsoft.iframework.client.application.service.ConfigService;
+import pro.redsoft.iframework.client.application.service.ConfigServiceAsync;
+import pro.redsoft.iframework.shared.config.Config;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -52,5 +60,32 @@ public class ApplicationPresenter extends
   @Inject
   public ApplicationPresenter(EventBus eventBus, MyView view, MyProxy proxy) {
     super(eventBus, view, proxy, RevealType.Root);
+  }
+
+  private final ConfigServiceAsync configService = GWT.create(ConfigService.class);
+
+  @Override
+  protected void onReveal() {
+    super.onReveal();
+    configService.getClientSettings(new AsyncCallback<Config>() {
+
+      @Override
+      public void onSuccess(Config result) {
+
+        if (result.getLogMessage() != null) {
+          Window.alert("Ошибка при работе с внешним файлом конфигурации.\n\n"
+              + result.getLogMessage());
+        }
+
+        getView().setInSlot("slot", new HTMLPanel("pre", result.getLogMessage() + "<br/>"));
+        getView().setInSlot("slot",
+            new HTMLPanel("p", "<br/>" + result.getSystem().getEntryPoint()));
+      }
+
+      @Override
+      public void onFailure(Throwable caught) {
+        getView().setInSlot("slot", new HTMLPanel("pre", caught.getMessage()));
+      }
+    });
   }
 }

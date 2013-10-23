@@ -14,3 +14,4 @@ builds/
 pom.properties
 lib/
 /tabbed-presenter/src/main/webapp/META-INF
+.class

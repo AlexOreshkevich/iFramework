@@ -4,4 +4,25 @@
   <welcome-file-list>
     <welcome-file>TabbedPresenter.html</welcome-file>
   </welcome-file-list>
+  
+   <context-param>
+    <param-name>configDirPropertyName</param-name>
+    <param-value>ru.intertrust.cmj.configFileLocation.4.3</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>ru.intertrust.cmj.configFileLocation.4.3</param-name>
+    <param-value>/Users/neo/java/jworkspace/iFramework/iframework-samples/tabbed-presenter/xml</param-value>
+  </context-param>
+  
+  
+  <servlet>
+    <servlet-name>configServiceImpl</servlet-name>
+    <servlet-class>pro.redsoft.iframework.server.ConfigServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>configServiceImpl</servlet-name>
+    <url-pattern>/project/configServiceImpl</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.intertrust.ru" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://dev.inttrust.ru config.xsd">
+
+  <system>
+    
+    <validationUps/>
+    
+    <!-- Точка входа в приложение -->
+    <entryPoint>test-validation-failed</entryPoint>
+
+    <!-- Ссылка на сайт помощи по клиенту, открывается в новой вкладке при вызове меню "Помощь" -->
+    <reference>http://conf.inttrust.ru/pages/viewpage.action?pageId=3083006</reference>
+
+    <!-- Время хранения информации об авторизации пользователя (часы) -->
+    <cookiesExpires>1</cookiesExpires>
+
+    <faviconPath></faviconPath>
+
+    <!-- Настройки логотипа -->
+    <logoImagePath>http://dev.inttrust.ru/logo/CompanyMedia-small.gif</logoImagePath>
+    <logoImageWidth>190px</logoImageWidth>
+    <logoImageHeight>32px</logoImageHeight>
+
+    <!-- Настройки локализации -->
+    <language>
+      <defaultLocale>ru</defaultLocale>
+      <locales>ru en be</locales>
+    </language>
+
+    <!-- Настройки отправки уведомлений об ошибке по электронной почте -->
+    <emailSettings>
+      <mailHostName>169.254.0.4</mailHostName>
+      <mailPortNumber>25</mailPortNumber>
+      <mailAuthUser>companymedia4@gmail.com</mailAuthUser>
+      <mailAuthPwd>$$123456</mailAuthPwd>
+      <mailFrom>companymedia41@noreply.com</mailFrom>
+      <mailTo>
+        <mail>z19@inttrust.ru</mail>
+      </mailTo>
+      <mailDbug>true</mailDbug>
+      <mailStarttls>true</mailStarttls>
+      <subject>Error in CompanyMedia41</subject>
+    </emailSettings>
+
+    <!-- Темы приложения -->
+    <themes>
+      <default>default</default>
+      <theme>default</theme>
+      <theme>iridescent</theme>
+      <theme>bright</theme>
+    </themes>
+
+    <!-- Разрешить автоматический редирект для браузеров Internet Explorer всех версий -->
+    <ieRedirectEnabled>true</ieRedirectEnabled>
+
+    <!-- Адрес страницы в интернете для перенаправления запросов с браузера Internet Explorer -->
+    <ieRedirectUrl>http://www.google.com/chromeframe</ieRedirectUrl>
+
+    <!-- Доступность кнопки Регистрация в окне авторизации -->
+    <registrationEnabled>false</registrationEnabled>
+    <registrationUrl>http://www.intertrust.ru/products/test_drive/</registrationUrl>
+
+    <!-- Показывает окно с описанием ошибки для любой необработанной ошибки в системе -->
+    <enableMessageOnUncaughtException>true</enableMessageOnUncaughtException>
+    
+    <showTraceWindow>false</showTraceWindow>
+    <useHistory>true</useHistory>
+  </system>
+  
+</config>

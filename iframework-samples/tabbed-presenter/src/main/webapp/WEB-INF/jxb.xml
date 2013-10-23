@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" jxb:extensionBindingPrefixes="ci " jxb:version="2.1">
+
+<!-- Raise theEnumMemberSizeCap limit -->
+
+  <jxb:bindings schemaLocation="config.xsd">
+    <jxb:globalBindings typesafeEnumMaxMembers="2000">
+      <xjc:superClass name="pro.redsoft.iframework.shared.Setting" />
+    </jxb:globalBindings>
+
+    <!-- here we use an XPATH expression to tell xjc about which part of the XML schema we want to change -->
+    <jxb:bindings node="/xs:schema/xs:complexType[@name='obj']">
+      <ci:code>
+
+        /** comment example */
+        public String testGeneratedMethod()
+        {
+        return super.toString();
+        }
+
+      </ci:code>
+    </jxb:bindings>
+
+  </jxb:bindings>
+
+</jxb:bindings>

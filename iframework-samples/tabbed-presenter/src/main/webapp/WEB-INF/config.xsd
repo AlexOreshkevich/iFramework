@@ -1,0 +1,1030 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.intertrust.ru" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+  targetNamespace="http://www.intertrust.ru" elementFormDefault="qualified" attributeFormDefault="unqualified" jaxb:version="2.1">
+
+  <xs:annotation>
+    <xs:appinfo> CM4.X Standardized specification </xs:appinfo>
+    <xs:documentation>
+      https://docs.google.com/document/d/1ozEKsCCJUuv47P2NSdEGn8Se1FxqocWCazljemr19TI/edit#heading=h.v1170smuxtza
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:complexType name="obj" />
+
+  <!-- Argument description -->
+  <xs:complexType name="argument">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1" />
+          <xs:element name="value" type="xs:string" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="arguments">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="arg" type="xsi:argument" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="config" type="xsi:config" />
+
+  <xs:simpleType name="bool">
+    <xs:annotation>
+      <xs:appinfo>
+        <jaxb:class name="Boolean" ref="java.lang.Boolean" />
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="true|false" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Defining CDATA section -->
+  <!-- http://www.w3.org/TR/2000/CR-xmlschema-2-20001024/#schema -->
+  <xs:simpleType name="CDATA" id="CDATA">
+    <xs:annotation>
+      <xs:documentation source="http://www.w3.org/TR/xmlschema-2/#CDATA" xml:lang="en" />
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="replace" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Root type named config -->
+  <xs:complexType name="config">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:all>
+          <xs:element name="system" type="xsi:systemSettings" minOccurs="0" />
+          <xs:element name="user" type="xsi:userSettings" minOccurs="0" />
+          <xs:element name="logMessage" type="xs:string" minOccurs="0" />
+        </xs:all>
+        <xs:attribute name="version" type="xs:string" default="0.1-SNAPSHOT" />
+        <xs:attribute name="schemaLocation" type="xs:string" use="optional" form="qualified" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Language settings -->
+  <xs:complexType name="languageSettings">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:all>
+          <xs:element name="defaultLocale" type="xs:string" minOccurs="0" default="ru" />
+          <xs:element name="locales" type="xsi:listOfLocales" minOccurs="1" />
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- List of concrete languages -->
+  <xs:simpleType name="listOfLocales">
+    <xs:list itemType="xs:language" />
+  </xs:simpleType>
+
+  <!-- System settings -->
+  <xs:complexType name="systemSettings">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:all>
+          <!-- Simple settings -->
+          <xs:element name="entryPoint" type="xs:string" minOccurs="1" />
+          <xs:element name="reference" type="xs:string" minOccurs="1" />
+          <xs:element name="showTraceWindow" type="xs:boolean" />
+          <xs:element name="useHistory" type="xs:boolean"  />
+          <xs:element name="cookiesExpires" type="xs:int" minOccurs="1" default="1" />
+          <xs:element name="ieRedirectUrl" type="xsi:CDATA" />
+          <xs:element name="ieRedirectEnabled" type="xs:boolean" />
+          <xs:element name="registrationEnabled" type="xs:boolean" />
+          <xs:element name="registrationUrl" type="xs:string" minOccurs="1" />
+          <xs:element name="enableMessageOnUncaughtException" type="xsi:bool" default="false" />
+          <xs:element name="faviconPath" type="xs:string" />
+          <xs:element name="logoImagePath" type="xs:string" />
+          <xs:element name="logoImageWidth" type="xs:string" />
+          <xs:element name="logoImageHeight" type="xs:string" />
+
+          <xs:element name="themes" type="xsi:themes" minOccurs="1" />
+
+          <!-- Complex settings -->
+          <xs:element name="language" type="xsi:languageSettings" minOccurs="1" maxOccurs="1" />
+
+          <!-- Email settings for error window -->
+          <xs:element name="emailSettings" type="xsi:emailSettings" minOccurs="1" maxOccurs="1" />
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <xs:complexType name="requestTimeout">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="entry" type="xsi:entry" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Email settings for error window -->
+  <xs:complexType name="emailSettings">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:all>
+          <xs:element name="mailHostName" type="xs:string" minOccurs="1" default="smtp.gmail.com" />
+          <xs:element name="mailPortNumber" type="xs:string" minOccurs="1" default="587" />
+          <xs:element name="mailAuthUser" type="xs:string" minOccurs="1" default="companymedia4@gmail.com" />
+          <xs:element name="mailAuthPwd" type="xs:string" minOccurs="1" default="$$123456" />
+          <xs:element name="mailFrom" type="xs:string" minOccurs="1" default="companymedia4@gmail.com" />
+          <xs:element name="mailTo" minOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="mail" type="xs:string" minOccurs="1" maxOccurs="unbounded" default="companymedia4@gmail.com" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <!-- <xs:element name="mailTo" type="xsi:mailsTo" minOccurs="0" maxOccurs="unbounded" default="companymedia4@gmail.com" /> -->
+          <xs:element name="mailDbug" type="xsi:bool" minOccurs="1" default="true" />
+          <xs:element name="mailStarttls" type="xsi:bool" minOccurs="1" default="true" />
+          <xs:element name="subject" type="xs:string" minOccurs="1" default="Error in CompanyMedia4" />
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Resources description -->
+  <xs:complexType name="resources">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="resource" type="xsi:resource" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Resource description -->
+  <xs:complexType name="resource">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:all>
+          <xs:element name="type" type="xsi:resource.type" minOccurs="1" maxOccurs="1" />
+          <xs:element name="args" type="xsi:arguments" minOccurs="1" maxOccurs="1" />
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Types of concrete resources are fixed -->
+  <xs:simpleType name="resource.type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="title" />
+      <xs:enumeration value="style" />
+      <xs:enumeration value="base" />
+      <xs:enumeration value="link" />
+      <xs:enumeration value="meta" />
+      <xs:enumeration value="script" />
+      <xs:enumeration value="noscript" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Themes description -->
+  <xs:complexType name="themes">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="default" type="xsi:theme" minOccurs="1" maxOccurs="1" />
+          <xs:element name="theme" type="xsi:theme" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Types of concrete themes are fixed -->
+  <xs:simpleType name="theme">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="default" />
+      <xs:enumeration value="iridescent" />
+      <xs:enumeration value="bright" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- User settings -->
+  <xs:complexType name="userSettings">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:all>
+          <xs:element name="margin" type="xs:string" default="0px" />
+          <xs:element name="enableScrolling" type="xsi:bool" default="false" />
+          <xs:element name="animation" type="xsi:animation" />
+          <xs:element name="enableWindowClosingHandler" type="xsi:bool" default="false" />
+          <xs:element name="components" type="xsi:components" minOccurs="1" />
+          <xs:element name="requestTimeout" minOccurs="1" maxOccurs="1" type="xsi:requestTimeout" />
+          <xs:element name="tokenConfig" type="xsi:tokenConfig" minOccurs="1" />
+          <xs:element name="dialogConfig" type="xsi:dialogConfig" minOccurs="1" />
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- animation configuration -->
+  <xs:complexType name="animation">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:all>
+          <xs:element name="enabled" type="xs:boolean" default="true" />
+          <xs:element name="duration" type="xs:int" default="500" />
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- components configuration -->
+  <xs:complexType name="components">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:all>
+          <xs:element name="previewComponent" type="xsi:previewConfig" minOccurs="1" />
+          <xs:element name="dialogMediaView" type="xsi:dialogMediaTypeConfig" minOccurs="1" />
+          <xs:element name="extSearchComponent" type="xsi:extSearchConfig" minOccurs="1" />
+          <xs:element name="noticePanelComponent" type="xsi:noticePanelConfig" minOccurs="1" />
+        </xs:all>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- componentForm configuration -->
+  <xs:complexType name="componentForm">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="componentForm" type="xsi:componentForm" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute type="xsi:component.type" name="type" use="required" />
+        <xs:attribute type="xsi:slot.type" name="slotType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="tokenConfig">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="tokenConfigItem" type="xsi:tokenConfigItem" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="dialogConfig">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="dialog" type="xsi:dialogConfigItem" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- componentForm configuration -->
+  <xs:complexType name="tokenConfigItem">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="componentFormConfig" type="xsi:componentFormConfig" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute type="xsi:token.type" name="type" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="dialogConfigItem">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="componentFormConfig" type="xsi:componentFormConfig" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute type="xsi:dialog.type" name="type" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Types of concrete tabs are fixed -->
+  <xs:simpleType name="token.type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="default" />
+      <xs:enumeration value="view" />
+      <xs:enumeration value="frameset" />
+      <xs:enumeration value="calendar" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="slot.type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ROOT_SLOT" />
+      <xs:enumeration value="ACTION_BAR_SLOT" />
+      <xs:enumeration value="SYSTEM_TREE_SLOT" />
+      <xs:enumeration value="QUICK_TASK_SLOT" />
+      <xs:enumeration value="REPORT_SLOT" />
+      <xs:enumeration value="SPLITTER_SLOT" />
+      <xs:enumeration value="TOP_LEFT_WRP_SLOT" />
+      <xs:enumeration value="BOTTOM_RIGHT_WRP_SLOT" />
+      <xs:enumeration value="GL_DLG_CONTENT" />
+      <xs:enumeration value="NULL" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- component configuration -->
+  <xs:complexType name="componentFormConfig">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="componentFormConfig" type="xsi:componentFormConfig" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="type" type="xsi:component.type" />
+        <xs:attribute type="xsi:slot.type" name="slotType" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Types of concrete tabs are fixed -->
+  <xs:simpleType name="component.type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="preview" />
+      <xs:enumeration value="dialogPreview" />
+      <xs:enumeration value="content" />
+      <xs:enumeration value="systemTree" />
+      <xs:enumeration value="actionBar" />
+      <xs:enumeration value="splitLayoutPanel" />
+      <xs:enumeration value="grid" />
+      <xs:enumeration value="resources" />
+      <xs:enumeration value="reports" />
+      <xs:enumeration value="extSearch" />
+      <xs:enumeration value="contentTab" />
+      <xs:enumeration value="detailsTab" />
+      <xs:enumeration value="universalView" />
+      <xs:enumeration value="universalViewDialog" />
+      <xs:enumeration value="calendarDialog" />
+      <xs:enumeration value="gridSettingsDialog" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="dialog.type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="searchDialog" />
+      <xs:enumeration value="calendarDialog" />
+      <xs:enumeration value="gridSettingsDialog" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Preview configuration -->
+  <xs:complexType name="previewConfig">
+    <xs:complexContent>
+      <xs:extension base="xsi:componentFormConfig">
+        <xs:sequence>
+          <xs:element name="mediaType" type="xsi:mediaTypeConfig" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- MediavType View (in dialogs fe.) configuration -->
+  <xs:complexType name="dialogMediaTypeConfig">
+    <xs:complexContent>
+      <xs:extension base="xsi:componentFormConfig">
+        <xs:sequence>
+          <xs:element name="mediaType" type="xsi:mediaTypeConfig" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- ExtSearch configuration -->
+  <xs:complexType name="extSearchConfig">
+    <xs:complexContent>
+      <xs:extension base="xsi:componentFormConfig">
+        <xs:sequence>
+          <xs:element name="fieldOrder" type="xsi:parameterConfig" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="parameterConfig">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="field" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="noticePanelConfig">
+    <xs:complexContent>
+      <xs:extension base="xsi:componentFormConfig">
+        <xs:sequence>
+          <xs:element name="noticePanelParameters" type="xsi:noticePanelParameters" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="noticePanelParameters">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="timeout" type="xs:int" minOccurs="0" maxOccurs="1" />
+          <xs:element name="visible" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <!-- Dedicated mediaType configuration -->
+  <xs:complexType name="mediaTypeConfig">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="contentType" type="xs:string" minOccurs="1" />
+          <xs:element name="header" type="xsi:previewHeader" minOccurs="0" maxOccurs="1" />
+          <xs:element name="tab" type="xsi:tab" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="defaultSelectedTab" type="xs:string" default="detailsTab" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Preview header configuration -->
+  <xs:complexType name="previewHeader">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="row" type="xsi:previewHeaderRow" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="withControl" type="xs:boolean" default="true" />
+        <xs:attribute name="withExecution" type="xs:boolean" default="true" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Preview header row configuration -->
+  <xs:complexType name="previewHeaderRow">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="headerElement" type="xsi:headerElem" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="visible" type="xs:boolean" default="true" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Preview headerElement configuration -->
+  <xs:complexType name="headerElem">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:attribute name="type" type="xsi:headerElem.type" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Types of concrete tabs are fixed -->
+  <xs:simpleType name="headerElem.type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mediaTypeElement" />
+      <xs:enumeration value="documentTypeElement" />
+      <xs:enumeration value="specialTagElement" />
+      <xs:enumeration value="numberDateElement" />
+      <xs:enumeration value="signatureElement" />
+      <xs:enumeration value="termElement" />
+      <xs:enumeration value="controlButton" />
+      <xs:enumeration value="executionButton" />
+      <xs:enumeration value="accessElement" />
+      <xs:enumeration value="statusElement" />
+      <xs:enumeration value="contractStatusElement" />
+      <xs:enumeration value="contractExecElement" />
+      <xs:enumeration value="agendaElement" />
+      <xs:enumeration value="meetingTimeElement" />
+      <xs:enumeration value="meetingDateElement" />
+      <xs:enumeration value="meetingDateTimeElement" />
+      <xs:enumeration value="meetingDateTransferElement" />
+      <xs:enumeration value="meetingFormElement" />
+      <xs:enumeration value="numberElement" />
+      <xs:enumeration value="placeElement" />
+      <xs:enumeration value="dateElement" />
+      <xs:enumeration value="protocolElement" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Dedicated tab configuration -->
+  <xs:complexType name="tab">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="section" type="xsi:tab.section" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="subtab" type="xsi:tab.subtab" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="type" type="xsi:tab.type" />
+        <xs:attribute name="subType" type="xsi:tab.subType" default="default" />
+        <xs:attribute name="alias" type="xs:string" use="optional" />
+        <xs:attribute name="helpId" type="xs:string" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Types of concrete tabs are fixed -->
+  <xs:simpleType name="tab.type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="contentTab" />
+      <xs:enumeration value="detailsTab" />
+      <xs:enumeration value="docTasksTab" />
+      <xs:enumeration value="relatedTab" />
+      <xs:enumeration value="discussionTab" />
+      <xs:enumeration value="historyTab" />
+      <xs:enumeration value="previewHeader" />
+      <xs:enumeration value="costPaymentTab" />
+      <xs:enumeration value="contractStructTab" />
+      <xs:enumeration value="cyprusTab" />
+      <xs:enumeration value="caseCalendarTab" />
+      <!--<xs:enumeration value="caseStructureTab" /> -->
+      <xs:enumeration value="caseDocumentsTab" />
+      <xs:enumeration value="caseWorkTab" />
+      <xs:enumeration value="relatedTabWithOutLeftMenu" />
+      <xs:enumeration value="informationMaterialsTab" />
+      <xs:enumeration value="executionTab" />
+      <xs:enumeration value="classifiersTab" />
+      <xs:enumeration value="reportTab" />
+      <xs:enumeration value="headCommentTab" />
+      <xs:enumeration value="folderTab" />
+      <xs:enumeration value="reportTab" />
+      <xs:enumeration value="directoriesTab" />
+      <xs:enumeration value="accessTab" />
+      <xs:enumeration value="approvalTempTab" />
+      <xs:enumeration value="reviewTempTab" />
+      <xs:enumeration value="caseMembersTab" />
+      <xs:enumeration value="caseTimelineTab" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Types of concrete tabs are fixed -->
+  <xs:simpleType name="tab.subType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="default" />
+      <xs:enumeration value="meetingMinutesTab" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Types of sections -->
+  <xs:complexType name="tab.section">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:sequence>
+          <xs:element name="element" type="xsi:tab.details.element" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="alias" type="xs:string" />
+        <xs:attribute name="open" type="xs:boolean" use="optional" default="true" />
+        <xs:attribute name="styleElementCaption" type="xs:string" use="optional" default="" />
+        <xs:attribute name="styleElementContainer" type="xs:string" use="optional" default="" />
+        <xs:attribute name="widthElement" type="xs:string" use="optional" default="" />
+        <xs:attribute name="isSendingFormWidget" type="xs:boolean" use="optional" default="false" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Types of subtabs -->
+  <xs:complexType name="tab.subtab">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:attribute name="alias" type="xs:string" />
+        <xs:attribute name="select" type="xs:boolean" use="optional" default="false" />
+        <xs:attribute name="visible" type="xs:boolean" use="optional" default="true" />
+        <xs:attribute name="helpId" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Types of sections -->
+  <xs:complexType name="tab.details.element">
+    <xs:complexContent>
+      <xs:extension base="xsi:obj">
+        <xs:all>
+          <!-- <xs:element name="type" type="xsi:tab.details.renderType" minOccurs="1" /> -->
+          <xs:element name="fieldName" type="xsi:details.field" minOccurs="1" /><!-- type="xsi:tab.details.element.field" -->
+          <xs:element name="alias" type="xs:string" minOccurs="0" />
+        </xs:all>
+        <!-- <xs:attribute name="excludeFromValidation" type="xs:boolean" use="optional" default="false" /> <xs:attribute name="onlyDigits" type="xs:boolean" use="optional" default="false" /> <xs:attribute 
+          name="readOnly" type="xs:boolean" use="optional" default="false" /> <xs:attribute name="manyChoose" type="xs:string" use="optional" default="100001" /> -->
+        <xs:attribute name="styleCaption" type="xs:string" use="optional" default="" />
+        <xs:attribute name="styleContainer" type="xs:string" use="optional" default="" />
+        <xs:attribute name="width" type="xs:string" use="optional" default="" />
+        <xs:attribute name="dicType" type="xs:string" use="optional" default="type4" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Render types for detailsTab -->
+  <xs:simpleType name="tab.details.renderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="textBoxType" />
+      <xs:enumeration value="textAreaType" />
+      <xs:enumeration value="dateBoxType" />
+      <xs:enumeration value="comboBoxType" />
+      <xs:enumeration value="checkBoxType" />
+      <xs:enumeration value="containerType" />
+      <xs:enumeration value="labelType" />
+
+      <xs:enumeration value="requestQuestionsContainerType" />
+      <xs:enumeration value="emptyTextBoxType" />
+      <xs:enumeration value="rolesType" />
+      <xs:enumeration value="timeType" />
+      <xs:enumeration value="voteType" />
+      <xs:enumeration value="agendaQuestionType" />
+      <xs:enumeration value="agendaType" />
+      <xs:enumeration value="decisionsType" />
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <!-- Enum of request timeout -->
+
+  <xs:simpleType name="request.timeout.enum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="default" />
+      <xs:enumeration value="lowest" />
+      <xs:enumeration value="low" />
+      <xs:enumeration value="normal" />
+      <xs:enumeration value="high" />
+      <xs:enumeration value="highest" />
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <xs:complexType name="entry">
+    <xs:sequence>
+      <xs:element name="key" minOccurs="1" maxOccurs="1" type="xsi:request.timeout.enum" />
+      <xs:element name="value" minOccurs="1" maxOccurs="1" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="details.field">
+    <xs:restriction base="xs:string">
+      <!-- Inner -->
+      <xs:enumeration value="inner_type" />
+      <xs:enumeration value="inner_category" />
+      <xs:enumeration value="inner_rDate" />
+      <xs:enumeration value="inner_placeReg" />
+      <xs:enumeration value="inner_numPage" />
+      <xs:enumeration value="inner_numCopy" />
+      <xs:enumeration value="inner_numAttach" />
+      <xs:enumeration value="inner_countNumAttach" />
+      <xs:enumeration value="inner_comment" />
+      <xs:enumeration value="inner_sign" />
+      <xs:enumeration value="inner_signOther" />
+      <xs:enumeration value="inner_executor" />
+      <xs:enumeration value="inner_addressee" />
+      <!-- Output -->
+      <xs:enumeration value="output_type" />
+      <xs:enumeration value="output_category" />
+      <xs:enumeration value="output_rDate" />
+      <xs:enumeration value="output_placeReg" />
+      <xs:enumeration value="output_numPage" />
+      <xs:enumeration value="output_numCopy" />
+      <xs:enumeration value="output_numAttach" />
+      <xs:enumeration value="output_countNumAttach" />
+      <xs:enumeration value="output_comment" />
+      <xs:enumeration value="output_sign" />
+      <xs:enumeration value="output_signOther" />
+      <xs:enumeration value="output_executor" />
+      <xs:enumeration value="output_correspondent" />
+      <xs:enumeration value="output_hardCopySending" />
+      <xs:enumeration value="output_sendingFormWidget" />
+      <!-- Ord -->
+      <xs:enumeration value="ord_type" />
+      <xs:enumeration value="ord_category" />
+      <xs:enumeration value="ord_rDate" />
+      <xs:enumeration value="ord_placeReg" />
+      <xs:enumeration value="ord_numPage" />
+      <xs:enumeration value="ord_numCopy" />
+      <xs:enumeration value="ord_numAttach" />
+      <xs:enumeration value="ord_countNumAttach" />
+      <xs:enumeration value="ord_comment" />
+      <xs:enumeration value="ord_sign" />
+      <xs:enumeration value="ord_signOther" />
+      <xs:enumeration value="ord_executor" />
+      <xs:enumeration value="ord_distributionList" />
+      <!-- Input -->
+      <xs:enumeration value="input_type" />
+      <xs:enumeration value="input_category" />
+      <xs:enumeration value="input_rDate" />
+      <xs:enumeration value="input_placeReg" />
+      <xs:enumeration value="input_numPage" />
+      <xs:enumeration value="input_numCopy" />
+      <xs:enumeration value="input_numAttach" />
+      <xs:enumeration value="input_countNumAttach" />
+      <xs:enumeration value="input_comment" />
+      <xs:enumeration value="input_correspondent" />
+      <xs:enumeration value="input_addressReadOnly" />
+      <xs:enumeration value="input_manualAddress" />
+      <xs:enumeration value="input_manualAuthors" />
+      <xs:enumeration value="input_manualExecutors" />
+      <xs:enumeration value="input_executor" />
+      <xs:enumeration value="input_number" />
+      <xs:enumeration value="input_dDate" />
+      <xs:enumeration value="input_addressee" />
+      <xs:enumeration value="input_redirectedTo" />
+      <xs:enumeration value="input_deliveryType" />
+      <!-- Contract -->
+      <xs:enumeration value="contract_type" />
+      <xs:enumeration value="contract_rNumber" />
+      <xs:enumeration value="contract_rDate" />
+      <xs:enumeration value="contract_additionalnumber" />
+      <xs:enumeration value="contract_parties1" />
+      <xs:enumeration value="contract_signature1" />
+      <xs:enumeration value="contract_parties2" />
+      <xs:enumeration value="contract_signature2" />
+      <xs:enumeration value="contract_relationsType" />
+      <xs:enumeration value="contract_advSigner1" />
+      <xs:enumeration value="contract_advSigner2" />
+      <xs:enumeration value="contract_concluded" />
+      <xs:enumeration value="contract_startDate" />
+      <xs:enumeration value="contract_finished" />
+      <xs:enumeration value="contract_duration" />
+      <xs:enumeration value="contract_preparedBy" />
+      <xs:enumeration value="contract_department" />
+      <xs:enumeration value="contract_responsibles" />
+      <xs:enumeration value="contract_sendlist" />
+      <xs:enumeration value="contract_placeReg" />
+      <xs:enumeration value="contract_numPage" />
+      <xs:enumeration value="contract_numCopy" />
+      <xs:enumeration value="contract_partiesOther" />
+      <!-- ContractTemplate -->
+      <xs:enumeration value="contractTempl_type" />
+      <xs:enumeration value="contractTempl_parties1" />
+      <xs:enumeration value="contractTempl_signature1" />
+      <xs:enumeration value="contractTempl_parties2" />
+      <xs:enumeration value="contractTempl_signature2" />
+      <xs:enumeration value="contractTempl_relationsType" />
+      <xs:enumeration value="contractTempl_preparedBy" />
+      <xs:enumeration value="contractTempl_department" />
+      <xs:enumeration value="contractTempl_responsibles" />
+      <xs:enumeration value="contractTempl_sendlist" />
+      <xs:enumeration value="contractTempl_placeReg" />
+      <xs:enumeration value="contractTempl_caption" />
+      <xs:enumeration value="contractTempl_advSigner1" />
+      <xs:enumeration value="contractTempl_advSigner2" />
+      <!-- ContractDoc -->
+      <xs:enumeration value="contractdoc_type" />
+      <xs:enumeration value="contractdoc_rNumber" />
+      <xs:enumeration value="contractdoc_rDate" />
+      <xs:enumeration value="contractdoc_signature" />
+      <xs:enumeration value="contractdoc_preparedBy" />
+      <xs:enumeration value="contractdoc_responsibles" />
+      <xs:enumeration value="contractdoc_typeC" />
+      <xs:enumeration value="contractdoc_datenumbC" />
+      <xs:enumeration value="contractdoc_objC" />
+      <xs:enumeration value="contractdoc_1tC" />
+      <xs:enumeration value="contractdoc_2tC" />
+      <!-- ContractDocTemplate -->
+      <xs:enumeration value="contractdocTempl_type" />
+      <xs:enumeration value="contractdocTempl_signature" />
+      <xs:enumeration value="contractdocTempl_preparedBy" />
+      <!-- ContractAddAgreement -->
+      <xs:enumeration value="contractagr_num" />
+      <xs:enumeration value="contractagr_rDate" />
+      <xs:enumeration value="contractagr_signature1" />
+      <xs:enumeration value="contractagr_signature2" />
+      <xs:enumeration value="contractagr_startDate" />
+      <xs:enumeration value="contractagr_concluded" />
+      <xs:enumeration value="contractagr_finished" />
+      <xs:enumeration value="contractagr_preparedBy" />
+      <xs:enumeration value="contractagr_duration" />
+      <xs:enumeration value="contractagr_responsibles" />
+      <xs:enumeration value="contractagr_sendlist" />
+      <xs:enumeration value="contractagr_typeC" />
+      <xs:enumeration value="contractagr_datenumbC" />
+      <xs:enumeration value="contractagr_objC" />
+      <xs:enumeration value="contractagr_1tC" />
+      <xs:enumeration value="contractagr_2tC" />
+      <!-- ContractAddAgreementTemplate -->
+      <xs:enumeration value="contractagrTempl_signature1" />
+      <xs:enumeration value="contractagrTempl_signature2" />
+      <xs:enumeration value="contractagrTempl_preparedBy" />
+      <xs:enumeration value="contractagrTempl_responsibles" />
+      <xs:enumeration value="contractagrTempl_sendlist" />
+      <xs:enumeration value="contractagrTempl_caption" />
+      <!-- ContractFinance -->
+      <xs:enumeration value="contractfin_type" />
+      <xs:enumeration value="contractfin_number" />
+      <xs:enumeration value="contractfin_date" />
+      <xs:enumeration value="contractfin_signature" />
+      <xs:enumeration value="contractfin_service" />
+      <xs:enumeration value="contractfin_supplier" />
+      <xs:enumeration value="contractfin_customer" />
+      <xs:enumeration value="contractfin_receiver" />
+      <xs:enumeration value="contractfin_total" />
+      <xs:enumeration value="contractfin_vat" />
+      <xs:enumeration value="contractfin_datenumbC" />
+      <xs:enumeration value="contractfin_objC" />
+      <xs:enumeration value="contractfin_1tC" />
+      <xs:enumeration value="contractfin_2tC" />
+
+      <!-- ContractFinanceTemplate -->
+      <xs:enumeration value="contractfinTempl_type" />
+      <xs:enumeration value="contractfinTempl_signature" />
+      <xs:enumeration value="contractfinTempl_vat" />
+
+      <!-- Request -->
+      <xs:enumeration value="request_type" />
+      <xs:enumeration value="request_category" />
+      <xs:enumeration value="request_rDate" />
+      <xs:enumeration value="request_placeReg" />
+      <xs:enumeration value="request_numPage" />
+      <xs:enumeration value="request_numCopy" />
+      <xs:enumeration value="request_numAttach" />
+      <xs:enumeration value="request_countNumAttach" />
+      <xs:enumeration value="request_comment" />
+      <xs:enumeration value="request_requestType" />
+      <xs:enumeration value="request_correspondent" />
+      <xs:enumeration value="request_editCorrespondent" />
+      <xs:enumeration value="request_addressReadonly" />
+      <xs:enumeration value="request_addressStreet" />
+      <xs:enumeration value="request_addressHouse" />
+      <xs:enumeration value="request_addressBuilding" />
+      <xs:enumeration value="request_addressOffice" />
+      <xs:enumeration value="request_addressCity" />
+      <xs:enumeration value="request_addressLocality" />
+      <xs:enumeration value="request_addressRegion" />
+
+      <xs:enumeration value="request_benefitGroups" />
+      <xs:enumeration value="request_requestCause" />
+      <xs:enumeration value="request_addressee" />
+      <xs:enumeration value="request_reviewResult" />
+      <xs:enumeration value="request_solution" />
+      <xs:enumeration value="request_sourceOrganization" />
+      <xs:enumeration value="request_sourceAddressees" />
+      <xs:enumeration value="request_letterNumber" />
+      <xs:enumeration value="request_letterDate" />
+
+      <xs:enumeration value="request_deadline" />
+      <xs:enumeration value="request_instructions" />
+      <xs:enumeration value="request_appointmentOrganization" />
+      <xs:enumeration value="request_appointmentAddressees" />
+
+      <!-- RequestTemplate -->
+      <xs:enumeration value="requesttmp_view" />
+      <xs:enumeration value="requesttmp_type" />
+      <xs:enumeration value="requesttmp_correspondent" />
+      <xs:enumeration value="requesttmp_editCorrespondent" />
+      <xs:enumeration value="requesttmp_addressReadonly" />
+      <xs:enumeration value="requesttmp_addressStreet" />
+      <xs:enumeration value="requesttmp_addressHouse" />
+      <xs:enumeration value="requesttmp_addressBuilding" />
+      <xs:enumeration value="requesttmp_addressOffice" />
+      <xs:enumeration value="requesttmp_addressCity" />
+      <xs:enumeration value="requesttmp_addressLocality" />
+      <xs:enumeration value="requesttmp_addressRegion" />
+      <xs:enumeration value="requesttmp_benefitGroups" />
+      <xs:enumeration value="requesttmp_placeReg" />
+      <!-- InnerTemplate -->
+      <xs:enumeration value="innertmp_category" />
+      <xs:enumeration value="innertmp_type" />
+      <xs:enumeration value="innertmp_caption" />
+      <xs:enumeration value="innertmp_addressee" />
+      <xs:enumeration value="innertmp_sign" />
+      <xs:enumeration value="innertmp_signOther" />
+      <xs:enumeration value="innertmp_executor" />
+      <xs:enumeration value="innertmp_placeReg" />
+      <!-- InputTemplate -->
+      <xs:enumeration value="inputtmp_category" />
+      <xs:enumeration value="inputtmp_type" />
+      <xs:enumeration value="inputtmp_header" />
+      <xs:enumeration value="inputtmp_correspondent" />
+      <xs:enumeration value="inputtmp_manualAddress" />
+      <xs:enumeration value="inputtmp_manualAuthors" />
+      <xs:enumeration value="inputtmp_manualExecutors" />
+      <xs:enumeration value="inputtmp_executor" />
+      <xs:enumeration value="inputtmp_addressee" />
+      <xs:enumeration value="inputtmp_placeReg" />
+      <!-- OrdTemplate -->
+      <xs:enumeration value="ordtmp_category" />
+      <xs:enumeration value="ordtmp_type" />
+      <xs:enumeration value="ordtmp_caption" />
+      <xs:enumeration value="ordtmp_sign" />
+      <xs:enumeration value="ordtmp_signOther" />
+      <xs:enumeration value="ordtmp_executor" />
+      <xs:enumeration value="ordtmp_distributionList" />
+      <xs:enumeration value="ordtmp_placeReg" />
+      <!-- OutputTemplate -->
+      <xs:enumeration value="outputtmp_category" />
+      <xs:enumeration value="outputtmp_type" />
+      <xs:enumeration value="outputtmp_caption" />
+      <xs:enumeration value="outputtmp_sign" />
+      <xs:enumeration value="outputtmp_signOther" />
+      <xs:enumeration value="outputtmp_executor" />
+      <xs:enumeration value="outputtmp_correspondent" />
+      <xs:enumeration value="outputtmp_placeReg" />
+      <!-- SendList -->
+      <xs:enumeration value="sendListMember" />
+      <xs:enumeration value="sendListOganization" />
+      <!-- CaseElement -->
+      <xs:enumeration value="case_target" />
+      <xs:enumeration value="case_type" />
+      <xs:enumeration value="case_number" />
+      <xs:enumeration value="case_date" />
+      <xs:enumeration value="case_term" />
+      <xs:enumeration value="case_status" />
+      <xs:enumeration value="case_comment" />
+      <xs:enumeration value="case_result" />
+
+      <xs:enumeration value="case_duration" />
+      <xs:enumeration value="case_master" />
+      <xs:enumeration value="case_executive" />
+      <xs:enumeration value="case_controller" />
+      <xs:enumeration value="case_expert" />
+      <xs:enumeration value="case_correspondent" />
+      <xs:enumeration value="case_staff" />
+      <xs:enumeration value="case_externalContacts" />
+      <xs:enumeration value="case_roles" />
+
+
+      <!-- meeting -->
+      <xs:enumeration value="meeting_chairman" />
+      <xs:enumeration value="meeting_secretary" />
+      <xs:enumeration value="meeting_permanent" />
+      <xs:enumeration value="meeting_invited" />
+      <xs:enumeration value="meeting_invitedToMeeting" />
+      <xs:enumeration value="meeting_invitedForPoints" />
+      <xs:enumeration value="meeting_agendaQuestions" />
+      <xs:enumeration value="meetingMinutes_chairman" />
+      <xs:enumeration value="meetingMinutes_secretary" />
+      <xs:enumeration value="meetingMinutes_permanent" />
+      <xs:enumeration value="meetingMinutes_participants" />
+      <xs:enumeration value="meetingMinutes_missing" />
+      <xs:enumeration value="meetingMinutes_quorum" />
+      <xs:enumeration value="meetingMinutes_DetailInfo" />
+
+      <xs:enumeration value="meetingMinutes_agenda" />
+
+      <!-- point -->
+      <xs:enumeration value="point_number" />
+      <xs:enumeration value="point_presenter" />
+      <xs:enumeration value="point_responsible" />
+      <xs:enumeration value="point_reporter" />
+      <xs:enumeration value="point_isReportersHasAccessOnlyToThisPoint" />
+      <xs:enumeration value="point_invited" />
+      <xs:enumeration value="point_isInvitedHasAccessOnlyToThisPoint" />
+      <xs:enumeration value="point_estimatedReportDuration" />
+      <xs:enumeration value="point_actualReportDuration" />
+      <xs:enumeration value="point_estimatedDiscussionDuration" />
+
+
+      <!-- decision -->
+      <xs:enumeration value="decision_listen" />
+      <xs:enumeration value="decision_reportComment" />
+      <xs:enumeration value="decision_opponents" />
+      <xs:enumeration value="decision_opponentsComment" />
+      <xs:enumeration value="decision_decisionText" />
+      <xs:enumeration value="decision_electionResults" />
+
+      <!-- decisionProject -->
+      <xs:enumeration value="decisionPr_author" />
+      <xs:enumeration value="decisionPr_decisionProject" />
+
+      <!-- meetingsExtract -->
+      <xs:enumeration value="meetingsExtr_chairman" />
+      <xs:enumeration value="meetingsExtr_secretary" />
+      <xs:enumeration value="meetingsExtr_permanent" />
+      <xs:enumeration value="meetingsExtr_invited" />
+      <xs:enumeration value="meetingsExtr_missing" />
+      <xs:enumeration value="meetingsExtr_decision" />
+      <xs:enumeration value="meetingsExtr_voteResult" />
+
+      <!-- meetingSettings -->
+      <xs:enumeration value="meetingSet_chairman" />
+      <xs:enumeration value="meetingSet_secretary" />
+      <xs:enumeration value="meetingSet_secretariat" />
+      <xs:enumeration value="meetingSet_eventTime" />
+      <xs:enumeration value="meetingSet_eventPlace" />
+      <xs:enumeration value="meetingSet_isWithAffirmationStamp" />
+      <xs:enumeration value="meetingSet_typeRP" />
+      <xs:enumeration value="meetingSet_rkktype" />
+      <xs:enumeration value="meetingSet_rkkRegplace" />
+      <xs:enumeration value="meetingSet_permanent" />
+      <xs:enumeration value="meetingSet_acl" />
+
+
+
+    </xs:restriction>
+  </xs:simpleType>
+
+
+</xs:schema>

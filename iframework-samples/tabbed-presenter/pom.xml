@@ -13,12 +13,36 @@
     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>pro.redsoft.iframework</groupId>
+      <artifactId>iframework-jaxbx</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
+
   <build>
     <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
 
     <resources>
       <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.*</include>
+        </includes>
+      </resource>
+      <resource>
         <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>target/generated-sources/xjc</directory>
+        <includes>
+          <include>**/*.java</include>
+        </includes>
       </resource>
     </resources>
 
@@ -36,9 +60,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>${maven-war-plugin.version}</version>
+        <version>2.3</version>
         <configuration>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <webappDirectory>${webappDirectory}</webappDirectory>
+          <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
+          </archive>
         </configuration>
       </plugin>
 
@@ -48,6 +75,35 @@
         <configuration>
           <skip>true</skip>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jvnet.jaxb2.maven2</groupId>
+        <artifactId>maven-jaxb2-plugin</artifactId>
+        <configuration>
+          <forceRegenerate>false</forceRegenerate>
+          <strict>true</strict>
+          <schemaDirectory>${basedir}/src/main/webapp/WEB-INF</schemaDirectory>
+          <schemaIncludes>
+            <include>config.xsd</include>
+          </schemaIncludes>
+          <bindingDirectory>${basedir}/src/main/webapp/WEB-INF</bindingDirectory>
+          <bindingIncludes>
+            <include>jxb.xml</include>
+          </bindingIncludes>
+          <extension>true</extension>
+          <generatePackage>pro.redsoft.iframework.shared.config</generatePackage>
+          <args>
+            <arg>-Xinject-code</arg>
+          </args>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <!-- JUnit Testing - skip *.GwtTest cases -->
@@ -66,22 +122,13 @@
         </configuration>
       </plugin>
 
-      <!-- GWT -->
-      <!-- 'mvn gwt:run' - runs development mode -->
-      <!-- 'mvn gwt:debug' - runs debug mode -->
-      <!-- 'mvn gwt:compile' - compiles gwt -->
-      <!-- 'mvn integration-test' - runs the gwt tests (*GwtTest.java) -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>gwt-maven-plugin</artifactId>
         <version>${gwt.version}</version>
         <configuration>
-          <!-- With multiple tests use GwtTestSuite.java for speed -->
-          <!-- <includes>**/*GwtTest.java</includes> -->
           <extraJvmArgs>-Xss1024K -Xmx1024M -XX:MaxPermSize=256M</extraJvmArgs>
-          <copyWebapp>true</copyWebapp>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
-
           <runTarget>TabbedPresenter.html</runTarget>
           <modules>
             <module>pro.redsoft.iframework.TabbedPresenter</module>

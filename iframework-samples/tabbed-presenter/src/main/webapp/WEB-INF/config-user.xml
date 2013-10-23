@@ -1,0 +1,2641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.intertrust.ru" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://dev.inttrust.ru config.xsd">
+
+  <user>
+  
+  
+  <margin>INTERNAL_USER_CFG</margin>
+  
+  
+    <requestTimeout>
+      <entry>
+        <key>default</key>
+        <value>300000</value>
+      </entry>
+      <entry>
+        <key>lowest</key>
+        <value>10000</value>
+      </entry>
+      <entry>
+        <key>low</key>
+        <value>50000</value>
+      </entry>
+      <entry>
+        <key>normal</key>
+        <value>600000</value>
+      </entry>
+      <entry>
+        <key>high</key>
+        <value>800000</value>
+      </entry>
+      <entry>
+        <key>highest</key>
+        <value>900000</value>
+      </entry>
+    </requestTimeout>
+
+    <tokenConfig>
+
+      <tokenConfigItem type="default">
+        <componentFormConfig type="content" slotType="ROOT_SLOT">
+          <componentFormConfig type="systemTree" slotType="SYSTEM_TREE_SLOT" />
+          <componentFormConfig type="actionBar" slotType="ACTION_BAR_SLOT" />
+          <componentFormConfig type="splitLayoutPanel" slotType="SPLITTER_SLOT">
+            <componentFormConfig type="grid" slotType="TOP_LEFT_WRP_SLOT" />
+            <componentFormConfig type="preview" slotType="BOTTOM_RIGHT_WRP_SLOT" />
+          </componentFormConfig>
+          <componentFormConfig type="resources" slotType="QUICK_TASK_SLOT" />
+          <componentFormConfig type="reports" slotType="REPORT_SLOT" />
+        </componentFormConfig>
+      </tokenConfigItem>
+
+      <tokenConfigItem type="view">
+        <componentFormConfig type="preview" slotType="BOTTOM_RIGHT_WRP_SLOT" />
+      </tokenConfigItem>
+
+      <tokenConfigItem type="frameset">
+        <componentFormConfig type="actionBar" slotType="ACTION_BAR_SLOT" />
+        <componentFormConfig type="systemTree" slotType="SYSTEM_TREE_SLOT" />
+        <componentFormConfig type="splitLayoutPanel" slotType="SPLITTER_SLOT">
+          <componentFormConfig type="preview" slotType="TOP_LEFT_WRP_SLOT" />
+          <componentFormConfig type="contentTab" slotType="BOTTOM_RIGHT_WRP_SLOT" />
+        </componentFormConfig>
+        <componentFormConfig type="resources" slotType="QUICK_TASK_SLOT" />
+        <componentFormConfig type="reports" slotType="REPORT_SLOT" />
+      </tokenConfigItem>
+
+    </tokenConfig>
+
+    <dialogConfig>
+      <dialog type="searchDialog">
+        <componentFormConfig type="extSearch" slotType="GL_DLG_CONTENT" />
+      </dialog>
+      <dialog type="calendarDialog">
+        <componentFormConfig type="calendarDialog" slotType="GL_DLG_CONTENT" />
+      </dialog>
+      <dialog type="gridSettingsDialog">
+        <componentFormConfig type="gridSettingsDialog" slotType="GL_DLG_CONTENT" />
+      </dialog>
+    </dialogConfig>
+
+    <!-- Отступ в пикселях от границ окна браузера для главного контейнера -->
+    
+
+    <!-- Разрешить встроенное скроллирование в браузере для главного контейнера -->
+    <enableScrolling>false</enableScrolling>
+
+    <!-- Анимация виджетов с длительностью в мс -->
+    <animation>
+      <enabled>true</enabled>
+      <duration>500</duration>
+    </animation>
+
+    <!-- Разрешить нестандартный обработчик закрытия вкладки с прилож ением -->
+    <enableWindowClosingHandler>false</enableWindowClosingHandler>
+
+    <components>
+
+      <!-- Конфигурация превью для всех медиатипов -->
+      <previewComponent type="preview" slotType="NULL">
+
+        <!-- ВнД -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk+json;type=internal</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="signatureElement" />
+              <headerElement type="termElement" />
+              <headerElement type="controlButton" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" alias="DETAILS_TAB" helpId="3086494">
+            <section alias="section_main">
+              <element>
+                <fieldName>inner_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>inner_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>inner_rDate</fieldName>
+                <alias>fieldName_documentDate</alias>
+              </element>
+              <element>
+                <fieldName>inner_sign</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>inner_signOther</fieldName>
+                <alias>fieldName_advSigner</alias>
+              </element>
+              <element>
+                <fieldName>inner_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+              <element>
+                <fieldName>inner_addressee</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>inner_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+              <element>
+                <fieldName>inner_numPage</fieldName>
+                <alias>fieldName_numPage</alias>
+              </element>
+              <element>
+                <fieldName>inner_numCopy</fieldName>
+                <alias>fieldName_numCopy</alias>
+              </element>
+              <element>
+                <fieldName>inner_numAttach</fieldName>
+                <alias>fieldName_numAttach</alias>
+              </element>
+              <element>
+                <fieldName>inner_countNumAttach</fieldName>
+                <alias>fieldName_countNumAttach</alias>
+              </element>
+              <element>
+                <fieldName>inner_comment</fieldName>
+                <alias>fieldName_comment</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="docTasksTab" helpId="">
+            <subtab alias="approvalTab" helpId="3086252" />
+            <subtab alias="historySignTab" helpId="3086609" />
+            <subtab alias="historyRegTab" helpId="3086611" />
+            <subtab alias="historyVerifTab" helpId="3086265" />
+            <subtab alias="reviewCycle" helpId="3086260" select="true" />
+            <subtab alias="executionTab" helpId="3086613" />
+            <subtab alias="preparationTab" helpId="" visible="false" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086235" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086239" />
+            <subtab alias="visualization" helpId="3086620" visible="true" />
+          </tab>
+          <tab type="discussionTab" helpId="3086245" />
+          <tab type="historyTab" helpId="3086265" />
+          <tab type="caseMembersTab" />
+          <tab type="caseTimelineTab" />
+        </mediaType>
+
+        <!-- ИсхД -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk+json;type=output</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="signatureElement" />
+              <headerElement type="termElement" />
+              <headerElement type="controlButton" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086503">
+            <section alias="section_main">
+              <element>
+                <fieldName>output_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>output_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>output_rDate</fieldName>
+                <alias>fieldName_documentDate</alias>
+              </element>
+              <element>
+                <fieldName>output_sign</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>output_signOther</fieldName>
+                <alias>fieldName_advSigner</alias>
+              </element>
+              <element>
+                <fieldName>output_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+              <element>
+                <fieldName>output_correspondent</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+              <element>
+                <fieldName>output_hardCopySending</fieldName>
+                <alias>fieldName_departmentSending</alias>
+              </element>
+            </section>
+            <section alias="section_sending" isSendingFormWidget="true"></section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>output_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+              <element>
+                <fieldName>output_numPage</fieldName>
+                <alias>fieldName_numPage</alias>
+              </element>
+              <element>
+                <fieldName>output_numCopy</fieldName>
+                <alias>fieldName_numCopy</alias>
+              </element>
+              <element>
+                <fieldName>output_numAttach</fieldName>
+                <alias>fieldName_numAttach</alias>
+              </element>
+              <element>
+                <fieldName>output_countNumAttach</fieldName>
+                <alias>fieldName_countNumAttach</alias>
+              </element>
+              <element>
+                <fieldName>output_comment</fieldName>
+                <alias>fieldName_comment</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="docTasksTab" helpId="">
+            <subtab alias="approvalTab" helpId="3086352" />
+            <subtab alias="historySignTab" helpId="3086609" />
+            <subtab alias="historyRegTab" helpId="3086611" />
+            <subtab alias="historyVerifTab" helpId="" />
+            <subtab alias="reviewCycle" helpId="3086260" select="true" />
+            <subtab alias="executionTab" helpId="3086613" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086345" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086334" />
+          </tab>
+          <tab type="discussionTab" helpId="3086332" />
+          <tab type="historyTab" helpId="3086347" />
+        </mediaType>
+
+        <!-- ВхД -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk+json;type=input</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="statusElement" />
+              <!-- <headerElement type="specialTagElement"></headerElement> -->
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="signatureElement" />
+              <headerElement type="termElement" />
+              <headerElement type="controlButton" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086500">
+            <section alias="section_main">
+              <element>
+                <fieldName>input_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>input_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>input_rDate</fieldName>
+                <alias>fieldName_regDate</alias>
+              </element>
+              <element>
+                <fieldName>input_correspondent</fieldName>
+                <alias>fieldName_correspondent</alias>
+              </element>
+              <element>
+                <fieldName>input_addressReadOnly</fieldName>
+                <alias>fieldName_address</alias>
+              </element>
+              <element>
+                <fieldName>input_manualAddress</fieldName>
+                <alias>fieldName_address</alias>
+              </element>
+              <element>
+                <fieldName>input_manualAuthors</fieldName>
+                <alias>fieldName_author</alias>
+              </element>
+              <element>
+                <fieldName>input_manualExecutors</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+              <element>
+                <fieldName>input_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+              <element>
+                <fieldName>input_number</fieldName>
+                <alias>fieldName_documentNumber</alias>
+              </element>
+              <element>
+                <fieldName>input_dDate</fieldName>
+                <alias>fieldName_documentDate</alias>
+              </element>
+              <element>
+                <fieldName>input_addressee</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+              <element>
+                <fieldName>input_redirectedTo</fieldName>
+                <alias>fieldName_redirectedTo</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>input_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+              <element>
+                <fieldName>input_deliveryType</fieldName>
+                <alias>fieldName_deliveryType</alias>
+              </element>
+              <element>
+                <fieldName>input_numPage</fieldName>
+                <alias>fieldName_numPage</alias>
+              </element>
+              <element>
+                <fieldName>input_numCopy</fieldName>
+                <alias>fieldName_numCopy</alias>
+              </element>
+              <element>
+                <fieldName>input_numAttach</fieldName>
+                <alias>fieldName_numAttach</alias>
+              </element>
+              <element>
+                <fieldName>input_countNumAttach</fieldName>
+                <alias>fieldName_countNumAttach</alias>
+              </element>
+              <element>
+                <fieldName>input_comment</fieldName>
+                <alias>fieldName_comment</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="docTasksTab">
+            <subtab alias="historyRegTab" helpId="3086611" />
+            <subtab alias="historyVerifTab" helpId="" />
+            <subtab alias="reviewCycle" helpId="3086260" select="true" />
+            <subtab alias="executionTab" helpId="3086613" />
+          </tab>
+          <tab type="relatedTab">
+            <subtab alias="documents" helpId="3086307" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086298" />
+          </tab>
+          <tab type="discussionTab" helpId="3086296" />
+          <tab type="historyTab" helpId="3086310" />
+        </mediaType>
+
+        <!-- ОГ -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk+json;type=requests</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="signatureElement" />
+              <headerElement type="termElement" />
+              <headerElement type="controlButton" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086526">
+            <section alias="section_main">
+              <element>
+                <fieldName>request_type</fieldName>
+                <alias>fieldName_view</alias>
+              </element>
+              <element>
+                <fieldName>request_requestType</fieldName>
+                <alias>fieldName_requestType</alias>
+              </element>
+              <element>
+                <fieldName>request_rDate</fieldName>
+                <alias>fieldName_regDate</alias>
+              </element>
+              <element>
+                <fieldName>request_correspondent</fieldName>
+                <alias>fieldName_correspondent</alias>
+              </element>
+              <element>
+                <fieldName>request_editCorrespondent</fieldName>
+                <alias>fieldName_correspondent</alias>
+              </element>
+              <element>
+                <fieldName>request_addressReadonly</fieldName>
+                <alias>fieldName_address</alias>
+              </element>
+              <element>
+                <fieldName>request_addressStreet</fieldName>
+                <alias>fieldName_addressStreet</alias>
+              </element>
+              <element>
+                <fieldName>request_addressHouse</fieldName>
+                <alias>fieldName_addressHouse</alias>
+              </element>
+              <element>
+                <fieldName>request_addressBuilding</fieldName>
+                <alias>fieldName_addressBuilding</alias>
+              </element>
+              <element>
+                <fieldName>request_addressOffice</fieldName>
+                <alias>fieldName_addressOffice</alias>
+              </element>
+              <element>
+                <fieldName>request_addressCity</fieldName>
+                <alias>fieldName_addressCity</alias>
+              </element>
+              <element>
+                <fieldName>request_addressLocality</fieldName>
+                <alias>fieldName_addressLocality</alias>
+              </element>
+              <element>
+                <fieldName>request_addressRegion</fieldName>
+                <alias>fieldName_addressRegion</alias>
+              </element>
+              <element>
+                <fieldName>request_benefitGroups</fieldName>
+                <alias>fieldName_benefitGroups</alias>
+              </element>
+              <element>
+                <fieldName>request_requestCause</fieldName>
+                <alias>fieldName_requestCause</alias>
+              </element>
+              <element>
+                <fieldName>request_addressee</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+            </section>
+            <section alias="section_execution">
+              <element>
+                <fieldName>request_reviewResult</fieldName>
+                <alias>fieldName_reviewResult</alias>
+              </element>
+              <element>
+                <fieldName>request_solution</fieldName>
+                <alias>fieldName_solution</alias>
+              </element>
+            </section>
+            <section alias="section_source">
+              <element>
+                <fieldName>request_sourceOrganization</fieldName>
+                <alias>fieldName_organization</alias>
+              </element>
+              <element>
+                <fieldName>request_sourceAddressees</fieldName>
+                <alias>fieldName_author</alias>
+              </element>
+              <element>
+                <fieldName>request_letterNumber</fieldName>
+                <alias>fieldName_letterNumber</alias>
+              </element>
+              <element>
+                <fieldName>request_letterDate</fieldName>
+                <alias>fieldName_letterDate</alias>
+              </element>
+              <element>
+                <fieldName>request_deadline</fieldName>
+                <alias>fieldName_deadline</alias>
+              </element>
+              <element>
+                <fieldName>request_instructions</fieldName>
+                <alias>fieldName_instructions</alias>
+              </element>
+            </section>
+            <section alias="section_redirection">
+              <element>
+                <fieldName>request_appointmentOrganization</fieldName>
+                <alias>fieldName_organization</alias>
+              </element>
+              <element>
+                <fieldName>request_appointmentAddressees</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>request_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+              <element>
+                <fieldName>request_numPage</fieldName>
+                <alias>fieldName_numPage</alias>
+              </element>
+              <element>
+                <fieldName>request_numCopy</fieldName>
+                <alias>fieldName_numCopy</alias>
+              </element>
+              <element>
+                <fieldName>request_numAttach</fieldName>
+                <alias>fieldName_numAttach</alias>
+              </element>
+              <element>
+                <fieldName>request_countNumAttach</fieldName>
+                <alias>fieldName_countNumAttach</alias>
+              </element>
+              <element>
+                <fieldName>request_comment</fieldName>
+                <alias>fieldName_comment</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="docTasksTab" helpId="">
+            <subtab alias="approvalTab" helpId="" />
+            <subtab alias="historySignTab" helpId="3086609" />
+            <subtab alias="historyRegTab" helpId="3086611" />
+            <subtab alias="historyVerifTab" helpId="" />
+            <subtab alias="reviewCycle" helpId="3086330" select="true" />
+            <subtab alias="executionTab" helpId="3086613" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086318" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086325" />
+          </tab>
+          <tab type="discussionTab" helpId="3086329" />
+          <tab type="historyTab" helpId="3086320" />
+        </mediaType>
+
+        <!-- ОРД -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk+json;type=missions</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="signatureElement" />
+              <headerElement type="termElement" />
+              <headerElement type="controlButton" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086497">
+            <section alias="section_main">
+              <element>
+                <fieldName>ord_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>ord_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>ord_rDate</fieldName>
+                <alias>fieldName_documentDate</alias>
+              </element>
+              <element>
+                <fieldName>ord_sign</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>ord_signOther</fieldName>
+                <alias>fieldName_advSigner</alias>
+              </element>
+              <element>
+                <fieldName>ord_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+              <element>
+                <fieldName>ord_distributionList</fieldName>
+                <alias>fieldName_sendlist</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>ord_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+              <element>
+                <fieldName>ord_numPage</fieldName>
+                <alias>fieldName_numPage</alias>
+              </element>
+              <element>
+                <fieldName>ord_numCopy</fieldName>
+                <alias>fieldName_numCopy</alias>
+              </element>
+              <element>
+                <fieldName>ord_numAttach</fieldName>
+                <alias>fieldName_numAttach</alias>
+              </element>
+              <element>
+                <fieldName>ord_countNumAttach</fieldName>
+                <alias>fieldName_countNumAttach</alias>
+              </element>
+              <element>
+                <fieldName>ord_comment</fieldName>
+                <alias>fieldName_comment</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="docTasksTab" helpId="">
+            <subtab alias="approvalTab" helpId="3086290" />
+            <subtab alias="historySignTab" helpId="3086609" />
+            <subtab alias="historyRegTab" helpId="3086611" />
+            <subtab alias="historyVerifTab" helpId="" />
+            <subtab alias="reviewCycle" helpId="3086276" select="true" />
+            <subtab alias="executionTab" helpId="3086613" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="discussionTab" helpId="3086283" />
+          <tab type="historyTab" helpId="3086289" />
+        </mediaType>
+
+        <!-- VCard -->
+        <mediaType defaultSelectedTab="directoriesTab">
+          <contentType>application/vnd.intertrust.cm.vcard+json</contentType>
+
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <!-- <headerElement type="documentTypeElement"></headerElement> -->
+            </row>
+          </header>
+
+          <!--tab type="contentTab" / -->
+          <!--tab type="discussionTab" / -->
+          <!--tab type="historyTab" / -->
+          <tab type="directoriesTab" />
+          <!--tab type="relatedTab" / -->
+          <!--tab type="docTasksTab" / -->
+        </mediaType>
+
+        <!-- Шаблон согласования -->
+        <mediaType defaultSelectedTab="approvalTempTab">
+          <contentType>application/vnd.intertrust.cm.apre.list.template+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="approvalTempTab" alias="details" />
+        </mediaType>
+
+        <!-- Классификаторы -->
+        <mediaType defaultSelectedTab="classifiersTab">
+          <contentType>application/vnd.intertrust.cm.collection+json;type=string</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <!-- <headerElement type="documentTypeElement"></headerElement> -->
+            </row>
+          </header>
+
+          <tab type="classifiersTab" />
+        </mediaType>
+
+        <!-- КИПР -->
+        <mediaType defaultSelectedTab="cyprusTab">
+          <contentType>application/vnd.intertrust.cm.cyprus+json;type=profile</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <!-- <headerElement type="documentTypeElement"></headerElement> -->
+            </row>
+          </header>
+
+          <tab type="cyprusTab" />
+        </mediaType>
+
+        <!-- Дело -->
+        <mediaType defaultSelectedTab="folderTab">
+          <contentType>application/vnd.intertrust.cm.fdnd+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+            </row>
+          </header>
+          <tab type="folderTab" />
+        </mediaType>
+
+        <!-- Поручения -->
+        <mediaType defaultSelectedTab="executionTab">
+          <contentType>application/vnd.intertrust.cm.resolution+json;type=tasks</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="signatureElement" />
+              <headerElement type="termElement" />
+              <headerElement type="controlButton" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="executionTab" helpId="3086552" />
+          <tab type="contentTab" alias="informationMaterials" helpId="3086264" />
+          <tab type="relatedTabWithOutLeftMenu" helpId="3086419" />
+          <tab type="discussionTab" helpId="3086418" />
+          <tab type="historyTab" helpId="3086421" />
+        </mediaType>
+
+        <!-- Отчеты -->
+        <mediaType defaultSelectedTab="reportTab">
+          <contentType>application/vnd.intertrust.cm.reporter+json;type=report</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+            </row>
+          </header>
+          <tab type="reportTab" helpId="3086456" />
+        </mediaType>
+
+        <!-- Кейсы -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cmj.case+json;type=item</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="signatureElement" />
+              <!-- <headerElement type="termElement"></headerElement> -->
+              <!-- <headerElement type="controlButton"></headerElement> -->
+              <!-- <headerElement type="executionButton"></headerElement> -->
+            </row>
+          </header>
+          <tab type="detailsTab" helpId="3086615">
+            <section alias="section_main">
+              <element>
+                <fieldName>case_target</fieldName>
+                <alias>fieldName_target</alias>
+              </element>
+              <element>
+                <fieldName>case_type</fieldName>
+                <alias>fieldName_casetype</alias>
+              </element>
+              <element>
+                <fieldName>case_number</fieldName>
+                <alias>fieldName_number</alias>
+              </element>
+              <element>
+                <fieldName>case_date</fieldName>
+                <alias>date</alias>
+              </element>
+              <element>
+                <fieldName>case_term</fieldName>
+                <alias>fieldName_term</alias>
+              </element>
+
+              <element>
+                <fieldName>case_status</fieldName>
+                <alias>fieldName_status</alias>
+              </element>
+              <element>
+                <fieldName>case_comment</fieldName>
+                <alias>comment</alias>
+              </element>
+              <element>
+                <fieldName>case_result</fieldName>
+                <alias>result</alias>
+              </element>
+            </section>
+          </tab>
+          <!-- <tab type="caseStructureTab" helpId="3086188"/> -->
+          <tab type="caseDocumentsTab" helpId="" />
+          <tab type="caseWorkTab" helpId="" />
+          <tab type="caseCalendarTab" helpId="3086618" />
+          <tab type="discussionTab" helpId="" />
+          <tab type="historyTab" helpId="" />
+        </mediaType>
+
+        <!-- Шаблон ВнД -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk.template+json;type=internal</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086497">
+            <section alias="section_main">
+              <element>
+                <fieldName>innertmp_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_caption</fieldName>
+                <alias>fieldName_caption</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_addressee</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_sign</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_signOther</fieldName>
+                <alias>fieldName_advSigner</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>innertmp_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!-- Шаблон ВхД -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk.template+json;type=input</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="detailsTab">
+            <section alias="section_main">
+              <element>
+                <fieldName>inputtmp_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>inputtmp_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>inputtmp_header</fieldName>
+                <alias>fieldName_header</alias>
+              </element>
+              <element>
+                <fieldName>inputtmp_correspondent</fieldName>
+                <alias>fieldName_correspondent</alias>
+              </element>
+              <element>
+                <fieldName>inputtmp_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+              <!--element> <fieldName>inputtmp_manualAddress</fieldName> <alias>fieldName_advSigner</alias> </element> <element> <fieldName>inputtmp_manualAuthors</fieldName> <alias>fieldName_executor</alias></element> 
+                <element> <fieldName>inputtmp_executor</fieldName> <alias>fieldName_addressee</alias> </element -->
+              <element>
+                <fieldName>inputtmp_addressee</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>inputtmp_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!-- Шаблон ОРД -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk.template+json;type=missions</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086497">
+            <section alias="section_main">
+              <element>
+                <fieldName>ordtmp_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>ordtmp_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>ordtmp_caption</fieldName>
+                <alias>fieldName_caption</alias>
+              </element>
+              <element>
+                <fieldName>ordtmp_sign</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>ordtmp_signOther</fieldName>
+                <alias>fieldName_advSigner</alias>
+              </element>
+              <element>
+                <fieldName>ordtmp_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+              <element>
+                <fieldName>ordtmp_distributionList</fieldName>
+                <alias>fieldName_sendlist</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>ordtmp_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!-- Шаблон ИсхД -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk.template+json;type=output</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086503">
+            <section alias="section_main">
+              <element>
+                <fieldName>outputtmp_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>outputtmp_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>outputtmp_caption</fieldName>
+                <alias>fieldName_caption</alias>
+              </element>
+              <element>
+                <fieldName>outputtmp_sign</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>outputtmp_signOther</fieldName>
+                <alias>fieldName_advSigner</alias>
+              </element>
+              <element>
+                <fieldName>outputtmp_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+              <element>
+                <fieldName>outputtmp_correspondent</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>outputtmp_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!-- Шаблон ОГ -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk.template+json;type=requests</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="detailsTab" helpId="3086526">
+            <section alias="section_main">
+              <element>
+                <fieldName>requesttmp_view</fieldName>
+                <alias>fieldName_view</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_type</fieldName>
+                <alias>fieldName_requestType</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_correspondent</fieldName>
+                <alias>fieldName_correspondent</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_editCorrespondent</fieldName>
+                <alias>fieldName_correspondent</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_addressReadonly</fieldName>
+                <alias>fieldName_address</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_addressStreet</fieldName>
+                <alias>fieldName_addressStreet</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_addressHouse</fieldName>
+                <alias>fieldName_addressHouse</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_addressBuilding</fieldName>
+                <alias>fieldName_addressBuilding</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_addressOffice</fieldName>
+                <alias>fieldName_addressOffice</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_addressCity</fieldName>
+                <alias>fieldName_addressCity</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_addressLocality</fieldName>
+                <alias>fieldName_addressLocality</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_addressRegion</fieldName>
+                <alias>fieldName_addressRegion</alias>
+              </element>
+              <element>
+                <fieldName>requesttmp_benefitGroups</fieldName>
+                <alias>fieldName_benefitGroups</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>requesttmp_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!-- Шаблон ознакомления -->
+        <mediaType defaultSelectedTab="reviewTempTab">
+          <contentType>application/vnd.intertrust.cm.apre.slv+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+            </row>
+          </header>
+          <tab type="reviewTempTab" />
+        </mediaType>
+
+        <!-- Шаблон поручения -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.resolution.template+json;type=tasks</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+          </header>
+          <tab type="detailsTab" helpId="" />
+          <tab type="accessTab" />
+        </mediaType>
+
+        <!-- Шаблон резолюции -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.resolution.template+json</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+          </header>
+          <tab type="detailsTab" />
+          <tab type="accessTab" />
+        </mediaType>
+
+        <!-- Договор -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk+json;type=contracts</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="contractStatusElement" />
+              <headerElement type="contractExecElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086533">
+            <section alias="section_main">
+              <element>
+                <fieldName>contract_type</fieldName>
+                <alias>fieldName_contractType</alias>
+              </element>
+              <element>
+                <fieldName>contract_rNumber</fieldName>
+                <alias>fieldName_contractNumber</alias>
+              </element>
+              <element>
+                <fieldName>contract_rDate</fieldName>
+                <alias>fieldName_contractDate</alias>
+              </element>
+              <element>
+                <fieldName>contract_additionalnumber</fieldName>
+                <alias>fieldName_additionalnumber</alias>
+              </element>
+              <element>
+                <fieldName>contract_parties1</fieldName>
+                <alias>fieldName_1party</alias>
+              </element>
+              <element>
+                <fieldName>contract_signature1</fieldName>
+                <alias>fieldName_signature1</alias>
+              </element>
+              <element>
+                <fieldName>contract_advSigner1</fieldName>
+                <alias>fieldName_advSigner1</alias>
+              </element>
+              <element>
+                <fieldName>contract_parties2</fieldName>
+                <alias>fieldName_2party</alias>
+              </element>
+              <element>
+                <fieldName>contract_signature2</fieldName>
+                <alias>fieldName_signature2</alias>
+              </element>
+              <element>
+                <fieldName>contract_advSigner2</fieldName>
+                <alias>fieldName_advSigner2</alias>
+              </element>
+              <element>
+                <fieldName>contract_partiesOther</fieldName>
+                <alias>fieldName_otherparty</alias>
+              </element>
+              <element>
+                <fieldName>contract_relationsType</fieldName>
+                <alias>fieldName_relationsType</alias>
+              </element>
+              <element>
+                <fieldName>contract_concluded</fieldName>
+                <alias>fieldName_concluded</alias>
+              </element>
+              <element>
+                <fieldName>contract_startDate</fieldName>
+                <alias>fieldName_startDate</alias>
+              </element>
+              <element>
+                <fieldName>contract_finished</fieldName>
+                <alias>fieldName_finished</alias>
+              </element>
+              <element>
+                <fieldName>contract_duration</fieldName>
+                <alias>fieldName_duration</alias>
+              </element>
+              <element>
+                <fieldName>contract_preparedBy</fieldName>
+                <alias>fieldName_preparedBy</alias>
+              </element>
+              <element>
+                <fieldName>contract_department</fieldName>
+                <alias>fieldName_departmentExec</alias>
+              </element>
+              <element>
+                <fieldName>contract_responsibles</fieldName>
+                <alias>fieldName_responsibles</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>contract_sendlist</fieldName>
+                <alias>fieldName_sendlist</alias>
+              </element>
+              <element>
+                <fieldName>contract_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+              <element>
+                <fieldName>contract_numPage</fieldName>
+                <alias>fieldName_numPage</alias>
+              </element>
+              <element>
+                <fieldName>contract_numCopy</fieldName>
+                <alias>fieldName_numCopy</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="costPaymentTab" helpId="3086387" />
+          <tab type="contractStructTab" />
+          <tab type="docTasksTab" helpId="">
+            <subtab alias="preparationTab" helpId="3083169" />
+            <subtab alias="approvalTab" helpId="3086290" />
+            <!-- <subtab alias="historySignTab" helpId="3086609"/> -->
+            <!-- <subtab alias="historyRegTab" helpId="3086611"/> -->
+            <subtab alias="reviewCycle" helpId="3086276" select="true" />
+            <subtab alias="executionTab" helpId="3086613" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="discussionTab" helpId="3086413" />
+          <!-- <tab type="historyTab" helpId="3086408"/> -->
+        </mediaType>
+
+        <!-- Шаблон договора -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk.template+json;type=contracts</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086533">
+            <section alias="section_main">
+              <element>
+                <fieldName>contractTempl_type</fieldName>
+                <alias>fieldName_contractType</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_caption</fieldName>
+                <alias>fieldName_caption</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_parties1</fieldName>
+                <alias>fieldName_1party</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_signature1</fieldName>
+                <alias>fieldName_signature1</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_advSigner1</fieldName>
+                <alias>fieldName_advSigner1</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_parties2</fieldName>
+                <alias>fieldName_2party</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_signature2</fieldName>
+                <alias>fieldName_signature2</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_advSigner2</fieldName>
+                <alias>fieldName_advSigner2</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_relationsType</fieldName>
+                <alias>fieldName_relationsType</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_preparedBy</fieldName>
+                <alias>fieldName_preparedBy</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_department</fieldName>
+                <alias>fieldName_departmentExec</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_responsibles</fieldName>
+                <alias>fieldName_responsibles</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>contractTempl_sendlist</fieldName>
+                <alias>fieldName_sendlist</alias>
+              </element>
+              <element>
+                <fieldName>contractTempl_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="costPaymentTab" helpId="3086387" />
+        </mediaType>
+
+        <!-- Документ по договору -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.contracts.document+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <!-- <headerElement type="mediaTypeElement"></headerElement> -->
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086542">
+            <section alias="section_main">
+              <element>
+                <fieldName>contractdoc_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>contractdoc_rNumber</fieldName>
+                <alias>fieldName_documentNumber</alias>
+              </element>
+              <element>
+                <fieldName>contractdoc_rDate</fieldName>
+                <alias>fieldName_documentDate</alias>
+              </element>
+              <element>
+                <fieldName>contractdoc_signature</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>contractdoc_preparedBy</fieldName>
+                <alias>fieldName_preparedBy</alias>
+              </element>
+              <element>
+                <fieldName>contractdoc_responsibles</fieldName>
+                <alias>fieldName_responsibles</alias>
+              </element>
+            </section>
+            <section alias="section_contractRequisites">
+              <element>
+                <fieldName>contractdoc_typeC</fieldName>
+                <alias>fieldName_contractType</alias>
+              </element>
+              <element>
+                <fieldName>contractdoc_datenumbC</fieldName>
+                <alias>fieldName_contractDateNum</alias>
+              </element>
+              <element>
+                <fieldName>contractdoc_objC</fieldName>
+                <alias>fieldName_contractSubject</alias>
+              </element>
+              <element>
+                <fieldName>contractdoc_1tC</fieldName>
+                <alias>fieldName_1party</alias>
+              </element>
+              <element>
+                <fieldName>contractdoc_2tC</fieldName>
+                <alias>fieldName_2party</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="contractStructTab" />
+          <tab type="docTasksTab" helpId="">
+            <subtab alias="preparationTab" helpId="3083169" />
+            <subtab alias="approvalTab" helpId="3086290" />
+            <!-- <subtab alias="historySignTab" helpId="3086609"/> -->
+            <!-- <subtab alias="historyRegTab" helpId="3086611"/> -->
+            <!-- <subtab alias="historyVerifTab" helpId="" /> -->
+            <subtab alias="reviewCycle" helpId="3086276" select="true" />
+            <subtab alias="executionTab" helpId="3086613" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="discussionTab" helpId="3086385" />
+          <!-- <tab type="historyTab" helpId="3086383"/> -->
+        </mediaType>
+
+        <!-- Шаблон документа по договору -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.contracts.document.template+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <!-- <headerElement type="documentTypeElement"></headerElement> -->
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086542">
+            <section alias="section_main">
+              <element>
+                <fieldName>contractdocTempl_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>contractdocTempl_signature</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>contractdocTempl_preparedBy</fieldName>
+                <alias>fieldName_preparedBy</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!-- Финансовый документ -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.contracts.finance+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086546">
+            <section alias="section_main">
+              <element>
+                <fieldName>contractfin_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_number</fieldName>
+                <alias>fieldName_documentNumber</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_date</fieldName>
+                <alias>fieldName_documentDate</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_signature</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_service</fieldName>
+                <alias>fieldName_service</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_supplier</fieldName>
+                <alias>fieldName_supplier</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_customer</fieldName>
+                <alias>fieldName_customer</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_receiver</fieldName>
+                <alias>fieldName_receiver</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_total</fieldName>
+                <alias>fieldName_total</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_vat</fieldName>
+                <alias>fieldName_vat</alias>
+              </element>
+            </section>
+            <section alias="section_ContractParentRequisites">
+              <element>
+                <fieldName>contractfin_datenumbC</fieldName>
+                <alias>fieldName_contractDateNum</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_objC</fieldName>
+                <alias>fieldName_contractSubject</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_1tC</fieldName>
+                <alias>fieldName_1party</alias>
+              </element>
+              <element>
+                <fieldName>contractfin_2tC</fieldName>
+                <alias>fieldName_2party</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="contractStructTab" />
+          <tab type="docTasksTab" helpId="">
+            <subtab alias="preparationTab" helpId="3083169" />
+            <subtab alias="approvalTab" helpId="3086290" />
+            <!-- <subtab alias="historySignTab" helpId="3086609"/> -->
+            <!-- <subtab alias="historyRegTab" helpId="3086611"/> -->
+            <!-- <subtab alias="historyVerifTab" helpId="" /> -->
+            <subtab alias="reviewCycle" helpId="3086276" select="true" />
+            <subtab alias="executionTab" helpId="3086613" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="discussionTab" helpId="3086364" />
+          <!-- <tab type="historyTab" helpId="3086363"/> -->
+        </mediaType>
+
+        <!-- Шаблон финансового документа -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.contracts.finance.template+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <!-- <headerElement type="documentTypeElement"></headerElement> -->
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086546">
+            <section alias="section_main">
+              <element>
+                <fieldName>contractfinTempl_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>contractfinTempl_signature</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>contractfinTempl_vat</fieldName>
+                <alias>fieldName_vat</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!-- Доп. соглашение -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.contracts.addagrement+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="contractStatusElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086539">
+            <section alias="section_main">
+              <element>
+                <fieldName>contractagr_num</fieldName>
+                <alias>fieldName_agrNumber</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_rDate</fieldName>
+                <alias>fieldName_agrDate</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_signature1</fieldName>
+                <alias>fieldName_signature1</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_signature2</fieldName>
+                <alias>fieldName_signature2</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_startDate</fieldName>
+                <alias>fieldName_startDateWorks</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_finished</fieldName>
+                <alias>fieldName_finished</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_duration</fieldName>
+                <alias>fieldName_duration</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_preparedBy</fieldName>
+                <alias>fieldName_preparedBy</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_responsibles</fieldName>
+                <alias>fieldName_responsibles</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>contractagr_sendlist</fieldName>
+                <alias>fieldName_sendlist</alias>
+              </element>
+            </section>
+            <section alias="section_contractRequisites">
+              <element>
+                <fieldName>contractagr_typeC</fieldName>
+                <alias>fieldName_contractType</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_datenumbC</fieldName>
+                <alias>fieldName_contractDateNum</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_objC</fieldName>
+                <alias>fieldName_contractSubject</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_1tC</fieldName>
+                <alias>fieldName_1party</alias>
+              </element>
+              <element>
+                <fieldName>contractagr_2tC</fieldName>
+                <alias>fieldName_2party</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="costPaymentTab" helpId="3086391" />
+          <tab type="contractStructTab" />
+          <tab type="docTasksTab" helpId="">
+            <subtab alias="preparationTab" helpId="3083169" />
+            <subtab alias="approvalTab" helpId="3086290" />
+            <!-- <subtab alias="historySignTab" helpId="3086609"/> -->
+            <!-- <subtab alias="historyRegTab" helpId="3086611"/> -->
+            <!-- <subtab alias="historyVerifTab" helpId="" /> -->
+            <subtab alias="reviewCycle" helpId="3086276" select="true" />
+            <subtab alias="executionTab" helpId="3086613" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="discussionTab" helpId="3086402" />
+          <!-- <tab type="historyTab" helpId="3086400"/> -->
+        </mediaType>
+
+        <!-- Шаблон Доп. соглашения -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.contracts.addagreement.template+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <!-- <headerElement type="documentTypeElement"></headerElement> -->
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086539">
+            <section alias="section_main">
+              <element>
+                <fieldName>contractagrTempl_caption</fieldName>
+                <alias>fieldName_caption</alias>
+              </element>
+              <element>
+                <fieldName>contractagrTempl_signature1</fieldName>
+                <alias>fieldName_signature1</alias>
+              </element>
+              <element>
+                <fieldName>contractagrTempl_signature2</fieldName>
+                <alias>fieldName_signature2</alias>
+              </element>
+              <element>
+                <fieldName>contractagrTempl_preparedBy</fieldName>
+                <alias>fieldName_preparedBy</alias>
+              </element>
+              <element>
+                <fieldName>contractagrTempl_responsibles</fieldName>
+                <alias>fieldName_responsibles</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>contractagrTempl_sendlist</fieldName>
+                <alias>fieldName_sendlist</alias>
+              </element>
+            </section>
+          </tab>
+          <!-- <tab type="costPaymentTab" /> CMJ-7012 -->
+        </mediaType>
+
+        <!-- Версия содержания TextVersion -->
+        <mediaType defaultSelectedTab="contentTab">
+          <contentType>application/vnd.intertrust.cm.textversion+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <!-- <headerElement type="documentTypeElement"></headerElement> -->
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+        </mediaType>
+
+        <!-- Список рассылки -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.sendlist+json</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="signatureElement" />
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="detailsTab">
+            <section alias="section_main">
+              <element>
+                <fieldName>sendListOganization</fieldName>
+                <alias>fieldName_organization</alias>
+              </element>
+              <element>
+                <fieldName>sendListMember</fieldName>
+                <alias>fieldName_sendlist</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!-- Заседание -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.meetings+json;type=meeting</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="statusElement"></headerElement>
+            </row>
+            <row>
+              <headerElement type="numberElement"></headerElement>
+              <headerElement type="meetingDateElement"></headerElement>
+              <headerElement type="meetingFormElement"></headerElement>
+              <headerElement type="meetingDateTransferElement"></headerElement>
+              <headerElement type="meetingTimeElement"></headerElement>
+              <headerElement type="placeElement"></headerElement>
+            </row>
+          </header>
+          <tab type="detailsTab" alias="Agenda">
+            <section alias="">
+              <element>
+                <fieldName>meeting_chairman</fieldName>
+                <alias>fieldName_chairman</alias>
+              </element>
+              <element>
+                <fieldName>meeting_secretary</fieldName>
+                <alias>fieldName_secretary</alias>
+              </element>
+              <element>
+                <fieldName>meeting_permanent</fieldName>
+                <alias>fieldName_permanent</alias>
+              </element>
+              <element>
+                <fieldName>meeting_invited</fieldName>
+                <alias>fieldName_participants</alias>
+              </element>
+              <element>
+                <fieldName>meeting_invitedToMeeting</fieldName>
+                <alias>fieldName_invitedToMeeting</alias>
+              </element>
+              <element>
+                <fieldName>meeting_invitedForPoints</fieldName>
+                <alias>fieldName_inviteds</alias>
+              </element>
+            </section>
+            <section alias="section_pointOfAgenda">
+              <element>
+                <fieldName>meeting_agendaQuestions</fieldName>
+                <alias>fieldName_inviteds</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="detailsTab" subType="meetingMinutesTab" alias="Protocol">
+            <section alias="">
+              <element>
+                <fieldName>meetingMinutes_chairman</fieldName>
+                <alias>fieldName_chairman</alias>
+              </element>
+              <element>
+                <fieldName>meetingMinutes_secretary</fieldName>
+                <alias>fieldName_secretary</alias>
+              </element>
+              <element>
+                <fieldName>meetingMinutes_permanent</fieldName>
+                <alias>fieldName_attendedpermanent</alias>
+              </element>
+              <element>
+                <fieldName>meetingMinutes_participants</fieldName>
+                <alias>fieldName_participants</alias>
+              </element>
+              <element>
+                <fieldName>meetingMinutes_missing</fieldName>
+                <alias>fieldName_missing</alias>
+              </element>
+              <element>
+                <fieldName>meetingMinutes_quorum</fieldName>
+                <alias>fieldName_quorum</alias>
+              </element>
+              <element>
+                <fieldName>meetingMinutes_DetailInfo</fieldName>
+                <alias>fieldName_DetailInfo</alias>
+              </element>
+            </section>
+            <section alias="section_agenda">
+              <element>
+                <fieldName>meetingMinutes_agenda</fieldName>
+                <alias>fieldName_permanent</alias>
+              </element>
+            </section>
+            <section alias="section_progressMeeting">
+            </section>
+          </tab>
+          <tab type="docTasksTab">
+            <subtab alias="approvalTab" helpId="3083165" />
+            <subtab alias="historySignTab" helpId="3083151" />
+            <subtab alias="historyRegTab" helpId="3083151" />
+            <subtab alias="reviewCycle" helpId="3083174" select="true" />
+            <subtab alias="executionTab" helpId="3083177" />
+          </tab>
+          <tab type="discussionTab" />
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="historyTab" />
+        </mediaType>
+
+        <!-- Вопрос повестки -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.meetings+json;type=point</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="meetingDateTimeElement" />
+              <headerElement type="agendaElement" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="detailsTab">
+            <section alias="section_main">
+              <element>
+                <fieldName>point_number</fieldName>
+                <alias>fieldName_numberPoint</alias>
+              </element>
+              <element>
+                <fieldName>point_presenter</fieldName>
+                <alias>fieldName_presenter</alias>
+              </element>
+              <element>
+                <fieldName>point_responsible</fieldName>
+                <alias>fieldName_responsiblePoint</alias>
+              </element>
+              <element>
+                <fieldName>point_reporter</fieldName>
+                <alias>fieldName_reporter</alias>
+              </element>
+              <element>
+                <fieldName>point_isReportersHasAccessOnlyToThisPoint</fieldName>
+                <alias>fieldName_reportersHasAccessOnlyToThisPoint</alias>
+              </element>
+              <element>
+                <fieldName>point_invited</fieldName>
+                <alias>fieldName_invited</alias>
+              </element>
+              <element>
+                <fieldName>point_isInvitedHasAccessOnlyToThisPoint</fieldName>
+                <alias>fieldName_invitedHasAccessOnlyToThisPoint</alias>
+              </element>
+              <element>
+                <fieldName>point_estimatedReportDuration</fieldName>
+                <alias>fieldName_estimatedReportDuration</alias>
+              </element>
+              <element>
+                <fieldName>point_actualReportDuration</fieldName>
+                <alias>fieldName_actualReportDuration</alias>
+              </element>
+              <element>
+                <fieldName>point_estimatedDiscussionDuration</fieldName>
+                <alias>fieldName_estimatedDiscussionDuration</alias>
+              </element>
+            </section>
+            <section alias="section_decisionProject">
+            </section>
+          </tab>
+          <tab type="contentTab" alias="AdditionalMaterials" helpId="3086264" />
+          <tab type="docTasksTab">
+            <subtab alias="approvalTab" helpId="" select="true" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="discussionTab" />
+          <tab type="historyTab" />
+        </mediaType>
+
+        <!-- Проект решения -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.meetings+json;type=decision.project</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberElement" />
+              <headerElement type="agendaElement" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="detailsTab">
+            <section alias="section_main">
+              <element>
+                <fieldName>decisionPr_author</fieldName>
+                <alias>fieldName_author</alias>
+              </element>
+              <element>
+                <fieldName>decisionPr_decisionProject</fieldName>
+                <alias>fieldName_decisionProject</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="contentTab" alias="Appendix" helpId="3086264" />
+          <tab type="docTasksTab">
+            <subtab alias="approvalTab" helpId="3083165" select="true" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="discussionTab" />
+          <tab type="historyTab" />
+        </mediaType>
+
+        <!-- Решения -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.meetings+json;type=decision</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement"></headerElement>
+              <headerElement type="documentTypeElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberElement" />
+              <headerElement type="protocolElement" />
+            </row>
+          </header>
+          <tab type="detailsTab">
+            <section alias="section_decision">
+              <element>
+                <fieldName>decision_listen</fieldName>
+                <alias>fieldName_listen</alias>
+              </element>
+              <element>
+                <fieldName>decision_reportComment</fieldName>
+                <alias>fieldName_ReportComment</alias>
+              </element>
+              <element>
+                <fieldName>decision_opponents</fieldName>
+                <alias>fieldName_opponents</alias>
+              </element>
+              <element>
+                <fieldName>decision_opponentsComment</fieldName>
+                <alias>fieldName_opponentsComment</alias>
+              </element>
+              <element>
+                <fieldName>decision_decisionText</fieldName>
+                <alias>fieldName_decisionText</alias>
+              </element>
+              <element>
+                <fieldName>decision_electionResults</fieldName>
+                <alias>fieldName_electionResults</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="contentTab" alias="Appendix" helpId="3086264" />
+          <tab type="docTasksTab">
+            <subtab alias="approvalTab" helpId="3083165" select="true" />
+          </tab>
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="discussionTab" />
+          <tab type="historyTab" />
+        </mediaType>
+
+        <!-- Выписка -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.meetings+json;type=extract</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="numberElement" />
+              <headerElement type="placeElement" />
+            </row>
+          </header>
+          <tab type="detailsTab">
+            <section alias="">
+              <element>
+                <fieldName>meetingsExtr_chairman</fieldName>
+                <alias>fieldName_chairman</alias>
+              </element>
+              <element>
+                <fieldName>meetingsExtr_secretary</fieldName>
+                <alias>fieldName_secretary</alias>
+              </element>
+              <element>
+                <fieldName>meetingsExtr_permanent</fieldName>
+                <alias>fieldName_attendedpermanent</alias>
+              </element>
+              <element>
+                <fieldName>meetingsExtr_invited</fieldName>
+                <alias>fieldName_participants</alias>
+              </element>
+              <element>
+                <fieldName>meetingsExtr_missing</fieldName>
+                <alias>fieldName_missing</alias>
+              </element>
+              <element>
+                <fieldName>meetingsExtr_decision</fieldName>
+                <alias>fieldName_decisions</alias>
+              </element>
+            </section>
+          </tab>
+          <tab type="contentTab" alias="Appendix" helpId="3086264" />
+          <tab type="relatedTab" helpId="">
+            <subtab alias="documents" helpId="3086286" select="true" />
+            <subtab alias="cases" helpId="3086620" visible="false" />
+            <subtab alias="files" helpId="3086269" />
+          </tab>
+          <tab type="discussionTab" />
+          <tab type="historyTab" />
+        </mediaType>
+
+        <!-- Настройка заседания -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.meetings+json;type=meeting.settings</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+          </header>
+          <tab type="detailsTab">
+            <section alias="section_main">
+              <element>
+                <fieldName>meetingSet_chairman</fieldName>
+                <alias>fieldName_chairman</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_secretary</fieldName>
+                <alias>fieldName_secretary</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_secretariat</fieldName>
+                <alias>fieldName_secretariat</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_eventTime</fieldName>
+                <alias>fieldName_eventTime</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_eventPlace</fieldName>
+                <alias>fieldName_eventPlace</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_isWithAffirmationStamp</fieldName>
+                <alias>fieldName_isWithAffirmationStamp</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_typeRP</fieldName>
+                <alias>fieldName_typeRP</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_rkktype</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_rkkRegplace</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+            </section>
+            <section alias="section_members">
+              <element>
+                <fieldName>meetingSet_permanent</fieldName>
+                <alias>fieldName_permanent</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_acl</fieldName>
+                <alias>fieldName_readers</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+      </previewComponent>
+
+      <!--Порядок следования параметров расширенного поиска -->
+      <extSearchComponent slotType="NULL">
+        <fieldOrder>
+          <!--Заголовок -->
+          <field>subject</field>
+          <!--Контрольный -->
+          <field>isControl</field>
+          <!--Исполнен -->
+          <field>isExecuted</field>
+          <!--Дата регистрации -->
+          <field>regDate</field>
+          <!--Автор резолюции -->
+          <field>resAuthor</field>
+          <!--Исполнитель резолюции -->
+          <field>resExecutor</field>
+          <!--Дата резолюции -->
+          <field>resDate</field>
+          <!--Срок резолюции -->
+          <field>resExDate</field>
+          <!--Текст резолюции -->
+          <field>resText</field>
+          <!--Искать везде -->
+          <field>searchOnEverywhere</field>
+          <!--Номер -->
+          <field>regFullNumber</field>
+          <!--Вид документа -->
+          <field>reqType</field>
+          <!--Зарегистрирован -->
+          <field>isRegistered</field>
+          <!--Исполнение контролируют -->
+          <field>controlPeople</field>
+          <!--Срок исполнения -->
+          <field>extControlDate</field>
+          <!--Место регистрации -->
+          <field>regPlace</field>
+          <!--Связанные документы -->
+          <field>linkedDocs</field>
+          <!--Искать в содержании -->
+          <field>searchInContent</field>
+          <!--Тематика -->
+          <field>theme</field>
+          <!--Подпись -->
+          <field>signer</field>
+          <!--Исполнитель -->
+          <field>executor</field>
+          <!--Адресат -->
+          <field>addressees</field>
+          <!--Автор отчета -->
+          <field>reportAuthor</field>
+          <!--Дата исполнения -->
+          <field>reportDate</field>
+          <!--Текст отчета -->
+          <field>reportText</field>
+        </fieldOrder>
+      </extSearchComponent>
+
+      <dialogMediaView slotType="NULL">
+
+        <!-- Шаблон резолюции -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.resolution.template+json</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+          </header>
+          <tab type="detailsTab" />
+          <tab type="accessTab" />
+        </mediaType>
+
+        <!--ВнД -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk+json;type=internal</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="signatureElement" />
+              <headerElement type="termElement" />
+              <headerElement type="controlButton" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" alias="DETAILS_TAB">
+            <section alias="section_main">
+              <element>
+                <fieldName>inner_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>inner_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>inner_rDate</fieldName>
+                <alias>fieldName_documentDate</alias>
+              </element>
+              <element>
+                <fieldName>inner_sign</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>inner_signOther</fieldName>
+                <alias>fieldName_advSigner</alias>
+              </element>
+              <element>
+                <fieldName>inner_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+              <element>
+                <fieldName>inner_addressee</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>inner_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+              <element>
+                <fieldName>inner_numPage</fieldName>
+                <alias>fieldName_numPage</alias>
+              </element>
+              <element>
+                <fieldName>inner_numCopy</fieldName>
+                <alias>fieldName_numCopy</alias>
+              </element>
+              <element>
+                <fieldName>inner_numAttach</fieldName>
+                <alias>fieldName_numAttach</alias>
+              </element>
+              <element>
+                <fieldName>inner_countNumAttach</fieldName>
+                <alias>fieldName_countNumAttach</alias>
+              </element>
+              <element>
+                <fieldName>inner_comment</fieldName>
+                <alias>fieldName_comment</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!--MeetingSettings -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.meetings+json;type=meeting.settings</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+          </header>
+          <tab type="detailsTab">
+            <section alias="section_main">
+              <element>
+                <fieldName>meetingSet_chairman</fieldName>
+                <alias>fieldName_chairman</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_secretary</fieldName>
+                <alias>fieldName_secretary</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_secretariat</fieldName>
+                <alias>fieldName_secretariat</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_eventTime</fieldName>
+                <alias>fieldName_eventTime</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_eventPlace</fieldName>
+                <alias>fieldName_eventPlace</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_isWithAffirmationStamp</fieldName>
+                <alias>fieldName_isWithAffirmationStamp</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_typeRP</fieldName>
+                <alias>fieldName_typeRP</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_rkktype</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_rkkRegplace</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+            </section>
+            <section alias="section_members">
+              <element>
+                <fieldName>meetingSet_permanent</fieldName>
+                <alias>fieldName_permanent</alias>
+              </element>
+              <element>
+                <fieldName>meetingSet_acl</fieldName>
+                <alias>fieldName_readers</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk.template+json;type=internal</contentType>
+          <header withControl="false" withExecution="false">
+            <row>
+              <headerElement type="mediaTypeElement" />
+            </row>
+            <row>
+              <headerElement type="accessElement" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="3086497">
+            <section alias="section_main">
+              <element>
+                <fieldName>innertmp_category</fieldName>
+                <alias>fieldName_category</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_type</fieldName>
+                <alias>fieldName_type</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_caption</fieldName>
+                <alias>fieldName_caption</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_addressee</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_sign</fieldName>
+                <alias>fieldName_signature</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_signOther</fieldName>
+                <alias>fieldName_advSigner</alias>
+              </element>
+              <element>
+                <fieldName>innertmp_executor</fieldName>
+                <alias>fieldName_executor</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>innertmp_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+        <!--RequestDocItem -->
+        <mediaType defaultSelectedTab="detailsTab">
+          <contentType>application/vnd.intertrust.cm.rkk+json;type=requests</contentType>
+          <header withControl="true" withExecution="true">
+            <row>
+              <headerElement type="mediaTypeElement" />
+              <headerElement type="documentTypeElement" />
+              <headerElement type="specialTagElement" />
+              <headerElement type="statusElement" />
+            </row>
+            <row>
+              <headerElement type="numberDateElement" />
+              <headerElement type="signatureElement" />
+              <headerElement type="termElement" />
+              <headerElement type="controlButton" />
+              <headerElement type="executionButton" />
+            </row>
+          </header>
+          <tab type="contentTab" helpId="3086264" />
+          <tab type="detailsTab" helpId="">
+            <section alias="section_main">
+              <element>
+                <fieldName>request_type</fieldName>
+                <alias>fieldName_view</alias>
+              </element>
+              <element>
+                <fieldName>request_requestType</fieldName>
+                <alias>fieldName_requestType</alias>
+              </element>
+              <element>
+                <fieldName>request_rDate</fieldName>
+                <alias>fieldName_regDate</alias>
+              </element>
+              <element>
+                <fieldName>request_correspondent</fieldName>
+                <alias>fieldName_correspondent</alias>
+              </element>
+              <element>
+                <fieldName>request_editCorrespondent</fieldName>
+                <alias>fieldName_correspondent</alias>
+              </element>
+              <element>
+                <fieldName>request_addressReadonly</fieldName>
+                <alias>fieldName_address</alias>
+              </element>
+              <element>
+                <fieldName>request_addressStreet</fieldName>
+                <alias>fieldName_addressStreet</alias>
+              </element>
+              <element>
+                <fieldName>request_addressHouse</fieldName>
+                <alias>fieldName_addressHouse</alias>
+              </element>
+              <element>
+                <fieldName>request_addressBuilding</fieldName>
+                <alias>fieldName_addressBuilding</alias>
+              </element>
+              <element>
+                <fieldName>request_addressOffice</fieldName>
+                <alias>fieldName_addressOffice</alias>
+              </element>
+              <element>
+                <fieldName>request_addressCity</fieldName>
+                <alias>fieldName_addressCity</alias>
+              </element>
+              <element>
+                <fieldName>request_addressLocality</fieldName>
+                <alias>fieldName_addressLocality</alias>
+              </element>
+              <element>
+                <fieldName>request_addressRegion</fieldName>
+                <alias>fieldName_addressRegion</alias>
+              </element>
+              <element>
+                <fieldName>request_benefitGroups</fieldName>
+                <alias>fieldName_benefitGroups</alias>
+              </element>
+              <element>
+                <fieldName>request_requestCause</fieldName>
+                <alias>fieldName_requestCause</alias>
+              </element>
+              <element>
+                <fieldName>request_addressee</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+            </section>
+            <section alias="section_execution">
+              <element>
+                <fieldName>request_reviewResult</fieldName>
+                <alias>fieldName_reviewResult</alias>
+              </element>
+              <element>
+                <fieldName>request_solution</fieldName>
+                <alias>fieldName_solution</alias>
+              </element>
+            </section>
+            <section alias="section_source">
+              <element>
+                <fieldName>request_sourceOrganization</fieldName>
+                <alias>fieldName_organization</alias>
+              </element>
+              <element>
+                <fieldName>request_sourceAddressees</fieldName>
+                <alias>fieldName_author</alias>
+              </element>
+              <element>
+                <fieldName>request_letterNumber</fieldName>
+                <alias>fieldName_letterNumber</alias>
+              </element>
+              <element>
+                <fieldName>request_letterDate</fieldName>
+                <alias>fieldName_letterDate</alias>
+              </element>
+              <element>
+                <fieldName>request_deadline</fieldName>
+                <alias>fieldName_deadline</alias>
+              </element>
+              <element>
+                <fieldName>request_instructions</fieldName>
+                <alias>fieldName_instructions</alias>
+              </element>
+            </section>
+            <section alias="section_redirection">
+              <element>
+                <fieldName>request_appointmentOrganization</fieldName>
+                <alias>fieldName_organization</alias>
+              </element>
+              <element>
+                <fieldName>request_appointmentAddressees</fieldName>
+                <alias>fieldName_addressee</alias>
+              </element>
+            </section>
+            <section alias="section_additional">
+              <element>
+                <fieldName>request_placeReg</fieldName>
+                <alias>fieldName_placeReg</alias>
+              </element>
+              <element>
+                <fieldName>request_numPage</fieldName>
+                <alias>fieldName_numPage</alias>
+              </element>
+              <element>
+                <fieldName>request_numCopy</fieldName>
+                <alias>fieldName_numCopy</alias>
+              </element>
+              <element>
+                <fieldName>request_numAttach</fieldName>
+                <alias>fieldName_numAttach</alias>
+              </element>
+              <element>
+                <fieldName>request_countNumAttach</fieldName>
+                <alias>fieldName_countNumAttach</alias>
+              </element>
+              <element>
+                <fieldName>request_comment</fieldName>
+                <alias>fieldName_comment</alias>
+              </element>
+            </section>
+          </tab>
+        </mediaType>
+
+      </dialogMediaView>
+
+      <!--Настройки отображения панели уведомлений -->
+      <noticePanelComponent slotType="NULL">
+        <noticePanelParameters>
+          <!--Период времени в секундах, через которое будет отправляться запрос на получение новых уведомлений -->
+          <timeout>60</timeout>
+          <!--false - панель уведомлений не отображается, true - панель уведомлений отображается -->
+          <visible>true</visible>
+        </noticePanelParameters>
+      </noticePanelComponent>
+
+    </components>
+
+  </user>
+
+</config>

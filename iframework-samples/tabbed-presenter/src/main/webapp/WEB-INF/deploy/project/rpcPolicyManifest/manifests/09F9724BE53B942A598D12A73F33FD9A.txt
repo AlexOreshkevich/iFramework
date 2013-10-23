@@ -1,0 +1,2 @@
+serviceClass: pro.redsoft.iframework.client.application.service.ConfigService
+path: D6B536128192069C46DB11D40562F945.gwt.rpc
