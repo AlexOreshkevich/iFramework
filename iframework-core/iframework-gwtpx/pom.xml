@@ -7,7 +7,19 @@
   </parent>
   <artifactId>iframework-gwtpx</artifactId>
   <name>Extended GWTP</name>
-
+  
+  <properties>
+    <gwt.gen>${project.build.directory}/generated</gwt.gen>
+  </properties>
+  
+  <dependencies>
+   <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <version>${gwt.version}</version>
+    </dependency>
+  </dependencies>
+  
   <build>
 
     <resources>

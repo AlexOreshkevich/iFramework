@@ -8,6 +8,13 @@
   <!-- Other module inherits -->
   <inherits name='com.gwtplatform.mvp.Mvp' />
 
+  <!-- Default warning for non-static, final fields enabled -->
+  <set-property name="gwt.suppressNonStaticFinalFieldWarnings" value="false" />
+
+  <generate-with class="pro.redsoft.iframework.client.generate.ModelGenerator">
+    <when-type-assignable class="pro.redsoft.iframework.client.generate.Model" />
+  </generate-with>
+
   <source path='client' />
   <source path='shared' />
 </module>

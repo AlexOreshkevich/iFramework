@@ -128,7 +128,7 @@ public abstract class AbstractConfigServlet extends RemoteServiceServlet impleme
       // common errors (for using external files)
       catch (Exception e) {
         Throwable caught = e.getCause() == null ? e : e.getCause();
-        logMessage.append("\nОшибка при работе с файлом конфигурации: " + caught.getMessage());
+        logMessage.append("\nError with configuration files: " + caught.getMessage());
         return getClientSettings(); // logMessage.length > 0; so internal config should be used
       }
     }
