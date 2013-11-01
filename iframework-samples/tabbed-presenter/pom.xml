@@ -37,6 +37,9 @@
       </resource>
       <resource>
         <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
       </resource>
       <resource>
         <directory>target/generated-sources/xjc</directory>

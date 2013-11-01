@@ -17,8 +17,6 @@ package pro.redsoft.iframework.client.application;
 
 import pro.redsoft.iframework.client.application.service.ConfigService;
 import pro.redsoft.iframework.client.application.service.ConfigServiceAsync;
-import pro.redsoft.iframework.client.generate.Model;
-import pro.redsoft.iframework.client.generate.NumberModel;
 import pro.redsoft.iframework.shared.config.Config;
 
 import com.google.gwt.core.client.GWT;
@@ -69,9 +67,6 @@ public class ApplicationPresenter extends
   @Override
   protected void onReveal() {
     super.onReveal();
-
-    Model numberModel = GWT.create(NumberModel.class);
-    Window.alert(numberModel.getType().getName());
 
     configService.getClientSettings(new AsyncCallback<Config>() {
 

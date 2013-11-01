@@ -11,7 +11,7 @@
 
   <modules>
     <module>iframework-gwtpx</module>
-      </modules>
+  </modules>
 
   <build>
     <plugins>
@@ -39,12 +39,12 @@
 
   <!-- Dependencies that are inherited by sub-modules -->
   <dependencies>
-    
+
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>iframework-build-tools</artifactId>
     </dependency>
-    
+
     <!-- Google Web Toolkit -->
     <dependency>
       <groupId>com.google.gwt</groupId>
@@ -81,6 +81,23 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>name.pehl</groupId>
+      <artifactId>piriti-user</artifactId>
+      <version>${piriti.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>name.pehl</groupId>
+      <artifactId>piriti-dev</artifactId>
+      <version>${piriti.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>name.pehl</groupId>
+      <artifactId>totoe</artifactId>
+      <version>${totoe.version}</version>
     </dependency>
   </dependencies>
 

@@ -27,7 +27,8 @@ import com.gwtplatform.mvp.client.gin.DefaultModule;
 /**
  * ClientModule. <br/>
  * See more on setting up the PlaceManager on <a
- * href="// See more on: https://github.com/ArcBees/GWTP/wiki/PlaceManager">DefaultModule's > DefaultPlaceManager</a>
+ * href="// See more on: https://github.com/ArcBees/GWTP/wiki/PlaceManager">DefaultModule's >
+ * DefaultPlaceManager</a>
  * 
  * @author Alex N. Oreshkevich
  */

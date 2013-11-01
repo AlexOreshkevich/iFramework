@@ -13,13 +13,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.generate;
+package pro.redsoft.iframework.client.rebind;
+
+import javax.annotation.Generated;
+
+import pro.redsoft.iframework.client.model.JsonData;
+
+import name.pehl.piriti.json.client.JsonReader;
+import name.pehl.piriti.json.client.JsonWriter;
 
 /**
- * NumberModel.
+ * JsonDataPrototype.
  * 
  * @author Alex N. Oreshkevich
  */
-@ModelType(Number.class)
-public abstract class NumberModel implements Model {
+@Generated("JsonDataGenerator")
+public abstract class JsonDataPrototype implements JsonData {
+
+  protected JsonReader<?> jsonReader;
+  protected JsonWriter<?> jsonWriter;
+
+  @Override
+  public final JsonReader<?> getReader() {
+    return jsonReader;
+  }
+
+  @Override
+  public final JsonWriter<?> getWriter() {
+    return jsonWriter;
+  }
 }

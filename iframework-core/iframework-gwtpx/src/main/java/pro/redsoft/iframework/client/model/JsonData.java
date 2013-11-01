@@ -13,14 +13,21 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.generate;
+package pro.redsoft.iframework.client.model;
+
+import name.pehl.piriti.json.client.JsonReader;
+import name.pehl.piriti.json.client.JsonWriter;
 
 /**
- * Model.
+ * JsonData.
  * 
  * @author Alex N. Oreshkevich
  */
-public interface Model {
+public interface JsonData {
 
-  public Class<? extends Object> getType();
+  JsonReader<?> getReader();
+
+  JsonWriter<?> getWriter();
+
+  Class<? extends Object> getType();
 }

@@ -13,9 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.generate;
+package pro.redsoft.iframework.client.rebind;
 
 import java.io.PrintWriter;
+
+import pro.redsoft.iframework.client.model.Model;
 
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -56,7 +58,11 @@ public class ModelGenerator extends Generator {
     ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(
         packageName, simpleName);
 
+    // imports
     composerFactory.addImport(Model.class.getCanonicalName());
+    composerFactory.addImport(modelType.getCanonicalName());
+
+    // interfaces
     composerFactory.addImplementedInterface(Model.class.getSimpleName());
 
     PrintWriter printWriter = context.tryCreate(logger, packageName, simpleName);

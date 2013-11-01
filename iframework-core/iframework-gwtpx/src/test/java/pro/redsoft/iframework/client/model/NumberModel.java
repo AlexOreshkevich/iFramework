@@ -13,21 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.client.generate;
+package pro.redsoft.iframework.client.model;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import pro.redsoft.iframework.client.rebind.ModelType;
 
 /**
- * ModelType.
+ * NumberModel.
  * 
  * @author Alex N. Oreshkevich
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ModelType {
-
-  Class<? extends Object> value();
+@ModelType(Number.class)
+public interface NumberModel extends Model {
 }

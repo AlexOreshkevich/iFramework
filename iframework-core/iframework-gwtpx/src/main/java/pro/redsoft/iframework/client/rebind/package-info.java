@@ -19,5 +19,5 @@
  * @author Alex N. Oreshkevich
  *
  */
-package pro.redsoft.iframework.client.generate;
+package pro.redsoft.iframework.client.rebind;
 
