@@ -15,11 +15,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>pro.redsoft.iframework</groupId>
-      <artifactId>iframework-jaxbx</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>

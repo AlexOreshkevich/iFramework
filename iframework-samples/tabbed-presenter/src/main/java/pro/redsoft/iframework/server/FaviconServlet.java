@@ -16,89 +16,32 @@ import javax.servlet.http.HttpServletResponse;
 
 import pro.redsoft.iframework.shared.config.Config;
 
-/**
- * Сервлет для подстановки иконки приложения из конфига.
- * 
- * @author Nick Gritsenko
- * @since 4.1
- */
 public class FaviconServlet extends HttpServlet {
-
-  /**
-   * 
-   */
-  private static final long   serialVersionUID = 618674144221468248L;
 
   /**
    * The content-type of the images to return.
    */
   private static final String CONTENT_TYPE     = "image/x-icon";
 
-  private static Logger       logger           = Logger.getLogger(FaviconServlet.class
-                                                   .getName());
+  private static Logger       logger           = Logger.getLogger(FaviconServlet.class.getName());
+
+  private static final long   serialVersionUID = 618674144221468248L;
 
   private byte[]              icon;
 
   @Override
-  public void init() throws ServletException {
-    try {
-      Config config = new ConfigServiceImpl().getClientSettings();
-      if (config.getSystem().getFaviconPath() != null
-          && config.getSystem().getFaviconPath().trim().length() > 0) {
-        URL resource = getServletContext().getResource(config.getSystem().getFaviconPath());
-        this.icon = getImage(resource);
-        // если иконки нет пробуем получить стандартную иконку
-        if (this.icon == null) {
-          this.icon = getImage(getServletContext().getResource("/favicon.ico"));
-        }
-      }
-    }
-    catch (Exception e) {
-      logger.log(Level.WARNING, "Cannot find any icon from url! " + e);
-    }
-  }
-
-  @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    // если есть иконка возвращаем в ответе, если нет обрабатываем стандартно
-    if (icon != null) {
-      writeBytesToStream(icon, response);
-    }
-    else {
-      super.doGet(request, response);
-    }
-  }
 
-  /**
-   * Пишет массив байт в исходящий поток.
-   * 
-   * @param byte - массив байт для записи
-   * @param response
-   *          - ответ сервера куда пишем байты
-   */
-  private void writeBytesToStream(byte[] bytes, HttpServletResponse response) {
-    response.setContentType(CONTENT_TYPE);
+    if (icon == null) {
+      init((Config) getServletContext().getAttribute(AbstractConfigServlet.CFG_PROP_NAME));
+    }
 
-    // Send image
-    OutputStream sos = null;
-    try {
-      sos = response.getOutputStream();
-      sos.write(bytes);
+    if (icon == null) {
+      return;
     }
-    catch (IOException e) {
-      logger.log(Level.SEVERE, "Cannot write to output stream for favicon! " + e);
-    }
-    finally {
-      if (sos != null) {
-        try {
-          sos.close();
-        }
-        catch (IOException e) {
-          logger.log(Level.SEVERE, "Cannot close output stream for favicon! " + e);
-        }
-      }
-    }
+
+    writeBytesToStream(icon, response);
   }
 
   /**
@@ -137,6 +80,51 @@ public class FaviconServlet extends HttpServlet {
       logger.log(Level.SEVERE, "Cannot write byte stream for favicon! " + e);
     }
     return result;
+  }
+
+  private void init(Config config) {
+    try {
+      if (config.getSystem().getFaviconPath() != null
+          && config.getSystem().getFaviconPath().trim().length() > 0) {
+        URL resource = getServletContext().getResource(config.getSystem().getFaviconPath());
+        this.icon = getImage(resource);
+      }
+    }
+    catch (Exception e) {
+      logger.log(Level.WARNING, "Cannot find any icon from url! " + e);
+    }
+  }
+
+  /**
+   * Пишет массив байт в исходящий поток.
+   * 
+   * @param byte - массив байт для записи
+   * @param response
+   *          - ответ сервера куда пишем байты
+   */
+  private void writeBytesToStream(byte[] bytes, HttpServletResponse response) {
+
+    response.setContentType(CONTENT_TYPE);
+
+    // Send image
+    OutputStream sos = null;
+    try {
+      sos = response.getOutputStream();
+      sos.write(bytes);
+    }
+    catch (IOException e) {
+      logger.log(Level.SEVERE, "Cannot write to output stream for favicon! " + e);
+    }
+    finally {
+      if (sos != null) {
+        try {
+          sos.close();
+        }
+        catch (IOException e) {
+          logger.log(Level.SEVERE, "Cannot close output stream for favicon! " + e);
+        }
+      }
+    }
   }
 
 }

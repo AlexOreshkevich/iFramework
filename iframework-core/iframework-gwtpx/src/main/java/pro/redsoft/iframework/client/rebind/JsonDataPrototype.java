@@ -15,19 +15,15 @@
  */
 package pro.redsoft.iframework.client.rebind;
 
-import javax.annotation.Generated;
-
-import pro.redsoft.iframework.client.model.JsonData;
-
 import name.pehl.piriti.json.client.JsonReader;
 import name.pehl.piriti.json.client.JsonWriter;
+import pro.redsoft.iframework.client.model.JsonData;
 
 /**
  * JsonDataPrototype.
  * 
  * @author Alex N. Oreshkevich
  */
-@Generated("JsonDataGenerator")
 public abstract class JsonDataPrototype implements JsonData {
 
   protected JsonReader<?> jsonReader;

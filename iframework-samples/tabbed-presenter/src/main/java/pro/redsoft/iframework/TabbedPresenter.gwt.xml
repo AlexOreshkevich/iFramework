@@ -3,8 +3,7 @@
 
   <inherits name='com.google.gwt.user.User' />
   <inherits name='com.google.gwt.inject.Inject' />
-
-  <inherits name="name.pehl.piriti.json.JSON" />
+  <inherits name="com.google.gwt.uibinder.UiBinder" />
 
   <!-- Default css -->
   <inherits name='com.google.gwt.user.theme.standard.Standard' />
@@ -12,7 +11,7 @@
   <!-- Other module inherits -->
   <inherits name='pro.redsoft.iframework.Gwtpx' />
   <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
- 
+
   <set-property name="user.agent" value="gecko1_8" />
   <!-- <set-property name="user.agent" value="safari, gecko1_8" /> -->
 

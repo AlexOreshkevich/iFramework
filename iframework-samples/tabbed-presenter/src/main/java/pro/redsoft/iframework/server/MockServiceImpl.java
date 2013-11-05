@@ -17,18 +17,41 @@ package pro.redsoft.iframework.server;
 
 import java.io.File;
 
+import javax.servlet.ServletException;
+
+import pro.redsoft.iframework.client.application.service.ConfigService;
+import pro.redsoft.iframework.jaxbx.AbstractJAXBParser;
+import pro.redsoft.iframework.shared.SystemSettingsParser;
+import pro.redsoft.iframework.shared.config.Config;
+import pro.redsoft.iframework.shared.config.SystemSettings;
+import pro.redsoft.iframework.shared.config.UserSettings;
+
 /**
  * MockServiceImpl.
  * 
  * @since 4.3
  * @author Alex N. Oreshkevich
  */
-public class MockServiceImpl extends AbstractConfigServlet {
+public class MockServiceImpl extends AbstractConfigServlet<Config> implements ConfigService {
 
-  private static final long   serialVersionUID = -1287811023799214221L;
+  private static final long                serialVersionUID = -1287811023799214221L;
 
-  private final static String cfgPath          = System.getProperty("user.dir")
-                                                   + "/src/main/webapp/WEB-INF/";
+  private final static String              cfgPath          = System.getProperty("user.dir")
+                                                                + "/src/main/webapp/WEB-INF/";
+
+  private final AbstractJAXBParser<Config> parser           = new SystemSettingsParser(Config.class);
+
+  StringBuilder                            log              = new StringBuilder();
+
+  @Override
+  public void init() throws ServletException {
+    log.append("123456");
+  }
+
+  @Override
+  public StringBuilder getLogMessage() {
+    return log;
+  }
 
   @Override
   public String getConfigDirProperty() {
@@ -58,5 +81,24 @@ public class MockServiceImpl extends AbstractConfigServlet {
   @Override
   public File getInternalSystemConfig() {
     return new File(cfgPath + "config-system.xml");
+  }
+
+  @Override
+  protected AbstractJAXBParser<Config> getParser() {
+    return parser;
+  }
+
+  @Override
+  public Config getClientSettings() throws RuntimeException {
+    return loadSettings();
+  }
+
+  @Override
+  protected Config mergeResults(Object o1, Object o2, String log) {
+    Config result = new Config();
+    result.setSystem((SystemSettings) o1);
+    result.setUser((UserSettings) o2);
+    result.setLogMessage(log);
+    return result;
   }
 }

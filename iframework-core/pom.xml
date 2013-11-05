@@ -100,6 +100,13 @@
       <artifactId>totoe</artifactId>
       <version>${totoe.version}</version>
     </dependency>
+    
+    <dependency>
+      <groupId>pro.redsoft.iframework</groupId>
+      <artifactId>iframework-jaxbx</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
   </dependencies>
 
 </project> 

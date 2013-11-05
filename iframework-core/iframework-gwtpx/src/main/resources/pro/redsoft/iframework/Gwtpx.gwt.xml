@@ -8,8 +8,8 @@
   <!-- $LastChangedBy: harald.pehl $LastChangedRevision: 138 $ -->
   <inherits name="com.google.gwt.junit.JUnit" />
   <inherits name="com.google.gwt.logging.Logging" />
-  <inherits name="name.pehl.piriti.json.JSON" />
-  <inherits name="name.pehl.totoe.json.JSON" />
+<!--   <inherits name="name.pehl.piriti.json.JSON" /> -->
+<!--   <inherits name="name.pehl.totoe.json.JSON" /> -->
 
   <!-- Other module inherits -->
   <inherits name='com.gwtplatform.mvp.Mvp' />

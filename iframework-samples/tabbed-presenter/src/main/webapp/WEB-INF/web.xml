@@ -14,6 +14,7 @@
   <servlet>
     <servlet-name>configServiceImpl</servlet-name>
     <servlet-class>pro.redsoft.iframework.server.ConfigServiceImpl</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
 
   <servlet-mapping>

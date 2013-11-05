@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import pro.redsoft.iframework.client.application.service.ConfigService;
 import pro.redsoft.iframework.server.AbstractConfigServlet;
 import pro.redsoft.iframework.server.MockServiceImpl;
 import pro.redsoft.iframework.shared.config.Config;
@@ -63,7 +64,7 @@ public class ConfigServletTest {
   }
 
   private final void doClientSettingsTest(AbstractConfigServlet servlet) throws Exception {
-    Config result = servlet.getClientSettings();
+    Config result = ((ConfigService) servlet).getClientSettings();
     Assert.assertNotNull(result.getLogMessage());
     Assert.assertEquals("INTERNAL_SYSTEM_CFG", result.getSystem().getEntryPoint());
     Assert.assertEquals("INTERNAL_USER_CFG", result.getUser().getMargin());

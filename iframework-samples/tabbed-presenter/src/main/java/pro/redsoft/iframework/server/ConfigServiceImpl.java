@@ -3,15 +3,25 @@ package pro.redsoft.iframework.server;
 import java.io.File;
 import java.util.Enumeration;
 
+import pro.redsoft.iframework.client.application.service.ConfigService;
+import pro.redsoft.iframework.jaxbx.AbstractJAXBParser;
+import pro.redsoft.iframework.shared.SystemSettingsParser;
+import pro.redsoft.iframework.shared.config.Config;
+import pro.redsoft.iframework.shared.config.SystemSettings;
+import pro.redsoft.iframework.shared.config.UserSettings;
+
 /**
- * Сервис для настройки серверных параметров приложения.
+ * Service for working with configuration sources: *.xml and *.properties files. <br/>
+ * Implementation of {@link ConfigService}.
  * 
  * @since 4.1
  * @author Alex N. Oreshkevich
  */
-public class ConfigServiceImpl extends AbstractConfigServlet {
+public class ConfigServiceImpl extends AbstractConfigServlet<Config> implements ConfigService {
 
-  private static final long serialVersionUID = 5525521520584334736L;
+  private static final long                serialVersionUID = 5525521520584334736L;
+
+  private final AbstractJAXBParser<Config> parser           = new SystemSettingsParser(Config.class);
 
   @Override
   protected String getConfigDirProperty() { // never null
@@ -40,17 +50,53 @@ public class ConfigServiceImpl extends AbstractConfigServlet {
   }
 
   @Override
-  protected File getSchemaRealPath() {
-    return new File(getServletContext().getRealPath("/WEB-INF/config.xsd"));
+  protected File getSchemaRealPath() throws Exception {
+    return getFileAsLazyDeployed("/WEB-INF/config.xsd", appendFileSeparator(getExtConfigDirPath())
+        + "config.xsd");
   }
 
   @Override
-  protected File getInternalUserConfig() {
-    return new File(getServletContext().getRealPath("/WEB-INF/config-user.xml"));
+  protected File getInternalUserConfig() throws Exception {
+    return getFileAsLazyDeployed("/WEB-INF/config-user.xml",
+        appendFileSeparator(getExtConfigDirPath()) + "config-user.xml");
   }
 
   @Override
-  protected File getInternalSystemConfig() {
-    return new File(getServletContext().getRealPath("/WEB-INF/config-system.xml"));
+  protected File getInternalSystemConfig() throws Exception {
+    return getFileAsLazyDeployed("/WEB-INF/config-system.xml",
+        appendFileSeparator(getExtConfigDirPath()) + "config-system.xml");
+  }
+
+  private File getFileAsLazyDeployed(String pathSrc, String pathFS) {
+    File file = null;
+    try {
+      file = new File(getServletContext().getRealPath(pathSrc));
+      if (!file.exists()) {
+        throw new UnsupportedOperationException("!exists");
+      }
+    }
+    catch (Exception e) {
+      file = new File(pathFS);
+    }
+    return file;
+  }
+
+  @Override
+  protected AbstractJAXBParser<Config> getParser() {
+    return parser;
+  }
+
+  @Override
+  protected Config mergeResults(Object o1, Object o2, String log) {
+    Config result = new Config();
+    result.setSystem((SystemSettings) o1);
+    result.setUser((UserSettings) o2);
+    result.setLogMessage(log);
+    return result;
+  }
+
+  @Override
+  public Config getClientSettings() throws RuntimeException {
+    return loadSettings();
   }
 }

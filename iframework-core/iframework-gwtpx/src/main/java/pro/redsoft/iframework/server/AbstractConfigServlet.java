@@ -19,43 +19,56 @@ import java.io.File;
 
 import javax.servlet.ServletException;
 
-import pro.redsoft.iframework.client.application.service.ConfigService;
 import pro.redsoft.iframework.jaxbx.AbstractJAXBParser;
 import pro.redsoft.iframework.jaxbx.FileSystemUtils;
-import pro.redsoft.iframework.shared.SystemSettingsParser;
-import pro.redsoft.iframework.shared.config.Config;
-import pro.redsoft.iframework.shared.config.SystemSettings;
-import pro.redsoft.iframework.shared.config.UserSettings;
+import pro.redsoft.iframework.jaxbx.config.Setting;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
  * AbstractConfigServlet.
  * 
- * @since 4.3
  * @author Alex N. Oreshkevich
+ * @param <T>
+ *          abstract setting
  */
-public abstract class AbstractConfigServlet extends RemoteServiceServlet implements ConfigService {
+public abstract class AbstractConfigServlet<T extends Setting> extends RemoteServiceServlet {
 
-  private static final long     serialVersionUID = -7808411015210521860L;
+  public static String          CFG_PROP_NAME     = "config";
 
-  protected final static String FSEP             = System.getProperty("file.separator");
+  protected static final String FSEP              = System.getProperty("file.separator");
 
-  protected abstract String getInitParameters();
+  private static final long     serialVersionUID  = -7808411015210521860L;
 
-  protected abstract String getConfigDirProperty();
-
-  protected abstract String getExtConfigDirPath();
-
-  protected abstract File getSchemaRealPath();
-
-  protected abstract File getInternalUserConfig();
-
-  protected abstract File getInternalSystemConfig();
+  protected final StringBuilder contextParameters = new StringBuilder();
 
   protected final StringBuilder logMessage        = new StringBuilder();
 
-  protected final StringBuilder contextParameters = new StringBuilder();
+  protected String appendFileSeparator(String srcPath) {
+    String correctedPath = srcPath;
+    if (srcPath != null && !srcPath.endsWith(FSEP)) {
+      correctedPath += FSEP; // append file.separator ('/' or '\') if missing
+    }
+    return correctedPath;
+  }
+
+  protected abstract String getConfigDirProperty();
+
+  public StringBuilder getContextParameters() {
+    return contextParameters;
+  }
+
+  protected abstract String getExtConfigDirPath();
+
+  protected abstract String getInitParameters();
+
+  protected abstract File getInternalSystemConfig() throws Exception;
+
+  protected abstract File getInternalUserConfig() throws Exception;
+
+  protected abstract AbstractJAXBParser<T> getParser();
+
+  protected abstract File getSchemaRealPath() throws Exception;
 
   @Override
   public void init() throws ServletException {
@@ -76,43 +89,33 @@ public abstract class AbstractConfigServlet extends RemoteServiceServlet impleme
 
     // save to log message external configuration path
     contextParameters.append(extConfigPath);
+
+    getServletContext().setAttribute(CFG_PROP_NAME, loadSettings());
   }
 
-  protected final Config readConfig(File cfgSrc) throws Exception {
-
-    // parser init
-    AbstractJAXBParser<Config> parser = new SystemSettingsParser(Config.class);
-
-    // start unmarshalling
-    return parser.unmarshall(FileSystemUtils.readFile(cfgSrc),
-        parser.getSchema(getSchemaRealPath()), false);
-  }
-
-  @Override
-  public Config getClientSettings() throws RuntimeException {
+  protected T loadSettings() {
 
     // result based on two configuration source
-    SystemSettings systemSettings = null;
-    UserSettings userSettings = null;
+    Object systemSettings = null;
+    Object userSettings = null;
 
     // if external config path is invalid
     if (logMessage.length() > 0) {
+
       try {
         systemSettings = readConfig(getInternalSystemConfig()).getSystem();
         userSettings = readConfig(getInternalUserConfig()).getUser();
       }
       catch (Exception e) {
-        throw new RuntimeException(e);
+        throw new RuntimeException("FATAL: Failed to load default config. ",
+            e.getCause() != null ? e.getCause() : e);
       }
     }
     else { // using external configuration path
       try {
 
         // load external path
-        String path = getExtConfigDirPath();
-        if (!path.endsWith(FSEP)) {
-          path += FSEP; // append file.separator ('/' or '\') if missing
-        }
+        String path = appendFileSeparator(getExtConfigDirPath());
 
         // load system settings
         systemSettings = readConfig(new File(path + "config-system.xml")).getSystem();
@@ -128,8 +131,9 @@ public abstract class AbstractConfigServlet extends RemoteServiceServlet impleme
       // common errors (for using external files)
       catch (Exception e) {
         Throwable caught = e.getCause() == null ? e : e.getCause();
-        logMessage.append("\nОшибка при работе с файлом конфигурации: " + caught.getMessage());
-        return getClientSettings(); // logMessage.length > 0; so internal config should be used
+        logMessage
+            .append("\nError while working with configuration source: " + caught.getMessage());
+        return loadSettings(); // logMessage.length > 0; so internal config should be used
       }
     }
 
@@ -140,19 +144,17 @@ public abstract class AbstractConfigServlet extends RemoteServiceServlet impleme
     }
 
     // build result config (merge results)
-    Config result = new Config();
-    result.setSystem(systemSettings);
-    result.setUser(userSettings);
-    result.setLogMessage(log);
+    return mergeResults(systemSettings, userSettings, logMessage.toString());
+  }
 
-    return result;
+  protected abstract T mergeResults(Object o1, Object o2, String log);
+
+  protected final T readConfig(File cfgSrc) throws Exception {
+    return getParser().unmarshall(FileSystemUtils.readFile(cfgSrc),
+        getParser().getSchema(getSchemaRealPath()), false);
   }
 
   public StringBuilder getLogMessage() {
     return logMessage;
-  }
-
-  public StringBuilder getContextParameters() {
-    return contextParameters;
   }
 }

@@ -17,11 +17,8 @@ package pro.redsoft.iframework.client.application;
 
 import javax.inject.Inject;
 
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 /**
@@ -31,18 +28,11 @@ import com.gwtplatform.mvp.client.ViewImpl;
  */
 public class ApplicationView extends ViewImpl implements ApplicationPresenter.MyView {
 
-  /**
-   * Binder.
-   */
-  public interface Binder extends UiBinder<Widget, ApplicationView> {
-  }
-
-  @UiField
-  FlowPanel main;
+  FlowPanel main = new FlowPanel();
 
   @Inject
-  public ApplicationView(Binder uiBinder) {
-    initWidget(uiBinder.createAndBindUi(this));
+  public ApplicationView() {
+    initWidget(main);
   }
 
   @Override

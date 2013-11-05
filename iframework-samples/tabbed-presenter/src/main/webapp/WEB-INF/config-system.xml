@@ -12,7 +12,7 @@
     <!-- Время хранения информации об авторизации пользователя (часы) -->
     <cookiesExpires>1</cookiesExpires>
 
-    <faviconPath></faviconPath>
+    <faviconPath>/static/favicon.ico</faviconPath>
 
     <!-- Настройки логотипа -->
     <logoImagePath>http://dev.inttrust.ru/logo/CompanyMedia-small.gif</logoImagePath>
