@@ -13,17 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package pro.redsoft.iframework.jaxbx.config;
+package pro.redsoft.iframework.shared;
 
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * Setting.
  * 
  * @author Alex N. Oreshkevich
  */
-@SuppressWarnings("serial")
-public abstract class Setting implements Serializable {
+public abstract class Setting implements IsSerializable {
 
   public Object getSystem() {
     return null;

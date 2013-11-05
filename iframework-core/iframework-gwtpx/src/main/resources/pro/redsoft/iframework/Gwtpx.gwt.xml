@@ -5,25 +5,11 @@
   <inherits name='com.google.gwt.user.User' />
   <inherits name='com.google.gwt.inject.Inject' />
 
-  <!-- $LastChangedBy: harald.pehl $LastChangedRevision: 138 $ -->
   <inherits name="com.google.gwt.junit.JUnit" />
   <inherits name="com.google.gwt.logging.Logging" />
-<!--   <inherits name="name.pehl.piriti.json.JSON" /> -->
-<!--   <inherits name="name.pehl.totoe.json.JSON" /> -->
 
   <!-- Other module inherits -->
   <inherits name='com.gwtplatform.mvp.Mvp' />
-
-  <!-- Default warning for non-static, final fields enabled -->
-  <!-- <set-property name="gwt.suppressNonStaticFinalFieldWarnings" value="false" /> -->
-
-  <!-- <generate-with class="pro.redsoft.iframework.client.rebind.JsonDataGenerator"> -->
-  <!-- <when-type-assignable class="pro.redsoft.iframework.client.model.JsonData" /> -->
-  <!-- </generate-with> -->
-
-  <!-- <generate-with class="pro.redsoft.iframework.client.rebind.ModelGenerator"> -->
-  <!-- <when-type-assignable class="pro.redsoft.iframework.client.model.Model" /> -->
-  <!-- </generate-with> -->
 
   <source path='client' />
   <source path='shared' />

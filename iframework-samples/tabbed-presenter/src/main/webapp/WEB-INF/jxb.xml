@@ -6,7 +6,7 @@
 
   <jxb:bindings schemaLocation="config.xsd">
     <jxb:globalBindings typesafeEnumMaxMembers="2000">
-      <xjc:superClass name="pro.redsoft.iframework.jaxbx.config.Setting" />
+      <xjc:superClass name="pro.redsoft.iframework.shared.Setting" />
     </jxb:globalBindings>
 
     <!-- here we use an XPATH expression to tell xjc about which part of the XML schema we want to change -->

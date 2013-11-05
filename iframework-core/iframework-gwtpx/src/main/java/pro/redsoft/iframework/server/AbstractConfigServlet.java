@@ -21,7 +21,7 @@ import javax.servlet.ServletException;
 
 import pro.redsoft.iframework.jaxbx.AbstractJAXBParser;
 import pro.redsoft.iframework.jaxbx.FileSystemUtils;
-import pro.redsoft.iframework.jaxbx.config.Setting;
+import pro.redsoft.iframework.shared.Setting;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 

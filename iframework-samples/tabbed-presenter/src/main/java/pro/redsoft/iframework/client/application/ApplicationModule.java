@@ -36,8 +36,6 @@ public class ApplicationModule extends AbstractPresenterModule {
 
     install(new ViewModule());
 
-    // bind(MockBeanJsonData.class).asEagerSingleton();
-
     bindPresenter(ApplicationPresenter.class, ApplicationPresenter.MyView.class,
         ApplicationView.class, ApplicationPresenter.MyProxy.class);
 
