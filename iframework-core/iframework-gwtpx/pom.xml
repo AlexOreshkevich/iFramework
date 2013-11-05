@@ -3,7 +3,7 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iframework-core</artifactId>
-    <version>0.2.10</version>
+    <version>0.2.10b</version>
   </parent>
   <artifactId>iframework-gwtpx</artifactId>
   <name>Extended GWTP</name>
@@ -13,11 +13,11 @@
   </properties>
   
   <dependencies>
-   <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-dev</artifactId>
-      <version>${gwt.version}</version>
-    </dependency>
+<!--    <dependency> -->
+<!--       <groupId>com.google.gwt</groupId> -->
+<!--       <artifactId>gwt-dev</artifactId> -->
+<!--       <version>${gwt.version}</version> -->
+<!--     </dependency> -->
   </dependencies>
   
   <build>

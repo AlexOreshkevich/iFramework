@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>TabbedPresenter</display-name>
   <welcome-file-list>
     <welcome-file>TabbedPresenter.html</welcome-file>
   </welcome-file-list>
-  
-   <context-param>
+
+  <context-param>
     <param-name>configDirPropertyName</param-name>
     <param-value>ru.intertrust.cmj.configFileLocation.4.3</param-value>
   </context-param>
-  
-  <context-param>
-    <param-name>ru.intertrust.cmj.configFileLocation.4.3</param-name>
-    <param-value>/Users/neo/java/jworkspace/iFramework/iframework-samples/tabbed-presenter/xml</param-value>
-  </context-param>
-  
-  
+
   <servlet>
     <servlet-name>configServiceImpl</servlet-name>
     <servlet-class>pro.redsoft.iframework.server.ConfigServiceImpl</servlet-class>
@@ -25,4 +20,15 @@
     <servlet-name>configServiceImpl</servlet-name>
     <url-pattern>/project/configServiceImpl</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>faviconServlet</servlet-name>
+    <servlet-class>pro.redsoft.iframework.server.FaviconServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>faviconServlet</servlet-name>
+    <url-pattern>/favicon.ico</url-pattern>
+  </servlet-mapping>
+
 </web-app>

@@ -3,7 +3,7 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iFramework</artifactId>
-    <version>0.2.10</version>
+    <version>0.2.10b</version>
   </parent>
   <artifactId>iframework-core</artifactId>
   <packaging>pom</packaging>
@@ -88,11 +88,12 @@
       <artifactId>piriti-user</artifactId>
       <version>${piriti.version}</version>
     </dependency>
-    <dependency>
-      <groupId>name.pehl</groupId>
-      <artifactId>piriti-dev</artifactId>
-      <version>${piriti.version}</version>
-    </dependency>
+    
+<!--     <dependency> -->
+<!--       <groupId>name.pehl</groupId> -->
+<!--       <artifactId>piriti-dev</artifactId> -->
+<!--       <version>${piriti.version}</version> -->
+<!--     </dependency> -->
 
     <dependency>
       <groupId>name.pehl</groupId>

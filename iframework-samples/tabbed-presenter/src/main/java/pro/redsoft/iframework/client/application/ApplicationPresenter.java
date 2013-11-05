@@ -21,7 +21,6 @@ import pro.redsoft.iframework.shared.config.Config;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.inject.Inject;
@@ -73,10 +72,10 @@ public class ApplicationPresenter extends
       @Override
       public void onSuccess(Config result) {
 
-        if (result.getLogMessage() != null) {
-          Window.alert("Ошибка при работе с внешним файлом конфигурации.\n\n"
-              + result.getLogMessage());
-        }
+        // if (result.getLogMessage() != null) {
+        // Window.alert("Ошибка при работе с внешним файлом конфигурации.\n\n"
+        // + result.getLogMessage());
+        // }
 
         getView().setInSlot("slot", new HTMLPanel("pre", result.getLogMessage() + "<br/>"));
         getView().setInSlot("slot",
