@@ -3,7 +3,7 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iFramework</artifactId>
-    <version>0.2.11</version>
+    <version>0.2.12</version>
   </parent>
   <artifactId>iframework-core</artifactId>
   <packaging>pom</packaging>
@@ -11,6 +11,7 @@
 
   <modules>
     <module>iframework-gwtpx</module>
+    <module>iframework-gwtpx-servlet</module>
   </modules>
 
   <build>
@@ -33,6 +34,11 @@
         <artifactId>gwtpx</artifactId>
         <version>${project.version}</version>
         <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>gwtpx-servlet</artifactId>
+        <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

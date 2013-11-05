@@ -3,7 +3,7 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iFramework</artifactId>
-    <version>0.2.11</version>
+    <version>0.2.12</version>
   </parent>
   <artifactId>iframework-jaxbx</artifactId>
   <name>iframework-jaxbx</name>
