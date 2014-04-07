@@ -1,17 +1,64 @@
+#--------------------------------------------------------
+# common ignore #
+
+*~
+MANIFEST.MF
+target/
+builds/
+
+#--------------------------------------------------------
+# maven release plugin #
+
+pom.xml.orig
+*.versionsBackup
+
+#--------------------------------------------------------
+# java packages & compiled files #
+
+*.class
+*.jar
+*.war
+
+#--------------------------------------------------------
+# gwt caches and compiled units #
+
+war/gwt_bree/
+gwt-unitCache/
+
+#--------------------------------------------------------
+# boilerplate generated classes #
+
+.apt_generated/
+
+#--------------------------------------------------------
+# IDE specific #
+
+.settings
 .settings/
 .project
 .classpath
-target/
-*~
-MANIFEST.MF
-/www-test
-/war
-.gwt
-.settings
-target
-gwt-unitCache
-builds/
-pom.properties
-lib/
+.metadata
+.idea/
+*.iml
+*.launch
+
+#--------------------------------------------------------
+# Environment specific #
+
+.DS_Store
+/*.*/.DS_Store
+.directory
+
+#--------------------------------------------------------
+# Static plugins #
+
+.pmd
+
+
+#--------------------------------------------------------
+#--------------------------------------------------------
+# application specific #
+
 /tabbed-presenter/src/main/webapp/META-INF
-.class
+lib/
+gwt-unitCache

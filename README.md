@@ -1,2 +1,1 @@
-readme
-added by neo
+https://issues.sonatype.org/browse/OSSRH-9377
