@@ -3,7 +3,7 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iframework</artifactId>
-    <version>0.3</version>
+    <version>0.4-SNAPSHOT</version>
   </parent>
   <artifactId>iframework-build-tools</artifactId>
 </project>
