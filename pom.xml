@@ -190,9 +190,7 @@
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <useEditMode>true</useEditMode>
                         <releaseProfiles>release</releaseProfiles>
-                        <mavenExecutorId>forked-path</mavenExecutorId>
                         <useReleaseProfile>false</useReleaseProfile>
-                        <arguments>${arguments} -Psonatype-oss-release</arguments>
                     </configuration>
                 </plugin>
 
