@@ -2,9 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
-    <artifactId>iFramework</artifactId>
-    <version>0.2.12a</version>
+    <artifactId>iframework</artifactId>
+    <version>0.3-SNAPSHOT</version>
   </parent>
   <artifactId>iframework-build-tools</artifactId>
-  <name>iFramework Build Tools</name>
 </project>

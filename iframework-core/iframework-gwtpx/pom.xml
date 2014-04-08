@@ -3,11 +3,10 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iframework-core</artifactId>
-    <version>0.2.12a</version>
+    <version>0.3-SNAPSHOT</version>
   </parent>
   <artifactId>iframework-gwtpx</artifactId>
-  <name>Extended GWTP</name>
-  
+
   <properties>
     <gwt.gen>${project.build.directory}/generated</gwt.gen>
   </properties>
@@ -43,10 +42,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
       </plugin>
     </plugins>
 

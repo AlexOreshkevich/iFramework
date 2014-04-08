@@ -1,29 +1,46 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>pro.redsoft.iframework</groupId>
-    <artifactId>iFramework</artifactId>
-    <version>0.2.12a</version>
-  </parent>
-  <artifactId>iframework-samples</artifactId>
-  <packaging>pom</packaging>
-  <name>Samples</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>pro.redsoft.iframework</groupId>
+        <artifactId>iframework</artifactId>
+        <version>0.3-SNAPSHOT</version>
+    </parent>
+    <artifactId>iframework-samples</artifactId>
+    <packaging>pom</packaging>
+    <name>Samples</name>
 
-  <modules>
-    <module>tabbed-presenter</module>
-  </modules>
+    <modules>
+        <module>tabbed-presenter</module>
+    </modules>
 
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>iframework-gwtpx</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-      <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>iframework-gwtpx-servlet</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>iframework-gwtpx</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>iframework-gwtpx-servlet</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+    </build>
 
 </project>

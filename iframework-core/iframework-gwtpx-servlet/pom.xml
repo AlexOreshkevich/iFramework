@@ -3,12 +3,10 @@
   <parent>
     <groupId>pro.redsoft.iframework</groupId>
     <artifactId>iframework-core</artifactId>
-    <version>0.2.12a</version>
+    <version>0.3-SNAPSHOT</version>
   </parent>
   <artifactId>iframework-gwtpx-servlet</artifactId>
-  <name>iframework-gwtpx-servlet</name>
-  <description>iframework-gwtpx-servlet</description>
-  
+
   <dependencies>
     <dependency>
       <groupId>pro.redsoft.iframework</groupId>
@@ -40,10 +38,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
       </plugin>
     </plugins>
 
