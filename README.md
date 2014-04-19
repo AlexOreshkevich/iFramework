@@ -1,11 +1,8 @@
 ![REDSOFT] (http://i.imgur.com/LHvTZ.png "iFramework") Powerfull extension for popular GWTP framework.
 
-## Maven settings
+# Maven settings
 
-###Latest Version
-[Find the lastest version listed here](https://github.com/AlexOreshkevich/iFramework) 
-
-###Maven Central Jars
+##Maven Central 
 [Download Jars from here](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22pro.redsoft.iframework%22) or follow the manual dependency download procedure.
 
 ####Define dependencies
