@@ -105,6 +105,11 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
             <!-- JUnit Testing - skip *.GwtTest cases -->
             <!-- 'mvn test' - runs the Jukito tests -->
             <plugin>
