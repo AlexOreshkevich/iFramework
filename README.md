@@ -10,7 +10,7 @@
 * Properties:
 ```xml
 <properties>
-    <iframework.version>0.3</iframework.version>
+    <iframework.version>0.4.0</iframework.version>
 </properties>
 ```
 
@@ -46,7 +46,7 @@ Snapshots of the current version are regularly deployed. If you want to experime
 * Here's how you use the snapshot dependencies. Get the lastest snapshot version from [here](https://github.com/AlexOreshkevich/iFramework).
 ```xml
 <properties>
-    <iframework.version>0.4-SNAPSHOT</iframework.version>
+    <iframework.version>0.4.1-SNAPSHOT</iframework.version>
 </properties>
 
 <repositories>
