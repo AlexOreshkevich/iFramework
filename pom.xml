@@ -186,6 +186,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven-javadoc-plugin.version}</version>
+                    <configuration>
+                        <excludePackageNames>*.internal:pro.redsoft.iframework.shared.config.*:by.redsoft.jaxbx.test.config.*</excludePackageNames>
+                    </configuration>
                     <executions>
                         <execution>
                             <id>attach-javadocs</id>
