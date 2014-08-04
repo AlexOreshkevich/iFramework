@@ -45,7 +45,6 @@ import java.util.Set;
 public abstract class PresenterPrototype<V extends View, P extends Proxy<?>> extends Presenter<V, P> {
 
   /**
-   * PresenterPrototype<br/>
    * Defines parent-child relations via proxy level. See
    * {@link pro.redsoft.iframework.client.slot.SlotMappedProxy} for details.
    *

@@ -28,9 +28,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 /**
  * Embeddable.
  * 
- * @since
  * @author Alex N. Oreshkevich
  */
 public interface Embeddable extends IsWidget {
-
 }

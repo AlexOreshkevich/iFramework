@@ -28,12 +28,13 @@ import com.google.gwt.user.client.Random;
 
 /**
  * UUID.
- * 
+ *
  * @author vitaliy tunkin, alex oreshkevich
  */
 public class UUID {
+
   private static final char[] CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-                                        .toCharArray();
+      .toCharArray();
 
   // TODO: Md5Digest почему-то глючит на длинных строках в web-режиме
   public static String generateMd5(String str) {
@@ -50,8 +51,7 @@ public class UUID {
     for (int i = 0; i < hash.length; i++) {
       if ((0xff & hash[i]) < 0x10) {
         hexString.append("0" + Integer.toHexString(0xFF & hash[i]));
-      }
-      else {
+      } else {
         hexString.append(Integer.toHexString(0xFF & hash[i]));
       }
     }
@@ -61,11 +61,15 @@ public class UUID {
 
   /**
    * Вычисляет md5-хэш (нормально работает с большими строками).
+   *
+   * @param string source
+   * @return md5
    */
   public static native String md5(String string) /*-{
     function RotateLeft(lValue, iShiftBits) {
       return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
     }
+
     function AddUnsigned(lX, lY) {
       var lX4, lY4, lX8, lY8, lResult;
       lX8 = (lX & 0x80000000);
@@ -90,12 +94,15 @@ public class UUID {
     function F(x, y, z) {
       return (x & y) | ((~x) & z);
     }
+
     function G(x, y, z) {
       return (x & z) | (y & (~z));
     }
+
     function H(x, y, z) {
       return (x ^ y ^ z);
     }
+
     function I(x, y, z) {
       return (y ^ (x | (~z)));
     }
@@ -164,7 +171,7 @@ public class UUID {
       string = string.replace(/\r\n/g, "\n");
       var utftext = "";
 
-      for ( var n = 0; n < string.length; n++) {
+      for (var n = 0; n < string.length; n++) {
 
         var c = string.charCodeAt(n);
 
@@ -303,10 +310,11 @@ public class UUID {
   }
 
   /**
-   * Generate a random uuid of the specified length. Example: uuid(15) returns "VcydxgltxrVZSTV"
-   * 
-   * @param len
-   *          the desired number of characters
+   * Generate a random uuid of the specified length. Example: uuid(15)
+   * returns "VcydxgltxrVZSTV".
+   *
+   * @param len the desired number of characters
+   * @return string
    */
   public static String uuid(int len) {
     return uuid(len, CHARS.length);
@@ -319,11 +327,11 @@ public class UUID {
    * <li>uuid(8, 10) returns "47473046" (8 character ID, base=10)
    * <li>uuid(8, 16) returns "098F4D35" (8 character ID, base=16)
    * </ul>
-   * 
-   * @param len
-   *          the desired number of characters
-   * @param radix
-   *          the number of allowable values for each character (must be <= 62)
+   *
+   * @param len   the desired number of characters
+   * @param radix the number of allowable values for each character (must be
+   *              less or equal to 62)
+   * @return String
    */
   public static String uuid(int len, int radix) {
     if (radix > CHARS.length) {
@@ -337,6 +345,11 @@ public class UUID {
     return new String(uuid);
   }
 
+  /**
+   * 16 символов, цифры+все загл буквы.
+   *
+   * @return string
+   */
   public static String uuidKap() {
     // 16 символов, цифры+все загл буквы
     return uuid(16, 36);

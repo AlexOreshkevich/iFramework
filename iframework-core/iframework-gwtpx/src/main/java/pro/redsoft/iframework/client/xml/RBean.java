@@ -166,13 +166,13 @@ public abstract class RBean extends RClass implements CreatableBean, IsSerializa
   }
 
   /**
-   * Creates new field instance. <br/>
+   * Creates new field instance.
    * 
-   * @param <T>
-   * @param name
-   * @param value
-   * @return
-   * @throws NullPointerException
+   * @param <T> t
+   * @param name name
+   * @param value value
+   * @return RField
+   * @throws NullPointerException e
    */
   public <T> RField<T> createField(String name, T value) throws NullPointerException {
 
@@ -183,14 +183,14 @@ public abstract class RBean extends RClass implements CreatableBean, IsSerializa
   }
 
   /**
-   * Creates new field instance. <br/>
-   * 
-   * @param <T>
-   * @param name
-   * @param value
-   * @param dataTypes
-   * @return
-   * @throws NullPointerException
+   * Creates new field instance.
+   *
+   * @param <T> t
+   * @param name name
+   * @param value value
+   * @param dataTypes dataTypes
+   * @return RField
+   * @throws NullPointerException e
    */
   public <T> RField<T> createField(String name, T value, DataTypes dataTypes)
       throws NullPointerException {
@@ -202,15 +202,15 @@ public abstract class RBean extends RClass implements CreatableBean, IsSerializa
   }
 
   /**
-   * Creates new field instance. <br/>
-   * 
-   * @param <T>
-   * @param name
-   * @param value
-   * @param dataTypes
-   * @param b
-   * @return
-   * @throws NullPointerException
+   * Creates new field instance.
+   *
+   * @param <T> t
+   * @param name name
+   * @param value value
+   * @param dataTypes dataTypes
+   * @param b byte
+   * @return RField
+   * @throws NullPointerException e
    */
   public <T> RField<T> createField(String name, T value, DataTypes dataTypes, byte b)
       throws NullPointerException {
@@ -222,7 +222,7 @@ public abstract class RBean extends RClass implements CreatableBean, IsSerializa
   }
 
   /**
-   * Get's an array of all simple fields (RField<?>) names.
+   * Get's an array of all simple fields (RField) names.
    * 
    * @return ArrayList of all simple field names
    * @throws NullPointerException
@@ -244,7 +244,7 @@ public abstract class RBean extends RClass implements CreatableBean, IsSerializa
   }
 
   /**
-   * Get's an array of all simple fields (RField<?>) types.
+   * Get's an array of all simple fields (RField) types.
    * 
    * @return ArrayList of all simple field types
    * @throws NullPointerException
@@ -267,7 +267,7 @@ public abstract class RBean extends RClass implements CreatableBean, IsSerializa
   }
 
   /**
-   * Get's an array of all simple fields (RField<?>) values.
+   * Get's an array of all simple fields (RField) values.
    * 
    * @return ArrayList of all simple field values
    * @throws NullPointerException

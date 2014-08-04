@@ -30,8 +30,8 @@ import com.google.gwt.user.client.ui.Panel;
  * Form Presenter.
  *
  * @author alex oreshkevich
- * @param <T>
- * @version $Id: $Id
+ * @param <T> form type
+ * @version 0.4.1
  */
 public abstract class FormPresenter<T extends RBean> extends RClass {
 

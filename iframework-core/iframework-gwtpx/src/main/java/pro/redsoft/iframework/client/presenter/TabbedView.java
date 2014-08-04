@@ -36,11 +36,10 @@ import com.gwtplatform.mvp.client.HandlerContainer;
 import com.gwtplatform.mvp.client.View;
 
 /**
- * TabbedView. <br/>
  * The tabbed presenter's view.
  *
  * @author Alex N. Oreshkevich
- * @version $Id: $Id
+ * @version 0.4.1
  */
 public interface TabbedView extends View, HandlerContainer, HasWidgets, ProvidesResize,
     IndexedPanel.ForIsWidget, AnimatedLayout, HasBeforeSelectionHandlers<Integer>,

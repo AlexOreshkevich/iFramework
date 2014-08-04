@@ -34,24 +34,46 @@ import java.lang.annotation.Documented;
 @Documented
 public @interface StandardClassDescriptor {
 
-  /** Class Advanced Software Architector */
+  /**
+   * Class Advanced Software Architector.
+   *
+   * @return author
+   */
   String author();
 
-  /** Class Description */
+  /**
+   * Class Description.
+   * @return classDescription
+   */
   String classDescription() default "";
 
-  /** Current Revision */
+  /**
+   * Current Revision.
+   * @return currentRevision
+   */
   int currentRevision();
 
-  /** Class Deliver Date */
+  /**
+   * Class Deliver Date.
+   * @return date
+   */
   String date();
 
-  /** Last Revision Date */
+  /**
+   * Last Revision Date.
+   * @return lastModified
+   */
   String lastModified();
 
-  /** Last Revision Author */
+  /**
+   * Last Revision Author.
+   * @return lastModifiedBy
+   */
   String lastModifiedBy();
 
-  /** Class Reviewers */
+  /**
+   * Class Reviewers.
+   * @return reviewers
+   */
   String[] reviewers();
 }

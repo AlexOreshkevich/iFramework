@@ -24,8 +24,7 @@ THE SOFTWARE.
 package pro.redsoft.iframework.client.strategy;
 
 /**
- * StrategyAdapter. <br/>
- * Godlike dual generic-based strategy-adapter patterns (GoF) implementation
+ * Dual generic-based strategy-adapter patterns (GoF) implementation.
  * 
  * @author alex oreshkevich
  */

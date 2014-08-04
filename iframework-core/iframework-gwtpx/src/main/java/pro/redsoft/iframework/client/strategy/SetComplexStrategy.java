@@ -26,9 +26,9 @@ package pro.redsoft.iframework.client.strategy;
 import java.util.Set;
 
 /**
- * ComplexStrategy. <br/>
- * Поддержка обработки нескольких медиатипов на основе набора независимых стратегий для каждого из них
- * 
+ * Поддержка обработки нескольких медиатипов на основе набора независимых
+ * стратегий для каждого из них.
+ *
  * @author alex oreshkevich
  */
 public interface SetComplexStrategy extends ComplexStrategy {

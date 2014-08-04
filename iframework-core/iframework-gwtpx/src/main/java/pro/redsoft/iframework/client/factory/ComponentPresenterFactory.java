@@ -30,9 +30,9 @@ import pro.redsoft.iframework.client.view.ComponentView;
  * Use this factory to create {@link pro.redsoft.iframework.client.presenter.ComponentPresenterWidget} objects.
  *
  * @author Alex N. Oreshkevich
- * @param <V>
- * @param <P>
- * @version $Id: $Id
+ * @param <V> ComponentView
+ * @param <P> ComponentPresenterWidget
+ * @version 0.4.1
  */
 public interface ComponentPresenterFactory<V extends ComponentView, P extends ComponentPresenterWidget<V>> {
 

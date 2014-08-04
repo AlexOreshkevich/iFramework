@@ -44,9 +44,9 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
  * TabbedPresenter.
  *
  * @author Alex N. Oreshkevich
- * @param <V>
- * @param <P>
- * @version $Id: $Id
+ * @param <V> TabbedView
+ * @param <P> Proxy
+ * @version 0.4.1
  */
 public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> extends Presenter<V, P> {
 

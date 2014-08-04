@@ -34,10 +34,10 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
 public class TabPanelEx extends TabLayoutPanel implements TabPanel {
 
   /**
-   * TabPanelEx
+   * TabPanelEx.
    * 
-   * @param barHeight
-   * @param barUnit
+   * @param barHeight barHeight
+   * @param barUnit barUnit
    */
   public TabPanelEx(double barHeight, Unit barUnit) {
     super(barHeight, barUnit);

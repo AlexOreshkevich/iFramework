@@ -34,9 +34,9 @@ import com.gwtplatform.mvp.client.PresenterWidget;
  * Base class for all factories of {@link PresenterWidget}.
  * 
  * @author Alex N. Oreshkevich
- * @param <V>
- * @param <P>
- * @param <F>
+ * @param <V> ComponentView
+ * @param <P> ComponentPresenterWidget
+ * @param <F> ComponentViewFactory
  */
 public abstract class AbstractComponentPresenterFactory<V extends ComponentView, P extends ComponentPresenterWidget<V>, F extends ComponentViewFactory<V>>
     implements ComponentPresenterFactory<V, P> {
