@@ -29,19 +29,22 @@ import pro.redsoft.iframework.client.model.JsonData;
 
 /**
  * JsonDataPrototype.
- * 
+ *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public abstract class JsonDataPrototype implements JsonData {
 
   protected JsonReader<?> jsonReader;
   protected JsonWriter<?> jsonWriter;
 
+  /** {@inheritDoc} */
   @Override
   public final JsonReader<?> getReader() {
     return jsonReader;
   }
 
+  /** {@inheritDoc} */
   @Override
   public final JsonWriter<?> getWriter() {
     return jsonWriter;

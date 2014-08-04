@@ -30,8 +30,9 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * <p>
  * Defines class name as String value with access methods.
  * </p>
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 @StandardClassDescriptor(
     author = "Neo",
@@ -49,7 +50,7 @@ public class RClass implements IsSerializable {
    * Returns the fully-qualified name for this class, for example: by.ipps.egr.client.core2.RClass.
    * <p>
    * Equals Class.getName() in Reflection
-   * 
+   *
    * @return full name for this class
    */
   public String getName() {
@@ -64,7 +65,7 @@ public class RClass implements IsSerializable {
    * Difference from the Class.getSimpleName() is that our bean classes can't be an arrays, then we skip isArray() code
    * section.
    * </p>
-   * 
+   *
    * @return the simple name of the underlying class
    */
   public String getSimpleName() {
@@ -72,6 +73,8 @@ public class RClass implements IsSerializable {
   }
 
   /**
+   * <p>Setter for the field <code>rclassName</code>.</p>
+   *
    * @param rclassName
    *          the rclassName to set
    */

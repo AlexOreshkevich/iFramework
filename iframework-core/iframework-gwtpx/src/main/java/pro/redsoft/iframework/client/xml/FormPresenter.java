@@ -28,28 +28,35 @@ import com.google.gwt.user.client.ui.Panel;
 
 /**
  * Form Presenter.
- * 
+ *
  * @author alex oreshkevich
  * @param <T>
+ * @version $Id: $Id
  */
 public abstract class FormPresenter<T extends RBean> extends RClass {
 
   private T              bean;
   private HandlerManager eventBus;
 
+  /**
+   * <p>Constructor for FormPresenter.</p>
+   *
+   * @param bean a T object.
+   */
   public FormPresenter(T bean) {
     this.bean = bean;
   }
 
   /**
    * Start presenter with specified description.
-   * 
-   * @param container
-   * @param tabDescription
+   *
+   * @param container a {@link com.google.gwt.user.client.ui.Panel} object.
    */
   public abstract void clear(Panel container);
 
   /**
+   * <p>Getter for the field <code>bean</code>.</p>
+   *
    * @return the bean
    */
   public T getBean() {
@@ -57,27 +64,41 @@ public abstract class FormPresenter<T extends RBean> extends RClass {
   }
 
   /**
+   * <p>Getter for the field <code>eventBus</code>.</p>
+   *
    * @return the eventBus
    */
   public HandlerManager getEventBus() {
     return eventBus;
   }
 
+  /**
+   * <p>getFormCode.</p>
+   *
+   * @return a int.
+   */
   public abstract int getFormCode();
 
   /**
    * Start presenter with specified description.
-   * 
-   * @param container
-   * @param tabDescription
+   *
+   * @param container a {@link com.google.gwt.user.client.ui.Panel} object.
+   * @param tabDescription a {@link java.lang.String} object.
    */
   public abstract void go(Panel container, String tabDescription);
 
+  /**
+   * <p>Setter for the field <code>bean</code>.</p>
+   *
+   * @param bean a T object.
+   */
   public void setBean(T bean) {
     this.bean = bean;
   }
 
   /**
+   * <p>Setter for the field <code>eventBus</code>.</p>
+   *
    * @param eventBus
    *          the eventBus to set
    */

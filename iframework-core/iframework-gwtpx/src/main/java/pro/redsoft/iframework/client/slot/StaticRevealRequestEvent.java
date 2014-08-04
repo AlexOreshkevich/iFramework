@@ -30,9 +30,10 @@ import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * StaticRevealRequestEvent.
- * 
+ *
  * @since 4.1
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public class StaticRevealRequestEvent extends
     GwtEvent<StaticRevealRequestEvent.StaticRevealRequestHandler> {
@@ -55,24 +56,40 @@ public class StaticRevealRequestEvent extends
     HandlerRegistration addStaticRevealRequestHandler(StaticRevealRequestHandler handler);
   }
 
+  /** Constant <code>TYPE</code> */
   public static Type<StaticRevealRequestHandler> TYPE = new Type<StaticRevealRequestHandler>();
 
+  /**
+   * <p>fire.</p>
+   *
+   * @param source a {@link com.google.gwt.event.shared.HasHandlers} object.
+   */
   public static void fire(HasHandlers source) {
     source.fireEvent(new StaticRevealRequestEvent());
   }
 
+  /**
+   * <p>getType.</p>
+   *
+   * @return a Type object.
+   */
   public static Type<StaticRevealRequestHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * <p>Constructor for StaticRevealRequestEvent.</p>
+   */
   public StaticRevealRequestEvent() {
   }
 
+  /** {@inheritDoc} */
   @Override
   protected void dispatch(StaticRevealRequestHandler handler) {
     handler.onStaticRevealRequest(this);
   }
 
+  /** {@inheritDoc} */
   @Override
   public Type<StaticRevealRequestHandler> getAssociatedType() {
     return TYPE;

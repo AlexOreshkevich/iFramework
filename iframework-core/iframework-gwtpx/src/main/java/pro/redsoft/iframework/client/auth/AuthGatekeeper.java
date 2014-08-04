@@ -29,18 +29,25 @@ import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 
 /**
  * Blocks application for unauthorized users via revealing unauthorized place.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public class AuthGatekeeper implements Gatekeeper {
 
   private final CurrentUser currentUser;
 
+  /**
+   * <p>Constructor for AuthGatekeeper.</p>
+   *
+   * @param currentUser a {@link pro.redsoft.iframework.client.auth.CurrentUser} object.
+   */
   @Inject
   public AuthGatekeeper(CurrentUser currentUser) {
     this.currentUser = currentUser;
   }
 
+  /** {@inheritDoc} */
   @Override
   public boolean canReveal() {
     return currentUser.isAuthorized();

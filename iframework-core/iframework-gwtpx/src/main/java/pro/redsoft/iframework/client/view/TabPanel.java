@@ -34,8 +34,9 @@ import com.google.gwt.user.client.ui.RequiresResize;
 
 /**
  * TabPanel.
- * 
+ *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public interface TabPanel extends RequiresResize, HasWidgets, ProvidesResize, IndexedPanel.ForIsWidget,
     AnimatedLayout, HasBeforeSelectionHandlers<Integer>, HasSelectionHandlers<Integer>, IsWidget {

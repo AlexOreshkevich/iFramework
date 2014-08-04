@@ -27,10 +27,16 @@ import java.util.Map;
 
 /**
  * MappedComplexStrategy.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public interface MappedComplexStrategy extends ComplexStrategy {
 
+  /**
+   * <p>getStrategies.</p>
+   *
+   * @return a {@link java.util.Map} object.
+   */
   Map<Class<?>, Strategy<? extends Object>> getStrategies();
 }

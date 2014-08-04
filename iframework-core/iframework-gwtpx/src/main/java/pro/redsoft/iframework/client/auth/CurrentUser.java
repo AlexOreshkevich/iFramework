@@ -31,28 +31,45 @@ import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * This is a basic class that holds the privileges of the user currently logged in.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public class CurrentUser implements HasHandlers {
 
   private final EventBus eventBus;
   private boolean        isAuthorized;
 
+  /**
+   * <p>Constructor for CurrentUser.</p>
+   *
+   * @param eventBus a {@link com.google.web.bindery.event.shared.EventBus} object.
+   */
   @Inject
   public CurrentUser(EventBus eventBus) {
     this.eventBus = eventBus;
   }
 
+  /** {@inheritDoc} */
   @Override
   public void fireEvent(GwtEvent<?> event) {
     eventBus.fireEvent(event);
   }
 
+  /**
+   * <p>isAuthorized.</p>
+   *
+   * @return a boolean.
+   */
   public boolean isAuthorized() {
     return isAuthorized;
   }
 
+  /**
+   * <p>setAdmin.</p>
+   *
+   * @param isAdmin a boolean.
+   */
   public void setAdmin(boolean isAdmin) {
     this.isAuthorized = isAdmin;
     CurrentUserChangedEvent.fire(this);

@@ -27,17 +27,18 @@ import pro.redsoft.iframework.client.presenter.ComponentPresenterWidget;
 import pro.redsoft.iframework.client.view.ComponentView;
 
 /**
- * This factory is used to create new views for the {@link ComponentPresenterWidget}.
- * 
+ * This factory is used to create new views for the ComponentPresenterWidget.
+ *
  * @author Alex N. Oreshkevich
- * @param <V>
+ * @param <V> type of View
+ * @version 0.4.1
  */
 public interface ComponentViewFactory<V extends ComponentView> {
 
   /**
-   * Create a new view for a {@link ComponentPresenterWidget}.
-   * 
-   * @return The newly created view for this {@link ComponentPresenterWidget}.
+   * Create a new view for a ComponentPresenterWidget.
+   *
+   * @return The newly created view for this ComponentPresenterWidget.
    */
   V create();
 }

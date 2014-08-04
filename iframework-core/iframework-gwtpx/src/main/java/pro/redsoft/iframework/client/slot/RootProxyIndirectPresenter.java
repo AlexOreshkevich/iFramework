@@ -28,10 +28,16 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 
 /**
  * RootProxyIndirectPresenter.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public interface RootProxyIndirectPresenter {
 
+  /**
+   * <p>setCurrentPresenter.</p>
+   *
+   * @param currentPresenter a {@link pro.redsoft.iframework.client.slot.PresenterPrototype} object.
+   */
   void setCurrentPresenter(PresenterPrototype<? extends View, ? extends Proxy<?>> currentPresenter);
 }

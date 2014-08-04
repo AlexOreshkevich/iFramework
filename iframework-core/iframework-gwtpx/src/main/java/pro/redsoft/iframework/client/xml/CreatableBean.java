@@ -25,14 +25,15 @@ package pro.redsoft.iframework.client.xml;
 
 /**
  * Marks any bean that must be creatable.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public interface CreatableBean {
 
   /**
    * Must call default constructor for each bean.
-   * 
+   *
    * @return CreatableBean new Instance
    */
   CreatableBean newInstance();

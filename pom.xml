@@ -144,7 +144,7 @@
                         <propertyExpansion>basedir=${basedir}
                         </propertyExpansion>
                         <consoleOutput>true</consoleOutput>
-                        <failsOnError>true</failsOnError>
+                        <failsOnError>false</failsOnError>
                         <linkXRef>false</linkXRef>
                         <includeTestSourceDirectory>true
                         </includeTestSourceDirectory>
@@ -186,6 +186,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven-javadoc-plugin.version}</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
                     <executions>
                         <execution>
                             <id>attach-javadocs</id>

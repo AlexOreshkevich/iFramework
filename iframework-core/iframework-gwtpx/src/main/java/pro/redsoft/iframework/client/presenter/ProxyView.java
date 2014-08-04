@@ -27,30 +27,31 @@ import com.google.gwt.user.client.ui.IsWidget;
 
 /**
  * Tabbed view that based on proxy-tabs. Defines Proxy pattern implementation interface for tabbed view.
- * 
+ *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public interface ProxyView {
 
   /**
    * Checks whenever tab by specified index is proxy or not.
-   * 
+   *
    * @param tabInd
    *          tab index
    * @return true if tab is proxy
-   * @throws IndexOutOfBoundsException
+   * @throws java.lang.IndexOutOfBoundsException
    *           if the index is out of range
    */
   boolean isProxy(int tabInd) throws IndexOutOfBoundsException;
 
   /**
    * Replaces proxy specified by tabInd with some widget.
-   * 
+   *
    * @param tabInd
    *          tab index
    * @param w
    *          real tab as widget
-   * @throws IndexOutOfBoundsException
+   * @throws java.lang.IndexOutOfBoundsException
    *           if the index is out of range
    */
   void replaceProxy(int tabInd, IsWidget w) throws IndexOutOfBoundsException;

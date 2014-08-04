@@ -25,8 +25,9 @@ package pro.redsoft.iframework.client.xml;
 
 /**
  * EgrFactory.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 @SuppressWarnings("unchecked")
 public class EgrFactory {
@@ -45,6 +46,11 @@ public class EgrFactory {
             namePresenter);
   }
 
+  /**
+   * <p>get.</p>
+   *
+   * @return a {@link pro.redsoft.iframework.client.xml.EgrFactory} object.
+   */
   public static EgrFactory get() {
     if (!hasInitialized && (hasInitialized = true)) {
       initialize();
@@ -175,6 +181,8 @@ public class EgrFactory {
   // }
 
   /**
+   * <p>Getter for the field <code>egrMap</code>.</p>
+   *
    * @return the egrmap
    */
   public EgrMap<Integer, RBean, FormPresenter<RBean>> getEgrMap() {

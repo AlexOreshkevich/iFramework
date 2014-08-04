@@ -25,9 +25,9 @@ package pro.redsoft.iframework.jaxbx;
 
 /**
  * ErrorCodes
- * 
+ *
  * Перечисляет характерные ошибки при работе с JAXB
- * 
+ *
  * @author oreshkevich
  */
 public enum ErrorCodes {
@@ -47,6 +47,11 @@ public enum ErrorCodes {
     this.desc = desc;
   }
 
+  /**
+   * <p>Getter for the field <code>desc</code>.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   */
   public String getDesc() {
     return desc;
   }

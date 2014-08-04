@@ -31,8 +31,9 @@ import com.gwtplatform.mvp.client.View;
 
 /**
  * ReloadChildsProxyContentEvent.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public class ReloadChildsProxyContentEvent extends
     GwtEvent<ReloadChildsProxyContentEvent.ReloadChildsProxyContentHandler> {
@@ -55,8 +56,14 @@ public class ReloadChildsProxyContentEvent extends
     HandlerRegistration addReloadChildsProxyContentHandler(ReloadChildsProxyContentHandler handler);
   }
 
+  /** Constant <code>TYPE</code> */
   public static Type<ReloadChildsProxyContentHandler> TYPE = new Type<ReloadChildsProxyContentHandler>();
 
+  /**
+   * <p>getType.</p>
+   *
+   * @return a Type object.
+   */
   public static Type<ReloadChildsProxyContentHandler> getType() {
     return TYPE;
   }
@@ -65,6 +72,12 @@ public class ReloadChildsProxyContentEvent extends
 
   private final TokenProxy                                                    tokenProxy;
 
+  /**
+   * <p>Constructor for ReloadChildsProxyContentEvent.</p>
+   *
+   * @param sourcePresenter a {@link pro.redsoft.iframework.client.slot.PresenterPrototype} object.
+   * @param tokenProxy a {@link pro.redsoft.iframework.client.slot.TokenProxy} object.
+   */
   public ReloadChildsProxyContentEvent(
       PresenterPrototype<? extends View, ? extends SlotMappedProxy> sourcePresenter,
       TokenProxy tokenProxy) {
@@ -72,20 +85,32 @@ public class ReloadChildsProxyContentEvent extends
     this.tokenProxy = tokenProxy;
   }
 
+  /** {@inheritDoc} */
   @Override
   protected void dispatch(ReloadChildsProxyContentHandler handler) {
     handler.onReloadChildsProxyContent(this);
   }
 
+  /** {@inheritDoc} */
   @Override
   public Type<ReloadChildsProxyContentHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /**
+   * <p>Getter for the field <code>sourcePresenter</code>.</p>
+   *
+   * @return a {@link pro.redsoft.iframework.client.slot.PresenterPrototype} object.
+   */
   public PresenterPrototype<? extends View, ? extends SlotMappedProxy> getSourcePresenter() {
     return sourcePresenter;
   }
 
+  /**
+   * <p>Getter for the field <code>tokenProxy</code>.</p>
+   *
+   * @return a {@link pro.redsoft.iframework.client.slot.TokenProxy} object.
+   */
   public TokenProxy getTokenProxy() {
     return tokenProxy;
   }

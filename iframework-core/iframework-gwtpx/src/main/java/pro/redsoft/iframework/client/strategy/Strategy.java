@@ -25,14 +25,25 @@ package pro.redsoft.iframework.client.strategy;
 
 /**
  * Strategy. Defines class-specific behaviour processing.
- * 
+ *
  * @param <T>
  *          any type
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public interface Strategy<T extends Object> {
 
+  /**
+   * <p>doAction.</p>
+   *
+   * @param bean a T object.
+   */
   void doAction(T bean);
 
+  /**
+   * <p>getBeanType.</p>
+   *
+   * @return a {@link java.lang.Class} object.
+   */
   Class<T> getBeanType();
 }

@@ -29,16 +29,20 @@ import javax.xml.XMLConstants;
 
 /**
  * NamespaceDecorator
- * 
+ *
  * Реализует шаблон Decorator для управления реализацией NamespacePrefixMapperImpl. Если не
  * проинициализирован, используются стандартные пространства имен.
- * 
+ *
  * @author oreshkevich
+ * @version $Id: $Id
  */
 public class NamespaceDecorator {
 
   HashMap<String, String> namespacePrefixMap = new HashMap<String, String>();
 
+  /**
+   * <p>Constructor for NamespaceDecorator.</p>
+   */
   public NamespaceDecorator() {
 
     // xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -48,6 +52,11 @@ public class NamespaceDecorator {
     namespacePrefixMap.put("http://java.sun.com/xml/ns/jaxb", "jxb");
   }
 
+  /**
+   * <p>Getter for the field <code>namespacePrefixMap</code>.</p>
+   *
+   * @return a {@link java.util.HashMap} object.
+   */
   public HashMap<String, String> getNamespacePrefixMap() {
     return namespacePrefixMap;
   }

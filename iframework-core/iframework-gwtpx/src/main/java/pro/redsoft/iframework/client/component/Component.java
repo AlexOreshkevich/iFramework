@@ -27,8 +27,14 @@ package pro.redsoft.iframework.client.component;
  * Component.
  *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public interface Component extends Embeddable {
 
+  /**
+   * <p>getParentContainer.</p>
+   *
+   * @return a {@link pro.redsoft.iframework.client.component.Container} object.
+   */
   Container getParentContainer();
 }

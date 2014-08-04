@@ -25,8 +25,9 @@ package pro.redsoft.iframework.client.xml;
 
 /**
  * TestComplexBean.
- * 
+ *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public class TestComplexBean {
 

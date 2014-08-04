@@ -28,14 +28,23 @@ import java.util.Set;
 
 /**
  * SlotMappedProxy.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public interface SlotMappedProxy {
 
-  /** Dynamic child presenter mapping: slot -> {token1, token2, ... tokenN}. */
+  /**
+   * Dynamic child presenter mapping: slot -> {token1, token2, ... tokenN}.
+   *
+   * @return a {@link java.util.Map} object.
+   */
   Map<String, Set<? extends TokenProxy>> getChildMap();
 
-  /** Dynamic parent presenter mapping: token -> slot. */
+  /**
+   * Dynamic parent presenter mapping: token -> slot.
+   *
+   * @return a {@link java.util.Map} object.
+   */
   Map<TokenProxy, String> getParentMap();
 }

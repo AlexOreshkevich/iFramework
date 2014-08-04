@@ -25,8 +25,9 @@ package pro.redsoft.iframework.client.xml;
 
 /**
  * RBeanFactory.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 @StandardClassDescriptor(
     author = "Neo",
@@ -42,9 +43,9 @@ public class RBeanFactory extends RClass {
 
   /**
    * Gets RBean Class By Name (String).
-   * 
-   * @param name
-   * @return
+   *
+   * @param name a {@link java.lang.String} object.
+   * @return a {@link pro.redsoft.iframework.client.xml.RBean} object.
    */
   public RBean getClassByName(String name) {
     RBean rb = EgrFactory.get().getEgrMap().getBeanByName(name.toUpperCase());

@@ -25,8 +25,9 @@ package pro.redsoft.iframework.client.xml;
 
 /**
  * DataTypes.
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public enum DataTypes {
 

@@ -32,7 +32,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * ComponentLoader.
- * 
+ *
  * @author Alex N. Oreshkevich
  * @param <V>
  *          view
@@ -40,17 +40,18 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *          presenter
  * @param <F>
  *          factory
+ * @version $Id: $Id
  */
 public interface ComponentLoader<V extends ComponentView, P extends ComponentPresenterWidget<V>, F extends ComponentPresenterFactory<V, P>> {
 
   /**
    * Loads component by type.
-   * 
-   * @param type
-   * @param asyncCallback
-   * @throws IllegalArgumentException
+   *
+   * @param type a {@link java.lang.Object} object.
+   * @param asyncCallback a {@link com.google.gwt.user.client.rpc.AsyncCallback} object.
+   * @throws java.lang.IllegalArgumentException
    *           if asyncCallback is null
-   * @throws UnsupportedOperationException
+   * @throws java.lang.UnsupportedOperationException
    *           if missing configuration mapping for tabType
    */
   void get(Object type, AsyncCallback<F> asyncCallback) throws IllegalArgumentException,
@@ -58,9 +59,9 @@ public interface ComponentLoader<V extends ComponentView, P extends ComponentPre
 
   /**
    * Register component by type.
-   * 
-   * @param type
-   * @param provider
+   *
+   * @param type a {@link java.lang.Object} object.
+   * @param provider a {@link com.google.gwt.inject.client.AsyncProvider} object.
    * @return the previous value associated with <tt>key</tt>, or <tt>null</tt> if there was no mapping for <tt>key</tt>.
    *         (A <tt>null</tt> return can also indicate that the map previously associated <tt>null</tt> with
    *         <tt>key</tt>, if the implementation supports <tt>null</tt> values.)

@@ -23,10 +23,10 @@ THE SOFTWARE.
 */
 package pro.redsoft.iframework.jaxbx;
 
-import java.io.File;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.HashMap;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -49,35 +49,46 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+import java.io.File;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.HashMap;
 
 /**
- * AbstractJAXBParser
- * 
+ * AbstractJAXBParser.
+ *
+ * @param <T> target class type
  * @author alex oreshkevich
- * @param <T>
+ * @version $Id: $Id
  */
 public abstract class AbstractJAXBParser<T extends Object> {
 
-  private DocumentBuilder              builder;
+  private DocumentBuilder builder;
 
-  protected final Class<T>             classType;
+  final protected Class<T> classType;
 
-  private final DocumentBuilderFactory factory            = DocumentBuilderFactory.newInstance();
+  private final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-  private final MarshallerBuilder      marshallBuilder;
+  private final MarshallerBuilder marshallBuilder;
 
-  private TransformerFactory           transformerFactory = TransformerFactory.newInstance();
+  private TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
+  /**
+   * <p>Constructor for AbstractJAXBParser.</p>
+   *
+   * @param classType a {@link java.lang.Class} object.
+   */
   public AbstractJAXBParser(Class<T> classType) {
     this.classType = classType;
     marshallBuilder = new MarshallerBuilder();
   }
 
+  /**
+   * <p>getDocument.</p>
+   *
+   * @return a {@link org.w3c.dom.Document} object.
+   * @throws javax.xml.parsers.ParserConfigurationException if any.
+   */
   public Document getDocument() throws ParserConfigurationException {
     if (builder == null) {
       builder = factory.newDocumentBuilder();
@@ -85,32 +96,45 @@ public abstract class AbstractJAXBParser<T extends Object> {
     return builder.newDocument();
   }
 
+  /**
+   * <p>Getter for the field <code>marshallBuilder</code>.</p>
+   *
+   * @return a {@link pro.redsoft.iframework.jaxbx.MarshallerBuilder} object.
+   */
   public MarshallerBuilder getMarshallBuilder() {
     return marshallBuilder;
   }
 
   /**
-   * Для корректного определения префикса необходимо определить пространство имен
-   * 
-   * @return
+   * Для корректного определения префикса необходимо определить пространство
+   * имен.
+   *
+   * @return namespace
    */
   public abstract String getNamespace();
 
   /**
    * ExJAXBParser должен предоставить сведения о пользовательских простанствах имен Если возвращается null, то
-   * используется карта по умолчанию
-   * 
+   * используется карта по умолчанию.
+   *
    * @return сведения о пользовательских простанствах имен (HashMap)
    */
   public abstract HashMap<String, String> getNamespacePrefixMap();
 
   /**
-   * getRootTagName
-   * 
-   * @return
+   * getRootTagName.
+   *
+   * @return rootTagName
    */
   public abstract String getRootTagName();
 
+  /**
+   * <p>getSchema.</p>
+   *
+   * @param file a {@link java.io.File} object.
+   * @return a {@link javax.xml.validation.Schema} object.
+   * @throws org.xml.sax.SAXException if any.
+   */
   public Schema getSchema(File file) throws SAXException {
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     Schema s = sf.newSchema(file);
@@ -118,24 +142,19 @@ public abstract class AbstractJAXBParser<T extends Object> {
   }
 
   /**
-   * getSchemaInstancePrefix
-   * 
-   * @return
+   * getSchemaInstancePrefix.
+   *
+   * @return schemaInstancePrefix
    */
   public abstract String getSchemaInstancePrefix();
 
   /**
-   * Выполняет автоматическую сериализацию объекта, задаваемого через targetObj Имя рутового тега rootName
-   * 
-   * @param <T>
-   * @param m
-   * @param targetObj
-   * @param rootName
-   * @param doc
-   *          создание документа без создания фабрики для вывода результатов маршаллера
-   * @return
-   * @throws JAXBException
-   * @throws ParserConfigurationException
+   * Выполняет автоматическую сериализацию объекта, задаваемого через targetObj.
+   *
+   * @param targetObj serializable object
+   * @return org.w3c.dom.Document
+   * @throws javax.xml.bind.JAXBException                   javax.xml.bind.JAXBException
+   * @throws javax.xml.parsers.ParserConfigurationException javax.xml.parsers.ParserConfigurationException
    */
   public org.w3c.dom.Document marshall(T targetObj) throws JAXBException, ParserConfigurationException {
 
@@ -150,7 +169,11 @@ public abstract class AbstractJAXBParser<T extends Object> {
   }
 
   /**
-   * Преобразование Node в строку
+   * Преобразование Node в строку.
+   *
+   * @param node source node
+   * @return String representation
+   * @throws javax.xml.transform.TransformerException exception
    */
   public String nodeToString(Node node) throws TransformerException {
     StringWriter sw = new StringWriter();
@@ -164,23 +187,14 @@ public abstract class AbstractJAXBParser<T extends Object> {
   }
 
   /**
-   * Демаршализация xml-документа в виде строки. <br/>
-   * Расширенная обработка исключительных ситуаций. Обобщен тип получаемого результата.
-   * 
-   * @param srcXml
-   *          исходный документ одной строкой
-   * @param srcXsd
-   *          xsd-схема для валидации (можно null)
-   * @param <T>
-   *          тип целевого класса
-   * @param srcBean
-   *          объект целевого класса (.class)
-   * @param isValidationEnabled
-   *          разрешить валидацию
-   * @param isSavingTempEnabled
-   *          разрешить сохранение xml на файловую систему
+   * Демаршализация xml-документа в виде строки. Расширенная обработка
+   * исключительных ситуаций. Обобщен тип получаемого результата.
+   *
+   * @param srcXml              исходный документ одной строкой
+   * @param srcXsd              xsd-схема для валидации (можно null)
+   * @param isSavingTempEnabled разрешить сохранение xml на файловую систему
    * @return T instance заполненный бин из xml
-   * @throws DetailedJAXBException
+   * @throws DetailedJAXBException exception
    */
   @SuppressWarnings("unchecked")
   public T unmarshall(String srcXml, Schema srcXsd, boolean isSavingTempEnabled) throws DetailedJAXBException {
@@ -192,8 +206,7 @@ public abstract class AbstractJAXBParser<T extends Object> {
     if (isSavingTempEnabled) {
       try {
         FileSystemUtils.saveTempFile(srcXml, "temp");
-      }
-      catch (Throwable e1) {
+      } catch (Throwable e1) {
         throw new DetailedJAXBException(ErrorCodes.ERROR_SAVING_TEMP_FILE, e1.getMessage());
       }
     }
@@ -202,8 +215,7 @@ public abstract class AbstractJAXBParser<T extends Object> {
     try {
       jc = JAXBContext.newInstance(classType.getPackage().getName());
       unmarshaller = jc.createUnmarshaller();
-    }
-    catch (JAXBException e) {
+    } catch (JAXBException e) {
       throw new DetailedJAXBException(ErrorCodes.INIT_UNMARSHALLER_ERROR, e.getMessage());
     }
 
@@ -221,8 +233,7 @@ public abstract class AbstractJAXBParser<T extends Object> {
       vec = new ValidationEventCollector();
       try {
         unmarshaller.setEventHandler(vec);
-      }
-      catch (JAXBException e1) {
+      } catch (JAXBException e1) {
         throw new DetailedJAXBException(ErrorCodes.VALIDATION_EVENT_COLLECTOR_ERR, e1.getMessage());
       }
     }
@@ -237,8 +248,7 @@ public abstract class AbstractJAXBParser<T extends Object> {
         source = unmarshaller.unmarshal(new StringReader(srcXml));
         return source instanceof JAXBElement<?> ? ((JAXBElement<T>) source).getValue() : (T) source;
       }
-    }
-    catch (JAXBException e) {
+    } catch (JAXBException e) {
 
       e.printStackTrace();
 
@@ -246,12 +256,10 @@ public abstract class AbstractJAXBParser<T extends Object> {
       if (e.getLinkedException() instanceof SAXParseException) {
         wasWrongXmlStructure = true;
         wringXmlStructureMessage += e.getLinkedException().getMessage() + "\n";
-      }
-      else {
+      } else {
         throw new DetailedJAXBException(ErrorCodes.UNMARSHALLER_FATAL_ERROR, e.getMessage());
       }
-    }
-    catch (ClassCastException castExc) {
+    } catch (ClassCastException castExc) {
       throw new DetailedJAXBException(ErrorCodes.WRONG_RECIEVER_DESC, source.getClass().getName() + "\n"
           + castExc.getMessage());
     } // сбор детальной информации
@@ -282,15 +290,15 @@ public abstract class AbstractJAXBParser<T extends Object> {
   }
 
   /**
-   * Универсальный метод для обертки бинов (разрешает не дописывать @XmlRootElement)
-   * http://jaxb.java.net/tutorial/section_4_5-Calling-marshal.html#Calling%20marshal
-   * 
-   * @param <T>
-   * @param namespace
-   * @param tagName
-   * @param object
-   * @return
+   * Универсальный метод для обертки бинов (разрешает не дописывать
+   *
+   * @param tagName tagName
+   * @param prefix  prefix
+   * @param object  object
+   * @return JAXBElement
+   * @XmlRootElement).
    */
+  // http://jaxb.java.net/tutorial/section_4_5-Calling-marshal.html#Calling%20marshal
   @SuppressWarnings("unchecked")
   JAXBElement<T> wrap(String tagName, String prefix, T object) {
     QName qtag = new QName(getNamespace(), tagName, prefix);

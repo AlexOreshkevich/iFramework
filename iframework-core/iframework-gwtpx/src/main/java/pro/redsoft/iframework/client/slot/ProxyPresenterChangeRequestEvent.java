@@ -32,15 +32,16 @@ import com.gwtplatform.mvp.client.View;
 
 /**
  * ProxyPresenterChangeRequestEvent.
- * 
+ *
  * @author alex oreshkevich
+ * @version 0.4.1
  */
 public class ProxyPresenterChangeRequestEvent extends
     GwtEvent<ProxyPresenterChangeRequestEvent.ProxyPresenterChangeRequestHandler> {
 
   /**
    * ProxyPresenterChangeRequestHandler.
-   * 
+   *
    * @author Alex N. Oreshkevich
    */
   public interface ProxyPresenterChangeRequestHandler extends EventHandler {
@@ -49,49 +50,85 @@ public class ProxyPresenterChangeRequestEvent extends
 
   /**
    * ProxyPresenterChangeRequestHandler.
-   * 
+   *
    * @author Alex N. Oreshkevich
    */
   public interface ProxyPresenterChangeRequestHasHandlers extends HasHandlers {
     HandlerRegistration
-        addProxyPresenterChangeRequestHandler(ProxyPresenterChangeRequestHandler handler);
+    addProxyPresenterChangeRequestHandler(ProxyPresenterChangeRequestHandler handler);
   }
 
+  /**
+   * Constant <code>TYPE</code>.
+   */
   public static Type<ProxyPresenterChangeRequestHandler> TYPE = new Type<ProxyPresenterChangeRequestHandler>();
 
+  private final TokenProxy requestedProxy;
+  private final AsyncCallback<PresenterPrototype<? extends View, ?>> revealCallback;
+
+  /**
+   * <p>fire.</p>
+   *
+   * @param source         a {@link com.google.gwt.event.shared.HasHandlers} object.
+   * @param requestedProxy a {@link pro.redsoft.iframework.client.slot.TokenProxy} object.
+   * @param revealCallback a {@link com.google.gwt.user.client.rpc.AsyncCallback} object.
+   */
   public static void fire(HasHandlers source, TokenProxy requestedProxy,
-      AsyncCallback<PresenterPrototype<? extends View, ?>> revealCallback) {
+                          AsyncCallback<PresenterPrototype<? extends View, ?>> revealCallback) {
     source.fireEvent(new ProxyPresenterChangeRequestEvent(requestedProxy, revealCallback));
   }
 
+  /**
+   * <p>getType.</p>
+   *
+   * @return a Type object.
+   */
   public static Type<ProxyPresenterChangeRequestHandler> getType() {
     return TYPE;
   }
 
-  private final TokenProxy                                           requestedProxy;
-
-  private final AsyncCallback<PresenterPrototype<? extends View, ?>> revealCallback;
-
+  /**
+   * <p>Constructor for ProxyPresenterChangeRequestEvent.</p>
+   *
+   * @param requestedProxy a {@link pro.redsoft.iframework.client.slot.TokenProxy} object.
+   * @param revealCallback a {@link com.google.gwt.user.client.rpc.AsyncCallback} object.
+   */
   public ProxyPresenterChangeRequestEvent(TokenProxy requestedProxy,
-      AsyncCallback<PresenterPrototype<? extends View, ?>> revealCallback) {
+                                          AsyncCallback<PresenterPrototype<? extends View, ?>> revealCallback) {
     this.requestedProxy = requestedProxy;
     this.revealCallback = revealCallback;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   protected void dispatch(ProxyPresenterChangeRequestHandler handler) {
     handler.onProxyPresenterChangeRequest(this);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Type<ProxyPresenterChangeRequestHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /**
+   * <p>Getter for the field <code>requestedProxy</code>.</p>
+   *
+   * @return a {@link pro.redsoft.iframework.client.slot.TokenProxy} object.
+   */
   public TokenProxy getRequestedProxy() {
     return requestedProxy;
   }
 
+  /**
+   * <p>Getter for the field <code>revealCallback</code>.</p>
+   *
+   * @return a {@link com.google.gwt.user.client.rpc.AsyncCallback} object.
+   */
   public AsyncCallback<PresenterPrototype<? extends View, ?>> getRevealCallback() {
     return revealCallback;
   }

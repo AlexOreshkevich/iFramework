@@ -38,20 +38,33 @@ import com.gwtplatform.mvp.client.View;
 /**
  * TabbedView. <br/>
  * The tabbed presenter's view.
- * 
+ *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public interface TabbedView extends View, HandlerContainer, HasWidgets, ProvidesResize,
     IndexedPanel.ForIsWidget, AnimatedLayout, HasBeforeSelectionHandlers<Integer>,
     HasSelectionHandlers<Integer>, ProxyView {
 
+  /**
+   * <p>add.</p>
+   *
+   * @param widget a {@link com.google.gwt.user.client.ui.Widget} object.
+   * @param string a {@link java.lang.String} object.
+   */
   void add(Widget widget, String string);
 
+  /**
+   * <p>init.</p>
+   *
+   * @param defaultSelectedInd a int.
+   * @param tabNamesMap a {@link java.util.Map} object.
+   */
   void init(int defaultSelectedInd, Map<Integer, String> tabNamesMap);
 
   /**
    * Inserts a widget into the panel. If the Widget is already attached, it will be moved to the requested index.
-   * 
+   *
    * @param child
    *          the widget to be added
    * @param text
@@ -61,7 +74,18 @@ public interface TabbedView extends View, HandlerContainer, HasWidgets, Provides
    */
   void insert(Widget child, String text, int beforeIndex);
 
+  /**
+   * <p>selectTab.</p>
+   *
+   * @param ind a int.
+   */
   void selectTab(int ind);
 
+  /**
+   * <p>selectTab.</p>
+   *
+   * @param ind a int.
+   * @param fireEvents a boolean.
+   */
   void selectTab(int ind, boolean fireEvents);
 }

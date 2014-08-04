@@ -25,14 +25,15 @@ package pro.redsoft.iframework.client.strategy;
 
 /**
  * HasStrategy Defines type that contains complex strategy. Containing simple Strategy is trivial.
- * 
+ *
  * @author aoreshkevich
+ * @version $Id: $Id
  */
 public interface HasStrategy {
 
   /**
    * Implementing this with covariant return types allows processing map, set, or any other based strategyes.
-   * 
+   *
    * @return complex strategy
    */
   ComplexStrategy getStrategy();

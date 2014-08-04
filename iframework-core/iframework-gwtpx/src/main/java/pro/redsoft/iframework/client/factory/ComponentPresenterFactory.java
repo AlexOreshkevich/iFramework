@@ -27,18 +27,19 @@ import pro.redsoft.iframework.client.presenter.ComponentPresenterWidget;
 import pro.redsoft.iframework.client.view.ComponentView;
 
 /**
- * Use this factory to create {@link ComponentPresenterWidget} objects.
- * 
+ * Use this factory to create {@link pro.redsoft.iframework.client.presenter.ComponentPresenterWidget} objects.
+ *
  * @author Alex N. Oreshkevich
  * @param <V>
  * @param <P>
+ * @version $Id: $Id
  */
 public interface ComponentPresenterFactory<V extends ComponentView, P extends ComponentPresenterWidget<V>> {
 
   /**
-   * Create a new {@link ComponentPresenterWidget}.
-   * 
-   * @return The newly created {@link ComponentPresenterWidget}.
+   * Create a new {@link pro.redsoft.iframework.client.presenter.ComponentPresenterWidget}.
+   *
+   * @return The newly created {@link pro.redsoft.iframework.client.presenter.ComponentPresenterWidget}.
    */
   P create();
 }

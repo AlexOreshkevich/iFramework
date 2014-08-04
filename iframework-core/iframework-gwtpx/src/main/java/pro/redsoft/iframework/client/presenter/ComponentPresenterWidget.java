@@ -32,36 +32,51 @@ import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
  * ComponentPresenterWidget.
- * 
+ *
  * @author Alex N. Oreshkevich
  * @param <V>
+ * @version $Id: $Id
  */
 public abstract class ComponentPresenterWidget<V extends ComponentView> extends PresenterWidget<V>
     implements Component {
 
   protected transient Container parentContainer;
 
+  /**
+   * <p>Constructor for ComponentPresenterWidget.</p>
+   *
+   * @param eventBus a {@link com.google.web.bindery.event.shared.EventBus} object.
+   * @param view a V object.
+   */
   protected ComponentPresenterWidget(final EventBus eventBus, final V view) {
     super(false, eventBus, view);
   }
 
+  /** {@inheritDoc} */
   @Override
   protected void onBind() {
     super.onBind();
     getView().bind();
   }
 
+  /** {@inheritDoc} */
   @Override
   protected void onUnbind() {
     super.onUnbind();
     getView().unbind();
   }
 
+  /** {@inheritDoc} */
   @Override
   public Container getParentContainer() {
     return parentContainer;
   }
 
+  /**
+   * <p>Setter for the field <code>parentContainer</code>.</p>
+   *
+   * @param parentContainer a {@link pro.redsoft.iframework.client.component.Container} object.
+   */
   public void setParentContainer(Container parentContainer) {
     this.parentContainer = parentContainer;
   }

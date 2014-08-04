@@ -30,18 +30,19 @@ import java.io.FileOutputStream;
 
 /**
  * FileSystemUtils
- * 
+ *
  * @author oreshkevich
  */
 public class FileSystemUtils {
 
+  /** Constant <code>PATH="System.getProperty(user.dir)"</code> */
   public static String PATH = System.getProperty("user.dir");
 
   /**
    * Чтение файла
-   * 
-   * @param target
-   * @return
+   *
+   * @param target target file
+   * @return file content as String
    */
   public static String readFile(File target) {
     String adhocXml = null;
@@ -60,10 +61,10 @@ public class FileSystemUtils {
 
   /**
    * При отладке сохраняю на диск файлы во временную папку
-   * 
-   * @param xmlSource
-   * @param fileName
-   * @throws Throwable
+   *
+   * @param xmlSource xmlSource
+   * @param fileName fileName
+   * @throws java.lang.Throwable java.lang.Throwable
    */
   public static void saveTempFile(String xmlSource, String fileName) throws Throwable {
 

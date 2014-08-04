@@ -26,13 +26,14 @@ package pro.redsoft.iframework.client.slot;
 import com.google.gwt.user.client.History;
 
 /**
- * Represents custom {@link TokenProxy} that can be implemented as history token (no differencies from gwtp-platform
- * defaults, see {@link History} for details) or as any object.
+ * Represents custom {@link pro.redsoft.iframework.client.slot.TokenProxy} that can be implemented as history token (no differencies from gwtp-platform
+ * defaults, see {@link com.google.gwt.user.client.History} for details) or as any object.
  * <p>
- * Important: define correct {@link Object#equals(Object)} and {@link Object#hashCode()} implementation.
+ * Important: define correct {@link java.lang.Object#equals(Object)} and {@link java.lang.Object#hashCode()} implementation.
  * </p>
- * 
+ *
  * @author alex oreshkevich
+ * @version $Id: $Id
  */
 public interface TokenProxy {
   // Marker

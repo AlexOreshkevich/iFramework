@@ -24,10 +24,10 @@ THE SOFTWARE.
 package pro.redsoft.iframework.jaxbx;
 
 /**
- * DetailedJAXBException <br/>
- * Исключение JAXB, дополненное описанием
- * 
+ * Исключение JAXB, дополненное описанием.
+ *
  * @author oreshkevich
+ * @version $Id: $Id
  */
 public class DetailedJAXBException extends RuntimeException {
 
@@ -47,8 +47,8 @@ public class DetailedJAXBException extends RuntimeException {
 
   /**
    * Создает исключение от неизвестного источника
-   * 
-   * @param e
+   *
+   * @param e Throwable
    */
   public DetailedJAXBException(Throwable e) {
     super(e);
@@ -61,9 +61,9 @@ public class DetailedJAXBException extends RuntimeException {
 
   /**
    * Создает исключение с определенным типом ошибки и сообщением
-   * 
-   * @param errorCode
-   * @param message
+   *
+   * @param errorCode errorCode
+   * @param message message
    */
   public DetailedJAXBException(ErrorCodes errorCode, String message) {
     super("\n" + errorCode.getDesc() + "\n" + message);
@@ -72,9 +72,8 @@ public class DetailedJAXBException extends RuntimeException {
 
   /**
    * Создает исключение с определенным кодом ошибки и сообщением
-   * 
-   * @param errorCode
-   * @param message
+   *
+   * @param message message
    */
   public DetailedJAXBException(String message) {
     super("\n" + message);
@@ -86,9 +85,9 @@ public class DetailedJAXBException extends RuntimeException {
 
   /**
    * Создает исключение с определенным кодом ошибки и любым количеством сообщений
-   * 
-   * @param errorCode
-   * @param detailed
+   *
+   * @param errorCode errorCode
+   * @param info info
    */
   public DetailedJAXBException(ErrorCodes errorCode, String... info) {
     super("\n" + errorCode.getDesc() + "\n" + info[0]);
@@ -103,10 +102,20 @@ public class DetailedJAXBException extends RuntimeException {
     detailedMessage = errorCode.getDesc();
   }
 
+  /**
+   * <p>Getter for the field <code>detailedMessage</code>.</p>
+   *
+   * @return a {@link java.lang.String} object.
+   */
   public String getDetailedMessage() {
     return detailedMessage;
   }
 
+  /**
+   * <p>Getter for the field <code>errorCode</code>.</p>
+   *
+   * @return a {@link pro.redsoft.iframework.jaxbx.ErrorCodes} object.
+   */
   public ErrorCodes getErrorCode() {
     return errorCode;
   }

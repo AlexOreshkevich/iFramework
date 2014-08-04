@@ -27,11 +27,17 @@ import javax.annotation.Generated;
 
 /**
  * Model.
- * 
+ *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public interface Model {
 
+  /**
+   * <p>getType.</p>
+   *
+   * @return a {@link java.lang.Class} object.
+   */
   @Generated("ModelGenerator")
   Class<? extends Object> getType();
 }

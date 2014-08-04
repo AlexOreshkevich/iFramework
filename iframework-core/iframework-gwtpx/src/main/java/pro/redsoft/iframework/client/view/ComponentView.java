@@ -28,8 +28,9 @@ import com.gwtplatform.mvp.client.View;
 
 /**
  * ComponentView.
- * 
+ *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public interface ComponentView extends View, HandlerContainer {
 }

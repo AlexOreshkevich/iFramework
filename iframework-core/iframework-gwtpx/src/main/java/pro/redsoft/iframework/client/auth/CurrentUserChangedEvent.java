@@ -30,8 +30,9 @@ import com.google.gwt.event.shared.HasHandlers;
 
 /**
  * CurrentUserChangedEvent.
- * 
+ *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public class CurrentUserChangedEvent extends GwtEvent<CurrentUserChangedEvent.CurrentUserChangedHandler> {
 
@@ -53,24 +54,40 @@ public class CurrentUserChangedEvent extends GwtEvent<CurrentUserChangedEvent.Cu
     HandlerRegistration addCurrentUserChangedHandler(CurrentUserChangedHandler handler);
   }
 
+  /** Constant <code>TYPE</code>. */
   public static Type<CurrentUserChangedHandler> TYPE = new Type<CurrentUserChangedHandler>();
 
+  /**
+   * <p>fire.</p>
+   *
+   * @param source a {@link com.google.gwt.event.shared.HasHandlers} object.
+   */
   public static void fire(HasHandlers source) {
     source.fireEvent(new CurrentUserChangedEvent());
   }
 
+  /**
+   * <p>getType.</p>
+   *
+   * @return a Type object.
+   */
   public static Type<CurrentUserChangedHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * <p>Constructor for CurrentUserChangedEvent.</p>
+   */
   public CurrentUserChangedEvent() {
   }
 
+  /** {@inheritDoc} */
   @Override
   protected void dispatch(CurrentUserChangedHandler handler) {
     handler.onCurrentUserChanged(this);
   }
 
+  /** {@inheritDoc} */
   @Override
   public Type<CurrentUserChangedHandler> getAssociatedType() {
     return TYPE;

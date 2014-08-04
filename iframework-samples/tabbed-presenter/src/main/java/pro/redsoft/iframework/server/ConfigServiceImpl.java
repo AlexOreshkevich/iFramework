@@ -34,7 +34,7 @@ import pro.redsoft.iframework.shared.config.SystemSettings;
 import pro.redsoft.iframework.shared.config.UserSettings;
 
 /**
- * Service for working with configuration sources: *.xml and *.properties files. <br/>
+ * Service for working with configuration sources: *.xml and *.properties files.
  * Implementation of {@link ConfigService}.
  * 
  * @author Alex N. Oreshkevich

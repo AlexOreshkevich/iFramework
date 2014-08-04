@@ -23,9 +23,6 @@ THE SOFTWARE.
 */
 package pro.redsoft.iframework.client.slot;
 
-import java.util.Map;
-import java.util.Set;
-
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -34,40 +31,50 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
  * General application-level presenter.
- * 
+ *
+ * @param <V> View subtype
+ * @param <P> Proxy subtype
  * @author alex oreshkevich
- * @param <V>
- *          View subtype
- * @param <P>
- *          Proxy subtype
+ * @version 0.4.1
  */
 public abstract class PresenterPrototype<V extends View, P extends Proxy<?>> extends Presenter<V, P> {
 
   /**
    * PresenterPrototype<br/>
-   * Defines parent-child relations via proxy level. See {@link SlotMappedProxy} for details.
+   * Defines parent-child relations via proxy level. See
+   * {@link pro.redsoft.iframework.client.slot.SlotMappedProxy} for details.
+   *
+   * @param eventBus a {@link com.google.web.bindery.event.shared.EventBus} object.
+   * @param view     a V object.
+   * @param proxy    a P object.
    */
   public PresenterPrototype(EventBus eventBus, V view, P proxy) {
     super(eventBus, view, proxy);
   }
 
   /**
-   * Use this function for common-purpose tokenProxy change handling. <br/>
-   * For example, you can use this for VIEW mode request. In callback you should receive
-   * ru.intertrust.cmj.client.module.content.presenter.ViewPresenter.
-   * 
-   * @param requestedProxy
-   *          some of {@link TokenProxy} implementation
-   * @param revealCallback
-   *          presenter will be loaded dynamically, so instead of default return value we use callback
+   * Use this function for common-purpose tokenProxy change handling.
+   * For example, you can use this for VIEW mode request. In callback you
+   * should receive ViewPresenter.
+   *
+   * @param requestedProxy some of {@link pro.redsoft.iframework.client.slot.TokenProxy} implementation
+   * @param revealCallback presenter will be loaded dynamically, so instead of default return value we use callback
    */
   protected void changeTokenProxy(TokenProxy requestedProxy,
-      AsyncCallback<PresenterPrototype<? extends View, ?>> revealCallback) {
+                                  AsyncCallback<PresenterPrototype<? extends View, ?>> revealCallback) {
     getEventBus().fireEvent(new ProxyPresenterChangeRequestEvent(requestedProxy, revealCallback));
   }
 
+  /**
+   * Load childs by tokenProxy.
+   *
+   * @param tokenProxy a {@link pro.redsoft.iframework.client.slot.TokenProxy} object.
+   */
   public void loadChilds(final TokenProxy tokenProxy) {
 
     // do not load childs if proxy isn't mapped
@@ -107,16 +114,25 @@ public abstract class PresenterPrototype<V extends View, P extends Proxy<?>> ext
     });
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void onBind() {
     super.onBind();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void onReveal() {
     // load childs by direct loadChilds() calls
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   protected void revealInParent() {
     // discard default gwtp reveal strategy

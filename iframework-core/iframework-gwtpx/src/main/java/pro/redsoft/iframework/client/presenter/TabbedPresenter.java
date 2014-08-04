@@ -42,10 +42,11 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 /**
  * TabbedPresenter.
- * 
+ *
  * @author Alex N. Oreshkevich
  * @param <V>
  * @param <P>
+ * @version $Id: $Id
  */
 public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> extends Presenter<V, P> {
 
@@ -55,12 +56,24 @@ public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> 
   @Inject
   private ComponentLoader              tabFactoryLoader;
 
+  /**
+   * <p>Constructor for TabbedPresenter.</p>
+   *
+   * @param eventBus a {@link com.google.web.bindery.event.shared.EventBus} object.
+   * @param view a V object.
+   * @param proxy a P object.
+   * @param slot a {@link com.google.gwt.event.shared.GwtEvent.Type} object.
+   */
   public TabbedPresenter(EventBus eventBus, V view, P proxy, Type<RevealContentHandler<?>> slot) {
     super(eventBus, view, proxy, slot);
   }
 
+  /**
+   * <p>initializeProxy.</p>
+   */
   protected abstract void initializeProxy();
 
+  /** {@inheritDoc} */
   @Override
   protected void onBind() {
     super.onBind();
@@ -97,6 +110,7 @@ public abstract class TabbedPresenter<V extends TabbedView, P extends Proxy<?>> 
     }));
   }
 
+  /** {@inheritDoc} */
   @Override
   protected void onReveal() {
     super.onReveal();

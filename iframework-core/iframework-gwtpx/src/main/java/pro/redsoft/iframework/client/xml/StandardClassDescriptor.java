@@ -27,8 +27,9 @@ import java.lang.annotation.Documented;
 
 /**
  * Standardized Class Descriptor.
- * 
+ *
  * @author Neo
+ * @version $Id: $Id
  */
 @Documented
 public @interface StandardClassDescriptor {

@@ -28,14 +28,30 @@ import name.pehl.piriti.json.client.JsonWriter;
 
 /**
  * JsonData.
- * 
+ *
  * @author Alex N. Oreshkevich
+ * @version $Id: $Id
  */
 public interface JsonData {
 
+  /**
+   * <p>getReader.</p>
+   *
+   * @return a {@link name.pehl.piriti.json.client.JsonReader} object.
+   */
   JsonReader<?> getReader();
 
+  /**
+   * <p>getWriter.</p>
+   *
+   * @return a {@link name.pehl.piriti.json.client.JsonWriter} object.
+   */
   JsonWriter<?> getWriter();
 
+  /**
+   * <p>getType.</p>
+   *
+   * @return a {@link java.lang.Class} object.
+   */
   Class<? extends Object> getType();
 }
