@@ -89,7 +89,7 @@
         <gin.version>2.1.2</gin.version>
         <gwtquery.version>1.4.2</gwtquery.version>
         <piriti.version>0.8</piriti.version>
-        <totoe.version>0.4</totoe.version>
+        <totoe.version>0.7</totoe.version>
 
         <!-- Server -->
         <guice.version>3.0</guice.version>
