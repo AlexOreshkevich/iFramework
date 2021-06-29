@@ -84,7 +84,7 @@
         <maven-release-plugin.version>2.4.1</maven-release-plugin.version>
 
         <!-- Client -->
-        <gwt.version>2.7.0</gwt.version>
+        <gwt.version>2.9.0</gwt.version>
         <gwtp.version>1.4</gwtp.version>
         <gin.version>2.1.2</gin.version>
         <gwtquery.version>1.4.2</gwtquery.version>
